@@ -17,6 +17,12 @@ body {
 .flexed {
     display: flex;
 }
+.transed {
+    transition: all .2s ease;
+    &:hover {
+        background : #e7e7e7
+    }
+}
 .Alink {
     text-decoration: none;
     padding: 14px 2px;

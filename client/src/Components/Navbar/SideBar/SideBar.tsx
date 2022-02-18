@@ -54,9 +54,12 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
                 </IconButton>
            
             </CBox>
-            <CBox>
-                <SideBarLink/>
-            </CBox>
+            
+                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
+                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
+                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
+                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
+         
         </AppBar>
     )
 }
