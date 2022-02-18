@@ -8,6 +8,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { useState } from 'react';
+import SideBar from './SideBar/SideBar';
 
 const Bg = (theme : string, color?: string, DarkTheme?: string) : string => {
     if (theme === 'dark') 
@@ -23,10 +25,14 @@ const Color = (theme?: string) => {
         return 'black'
 }
 
+
+
 const Navbody = () => {
+    const [isOpen ,setOpen] = useState(false)
     return <CBox
-    className='limit'
+    className='limit trans'
         sx={{
+            position:'relative',
         height: '30px',
         background: Bg('light'),
         display: 'flex',
@@ -125,6 +131,8 @@ const Navbody = () => {
                 <FavoriteBorderOutlinedIcon/>
             </IconButton>
             <IconButton
+            onClick={()=>setOpen(!isOpen)
+            }
                 sx={{
                
                 color: '#3d3d3d',
@@ -136,6 +144,7 @@ const Navbody = () => {
             </IconButton>
         </Box>
 
+           <SideBar setOpen={setOpen} isOpen={isOpen} />
     </CBox>;
 };
 
