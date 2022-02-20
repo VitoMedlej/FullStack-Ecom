@@ -73,7 +73,7 @@ const Navbody = () => {
                     sx={{
                     fontFamily: 'Poppins, sans-serif',
                     fontSize: '1.3rem'
-                }}>LOGO</Typography>
+                }}>EL-VITO</Typography>
             </Link>
         </Box>
 

@@ -44,7 +44,7 @@ const LandingPage = ({className} : Ilanding) => {
                     md: '1.1em',
                     lg: '1.15em'
                 }}
-                    text={`it’s time to shake things up with vitozs new releases for men`}/>
+                    text={`it’s time to shake things up with el-vito's new releases for men`}/>
 
                 <CButton
                     hover={{

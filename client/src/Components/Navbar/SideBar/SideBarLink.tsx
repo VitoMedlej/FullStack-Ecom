@@ -6,11 +6,11 @@ import CBox from '../../CustomMui/CBox';
 interface ISideBarLink {
     link : string
     text : string
-    setOpen : React.Dispatch < React.SetStateAction < boolean >>;
+    setOpen ?: React.Dispatch < React.SetStateAction < boolean >>;
 }
 const SideBarLink = ({link, text ,setOpen} : ISideBarLink) => {
     return (
-        <Link onClick={()=> setOpen(false)} className='transed ' to={`${link}`}>
+        <Link onClick={()=> setOpen && setOpen(false)} className='transed ' to={`${link}`}>
             <CBox >
 
                 <Box
