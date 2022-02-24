@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import { useState } from 'react';
+import {useState} from 'react';
 import SideBar from './SideBar/SideBar';
 
 const Bg = (theme : string, color?: string, DarkTheme?: string) : string => {
@@ -25,14 +25,13 @@ const Color = (theme?: string) => {
         return 'black'
 }
 
-
-
 const Navbody = () => {
-    const [isOpen ,setOpen] = useState(false)
+    const [isOpen,
+        setOpen] = useState(false)
     return <CBox
-    className='limit trans'
+        className='limit trans'
         sx={{
-            position:'relative',
+        position: 'relative',
         height: '30px',
         background: Bg('light'),
         display: 'flex',
@@ -87,7 +86,10 @@ const Navbody = () => {
             <Box
                 sx={{
                 display: 'flex',
-                background:{xs:'white',sm:'white' ,md:'#f1f1f1'}
+                background: {
+                    xs: 'white',
+                    md: '#f1f1f1'
+                }
             }}
                 className='searchForm'
                 component='form'>
@@ -95,7 +97,6 @@ const Navbody = () => {
                     sx={{
                     display: {
                         xs: 'none',
-                        sm: 'none',
                         md: 'block'
                     }
                 }}>
@@ -112,7 +113,9 @@ const Navbody = () => {
             </Box>
 
         </Box>
-        <Box sx={{display:'flex'}}>
+        <Box sx={{
+            display: 'flex'
+        }}>
             <IconButton
                 sx={{
                 color: '#3d3d3d',
@@ -125,26 +128,30 @@ const Navbody = () => {
                 sx={{
                 color: '#3d3d3d',
                 m: '4px',
-                display:{xs:'none',sm:'none',md:'block'}
+                display: {
+                    xs: 'none',
+                    md: 'flex'
+                }
             }}
                 type='button'>
                 <FavoriteBorderOutlinedIcon/>
             </IconButton>
             <IconButton
-            onClick={()=>setOpen(!isOpen)
-            }
+                onClick={() => setOpen(!isOpen)}
                 sx={{
-               
                 color: '#3d3d3d',
                 m: '4px',
-                display:{xs:'flex',sm:'flex ',md:'none'}
+                display: {
+                    xs: 'flex',
+                    md: 'none'
+                }
             }}
                 type='button'>
                 <MenuOutlinedIcon/>
             </IconButton>
         </Box>
 
-           <SideBar setOpen={setOpen} isOpen={isOpen} />
+        <SideBar setOpen={setOpen} isOpen={isOpen}/>
     </CBox>;
 };
 

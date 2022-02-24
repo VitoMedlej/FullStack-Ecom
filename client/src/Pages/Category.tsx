@@ -3,18 +3,19 @@ import Grid from '@mui/material/Grid';
 import CBox from '../Components/CustomMui/CBox';
 import CTypo from '../Components/CustomMui/CTypo';
 import Product from '../Components/Product/ProductCard';
+import BreadCrumbsLink from '../Components/Product/BreadCrumbsLink';
+import {useParams} from 'react-router-dom';
 const pic = require('../Helpers/Images/nike.jfif')
+
 const Category = () => {
+    const {section} = useParams()
+
     return (
 
         <Box component='section'>
             <CBox className='limit'>
 
-                <Box sx={{
-                    my: '2em'
-                }}>
-                    Home / Shoes
-                </Box>
+                <BreadCrumbsLink section={`${section}`}/>
                 <Box>
                     <CTypo
                         fontSize={{
@@ -46,9 +47,18 @@ const Category = () => {
                         md={9}
                         lg={10}>
 
-                        <Product title={'fasfasfasf asfasf asfasf wqr qwr qwrasf  asfasf'} price={412} id={54125} category={'shoes'} img={pic}/>
-                        <Product title={'fasfasfasf asfasf asfasf wqr qwr qwrasf  asfasf'} price={412} id={54125} category={'shoes'} img={pic}/>
-                       
+                        <Product
+                            title={'fasfasfasf asfasf asfasf wqr qwr qwrasf asfasf'}
+                            price={412}
+                            id={54125}
+                            category={'shoes'}
+                            img={pic}/>
+                        <Product
+                            title={'fasfasfasf asfasf asfasf wqr qwr qwrasf asfasf'}
+                            price={412}
+                            id={54125}
+                            category={'shoes'}
+                            img={pic}/>
 
                     </Grid>
                 </Grid>

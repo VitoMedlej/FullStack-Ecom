@@ -7,14 +7,26 @@ interface IProduct {
     price : number | string
     category : string
     id : string | number
-    unit ?: string
+    unit?: string
     title : string
 }
-const Product = ({img,id,title ,category,unit,price} : IProduct) => {
+const Product = ({
+    img,
+    id,
+    title,
+    category,
+    unit,
+    price
+} : IProduct) => {
     return (
         <Box
+            className='trans'
             sx={{
-            margin:'5px',
+            margin: '5px',
+            ':hover': {
+                transform: "translateY(-5px)",
+                boxShadow: '1px 1px 5px #eaeaea'
+            },
             position: 'relative',
             width: {
                 xs: '47%',
@@ -28,16 +40,17 @@ const Product = ({img,id,title ,category,unit,price} : IProduct) => {
                 <img className='img' src={`${img}`} alt="product image"/>
                 <Box
                     sx={{
-                    background: 'white',
                     width: 'fit-content',
                     position: 'absolute',
                     top: '90%',
                     color: 'green'
                 }}>
-                  {`${unit || '$'}`}{price}
+                    {`${unit || '$'}`}{price}
                 </Box>
             </Box>
-            <Box>
+            <Box sx={{
+                p: '5px'
+            }}>
                 <CTypo
                     fontSize={{
                     xs: '.95em',
