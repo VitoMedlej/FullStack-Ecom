@@ -23,6 +23,7 @@ const ProductDetails = () => {
     return (
         <Grid container >
             <Grid item md={2} xs={3}>
+                
                 {dummy.map((item : i ) => {
                     return <CTypo
                         fontWeight='400'

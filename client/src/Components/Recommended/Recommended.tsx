@@ -54,7 +54,7 @@ const Recommended = () => {
                         }
                     }}
                         autoplay={{
-                        "delay": 2500,
+                        "delay": 2000,
                         "disableOnInteraction": true
                     }}>
                         <SwiperSlide>
