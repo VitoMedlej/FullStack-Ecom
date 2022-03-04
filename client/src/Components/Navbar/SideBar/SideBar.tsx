@@ -4,13 +4,27 @@ import CBox from '../../CustomMui/CBox';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import SideBarLink from './SideBarLink';
+import CTypo from '../../CustomMui/CTypo';
+import {Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux'
+import {RootState} from '../../../Redux/Store';
+import {toggleSideBarState} from '../../../Redux/Slices/SideBarSlice'
+import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
+import {toggleCartState} from '../../../Redux/Slices/CartSlice';
 
-interface ISideBar {
-    isOpen : boolean;
-    setOpen : React.Dispatch < React.SetStateAction < boolean >>;
-}
+interface ISideBar {}
 
-const SideBar = ({isOpen, setOpen} : ISideBar) => {
+const SideBar = ({} : ISideBar) => {
+
+    const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
+
+    const dispatch = useDispatch()
+
+    const HandleLinkButtonClick = () => {
+        dispatch(toggleCartState(false));
+        dispatch(toggleSideBarState(false));
+        dispatch(toggleBackDropState(false))
+    }
     return (
         <AppBar
             className='trans'
@@ -18,29 +32,51 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
             transition: '.3s ease',
             width: '300px',
             height: '100vh',
-            right: `${isOpen
+            right: `${isSideBar
                 ? '0%'
                 : '-100%'}`,
-            background :'white',
-            color:'black',
-            display : {xs:'flex',md:'none'},
+            background: 'white',
+            color: 'black',
+            display: {
+                xs: 'flex',
+                md: 'none'
+            },
             position: 'absolute',
             zIndex: 3
         }}>
             <CBox
                 sx={{
-                    borderBottom: '1px solid #e2e2e2',
+                borderBottom: '1px solid #e2e2e2',
                 position: 'relative',
                 height: "30px",
                 display: "flex",
                 alignItems: 'center',
-                justifyContent: "end",
+                justifyContent: "start",
                 py: '15px'
             }}>
+                <Box onClick={() => HandleLinkButtonClick()} className='logo'>
+                    <Link to='/' className='link'>
+                        <CTypo
+                            fontSize={{
+                            xs: '1.2rem'
+                        }}
+                            sx={{
+                            mt: '0',
+                            fontFamily: 'Poppins, sans-serif',
+                            fontWeight: '500'
+                        }}>EL-VITO</CTypo>
+                    </Link>
+                </Box>
+
                 <IconButton
-                    onClick={() => setOpen(!isOpen)}
+                    onClick={() => {
+                    dispatch(toggleBackDropState(false));
+                    dispatch(toggleSideBarState(false))
+                }}
                     sx={{
                     color: 'red',
+                    position: 'absolute',
+                    right: '2%',
                     m: '4px',
                     padding: '8px',
                     display: {
@@ -52,14 +88,26 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
                     type='button'>
                     <CloseIcon/>
                 </IconButton>
-           
+
             </CBox>
-            
-                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-                <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-         
+
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/cart'
+                text={'cart'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
+
         </AppBar>
     )
 }

@@ -10,6 +10,7 @@ interface ICate {
 }
 
 const CategoryCard = ({img ,title ,desc,link} : ICate) => {
+    let lowerCaseLink = link.toLocaleLowerCase()
     return (
         
         <Box
@@ -22,13 +23,14 @@ const CategoryCard = ({img ,title ,desc,link} : ICate) => {
                 sm: '48%',
                 md: '32%',
             },
-            ':hover' : {
+            
+            ':hover': {
                 transform: "translateY(-5px)",
-                boxShadow: '1px 1px 5px #00000036'
+                boxShadow: '1px 1px 5px #eaeaea'
             },
             mt: '2em'
         }}>
-            <Link className='linkz' to={`${link}`}></Link>
+            <Link className='linkz' to={`/category/${lowerCaseLink}`}></Link>
             <Box
                 sx={{
                 width: '100%',

@@ -54,24 +54,24 @@ const Recommended = () => {
                         }
                     }}
                         autoplay={{
-                        "delay": 2500,
+                        "delay": 2000,
                         "disableOnInteraction": true
                     }}>
                         <SwiperSlide>
 
-                            <RecoCard link='/'/>
+                            <RecoCard id={15215} category='shoes'/>
                         </SwiperSlide>
                         <SwiperSlide>
 
-                            <RecoCard link='/'/>
+                            <RecoCard id={5125} category='shoes'/>
                         </SwiperSlide>
                         <SwiperSlide>
 
-                            <RecoCard link='/'/>
+                            <RecoCard id={12} category='shoes'/>
                         </SwiperSlide>
                         <SwiperSlide>
 
-                            <RecoCard link='/'/>
+                            <RecoCard id={1245} category='shoes'/>
                         </SwiperSlide>
                     </Swiper>
 

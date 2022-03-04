@@ -9,7 +9,7 @@ const Ad = () => {
         <Box
             sx={{
             mt: '10em',
-            background: '#ffff33',
+            background: '#3dfffc',
             width: '100%'
         }}>
             <CBox
@@ -29,9 +29,9 @@ const Ad = () => {
                     md: '1.8em',
                     xl: '2em'
                 }}
-                    text='JOIN OUR CLUB RIGHT FUCKING NOW TO GET 15% OFF'></CTypo>
+                    text='JOIN US RIGHT NOW TO GET 15% OFF EVERYTHING'></CTypo>
 
-               <Link to='/e'>
+               <Link to='/account/register'>
                 <CButton
                     hover={{
                     background: 'black'

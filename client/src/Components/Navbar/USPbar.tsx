@@ -5,7 +5,7 @@ const USPbar = () => {
     return <Box
         sx={{
         width: '100%',
-       
+        zIndex: '5125125',
         background: 'black',
         display: 'flex',
         justifyContent:'center',

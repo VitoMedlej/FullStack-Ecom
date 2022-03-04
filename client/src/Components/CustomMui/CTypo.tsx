@@ -16,9 +16,10 @@ interface CTypo {
     sx ?: SxProps<Theme> | undefined
     color ?: string
     className ?: string
+  
     
 }
-const CTypo = ({text,sx,className, fontSize ,color, children,fontWeight} : CTypo) => {
+const CTypo = ({text,sx,className,fontSize ,color, children,fontWeight} : CTypo) => {
     return (
         <Typography
         className={className}

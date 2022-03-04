@@ -7,9 +7,9 @@ const accessories = require('../../Helpers/Images/accessories.jfif')
 const suits = require('../../Helpers/Images/suits.jfif')
 
 const CateArray = [
-    {link:'/shoes',id:1,title:'shoes',desc:'Only High Quality Shoes' ,img : shoes},
-    {link:'/Suits',id:2,title:'Suits',desc:'Only High Quality Suits' ,img : suits},
-    {link:'/accessories',id:3,title:'accessories',desc:'Only High Quality accessories' ,img : accessories},
+    {link:'shoes',id:1,title:'shoes',desc:'Only High Quality Shoes' ,img : shoes},
+    {link:'Suits',id:2,title:'Suits',desc:'Only High Quality Suits' ,img : suits},
+    {link:'accessories',id:3,title:'accessories',desc:'Only High Quality accessories' ,img : accessories},
 
 ]
 const Categories = () => {

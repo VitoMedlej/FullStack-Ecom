@@ -1,0 +1,33 @@
+[
+    {
+        "images": [
+            "", ""
+        ],
+        "id": "a2ae4087a18e458fafac38105ffde7f5",
+        "sizes": [
+            8,
+            9,
+            11,
+            12,
+            13,
+            15
+        ],
+        "description": "",
+        "specifications": [
+            "easy to wear", "", ""
+        ],
+        "Manufacturer" : "",
+        "inStock" : true,
+        "details": {
+            "color": "red",
+            "weight": "300g",
+            "style": "5125-fas",
+            "made in" : "china"
+        },
+        "mainTitle": "ULTRABOOST 22 SHOES",
+        "category": "shoes",
+      
+        "price": 190,
+        "reviews": []
+    }
+]

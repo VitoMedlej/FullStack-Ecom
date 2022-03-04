@@ -5,10 +5,11 @@ import CTypo from '../CustomMui/CTypo';
 const nike = require('../../Helpers/Images/nike.jfif')
 
 interface IRecoCard {
-    link : string
+    category : string
+    id : number | string
 }
 
-const RecoCard = ({link} : IRecoCard) => {
+const RecoCard = ({category,id} : IRecoCard) => {
     return (
         <Box
             className='trans'
@@ -22,7 +23,7 @@ const RecoCard = ({link} : IRecoCard) => {
             mt: '2em',
             minWidth: '200px'
         }}>
-            <Link className='linkz' to={`${link}`}></Link>
+            <Link className='linkz' to={`/category/${category}/products/${id}`}></Link>
             <Box>
                 <img className='img' src={nike} alt=""/>
             </Box>
