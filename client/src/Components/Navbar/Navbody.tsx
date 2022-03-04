@@ -8,8 +8,14 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import {useState} from 'react';
 import SideBar from './SideBar/SideBar';
+import {useSelector, useDispatch} from 'react-redux'
+import {RootState} from '../../Redux/Store';
+import {toggleCartState} from '../../Redux/Slices/CartSlice'
+import {toggleBackDropState} from '../../Redux/Slices/BackDropSlice'
+import {toggleSideBarState} from '../../Redux/Slices/SideBarSlice'
+
+interface INavBar {}
 
 const Bg = (theme : string, color?: string, DarkTheme?: string) : string => {
     if (theme === 'dark') 
@@ -25,12 +31,18 @@ const Color = (theme?: string) => {
         return 'black'
 }
 
-const Navbody = () => {
-    const [isOpen,
-        setOpen] = useState(false)
+const Navbody = ({} : INavBar) => {
+
+    const isCartOpen = useSelector((state : RootState) => state.isCartOpen.isCartOpen)
+    const isBackDrop = useSelector((state : RootState) => state.isBackDrop.isBackDrop)
+    const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
+
+    const dispatch = useDispatch()
+
     return <CBox
         className='limit trans'
         sx={{
+        zIndex: '51251251',
         position: 'relative',
         height: '30px',
         background: Bg('light'),
@@ -47,11 +59,11 @@ const Navbody = () => {
             }
         }}>
 
-            <Link className='Alink' to='/'>
-                Link1
+            <Link className='Alink' to='/account/login'>
+                login
             </Link>
-            <Link className='Alink' to='/'>
-                Link1
+            <Link className='Alink' to='/dashboard'>
+                Dashboard
             </Link>
             <Link className='Alink' to='/'>
                 Link1
@@ -117,6 +129,10 @@ const Navbody = () => {
             display: 'flex'
         }}>
             <IconButton
+                onClick={() => {
+                dispatch(toggleCartState(!isCartOpen));
+                dispatch(toggleBackDropState(!isBackDrop))
+            }}
                 sx={{
                 color: '#3d3d3d',
                 m: '4px'
@@ -137,7 +153,14 @@ const Navbody = () => {
                 <FavoriteBorderOutlinedIcon/>
             </IconButton>
             <IconButton
-                onClick={() => setOpen(!isOpen)}
+                onClick={() => {
+                if (isBackDrop && isCartOpen) {
+                    dispatch(toggleCartState(false));
+                    dispatch(toggleBackDropState(false))
+                }
+                dispatch(toggleBackDropState(!isBackDrop));
+                dispatch(toggleSideBarState(!isSideBar));
+            }}
                 sx={{
                 color: '#3d3d3d',
                 m: '4px',
@@ -151,7 +174,7 @@ const Navbody = () => {
             </IconButton>
         </Box>
 
-        <SideBar setOpen={setOpen} isOpen={isOpen}/>
+        <SideBar/>
     </CBox>;
 };
 

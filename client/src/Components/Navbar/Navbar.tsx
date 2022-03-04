@@ -3,21 +3,28 @@ import USPbar from './USPbar';
 import AppBar from '@mui/material/AppBar';
 import SideBar from './SideBar/SideBar';
 import CartBar from './Cart/CartBar';
+import {useState} from 'react';
 
-const Navbar = () => {
-  return <AppBar
-  className='trans'
-  sx={{boxShadow:'none',background:'white'}} position="sticky">
-      <USPbar/>
-      <CartBar/>
-      <Navbody/>
+interface INavbar {
+    backdrop : boolean;
+    setBackDrop : React.Dispatch < React.SetStateAction < boolean >>
+}
+const Navbar = ({setBackDrop, backdrop} : INavbar) => {
 
-     
 
-     
-  </AppBar>
-  ;
+    return <AppBar
+        className='trans'
+        sx={{
+        boxShadow: 'none',
+        background: 'white'
+    }}
+        position="sticky">
+        <USPbar/>
+
+        <CartBar/>
+        <Navbody/>
+
+    </AppBar>;
 };
-
 
 export default Navbar;

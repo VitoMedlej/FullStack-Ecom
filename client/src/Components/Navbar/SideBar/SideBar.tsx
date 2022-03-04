@@ -6,13 +6,25 @@ import IconButton from '@mui/material/IconButton';
 import SideBarLink from './SideBarLink';
 import CTypo from '../../CustomMui/CTypo';
 import {Link} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux'
+import {RootState} from '../../../Redux/Store';
+import {toggleSideBarState} from '../../../Redux/Slices/SideBarSlice'
+import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
+import {toggleCartState} from '../../../Redux/Slices/CartSlice';
 
-interface ISideBar {
-    isOpen : boolean;
-    setOpen : React.Dispatch < React.SetStateAction < boolean >>;
-}
+interface ISideBar {}
 
-const SideBar = ({isOpen, setOpen} : ISideBar) => {
+const SideBar = ({} : ISideBar) => {
+
+    const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
+
+    const dispatch = useDispatch()
+
+    const HandleLinkButtonClick = () => {
+        dispatch(toggleCartState(false));
+        dispatch(toggleSideBarState(false));
+        dispatch(toggleBackDropState(false))
+    }
     return (
         <AppBar
             className='trans'
@@ -20,7 +32,7 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
             transition: '.3s ease',
             width: '300px',
             height: '100vh',
-            right: `${isOpen
+            right: `${isSideBar
                 ? '0%'
                 : '-100%'}`,
             background: 'white',
@@ -39,20 +51,10 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
                 height: "30px",
                 display: "flex",
                 alignItems: 'center',
-                justifyContent: "end",
+                justifyContent: "start",
                 py: '15px'
             }}>
-                <Box
-                 onClick={() => setOpen(!isOpen)}
-                    className='logo'
-                    sx={{
-                    right: {
-                        sm: '50%'
-                    },
-                    transform: {
-                        sm: 'translateX(50%)'
-                    }
-                }}>
+                <Box onClick={() => HandleLinkButtonClick()} className='logo'>
                     <Link to='/' className='link'>
                         <CTypo
                             fontSize={{
@@ -67,7 +69,10 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
                 </Box>
 
                 <IconButton
-                    onClick={() => setOpen(!isOpen)}
+                    onClick={() => {
+                    dispatch(toggleBackDropState(false));
+                    dispatch(toggleSideBarState(false))
+                }}
                     sx={{
                     color: 'red',
                     position: 'absolute',
@@ -86,10 +91,22 @@ const SideBar = ({isOpen, setOpen} : ISideBar) => {
 
             </CBox>
 
-            <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-            <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-            <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
-            <SideBarLink setOpen={setOpen} link='/ee' text={'HOME'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/cart'
+                text={'cart'}/>
+            <SideBarLink
+                HandleLinkButtonClick={HandleLinkButtonClick}
+                link='/ee'
+                text={'HOME'}/>
 
         </AppBar>
     )

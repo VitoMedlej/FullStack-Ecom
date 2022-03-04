@@ -9,7 +9,7 @@ interface CButton {
     hover?: any
     children?: any
     margin?: string
-    borderRadius ?: string
+    borderRadius?: string
     className?: string
 }
 
@@ -26,16 +26,17 @@ const CButton = ({
 } : CButton) => {
     return (
         <Button
+            
             variant='contained'
             className={className && className}
             sx={{
+            border: '1px solid transparent',
             ...sx,
             ':hover': {
                 ...hover
             },
             color: `${color || 'black'}`,
             fontFamily: 'Poppins , sans-serif',
-            border: '1px solid transparent',
             mt: `${margin || "2em"}`,
             px: '3em',
             fontWeight: '500',

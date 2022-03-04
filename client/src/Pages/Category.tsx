@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import CBox from '../Components/CustomMui/CBox';
 import CTypo from '../Components/CustomMui/CTypo';
-import Product from '../Components/Product/ProductCard';
-import BreadCrumbsLink from '../Components/Product/BreadCrumbsLink';
+import Product from '../Components/ProductPage/ProductCard';
+import BreadCrumbsLink from '../Components/ProductPage/BreadCrumbsLink';
 import {useParams} from 'react-router-dom';
 const pic = require('../Helpers/Images/nike.jfif')
 
@@ -13,7 +13,12 @@ const Category = () => {
     return (
 
         <Box component='section'>
-            <CBox className='limit'>
+            <CBox
+                sx={{
+                borderBottom: '1px solid #8080802e',
+                paddingBottom: '15px'
+            }}
+                className='limit'>
 
                 <BreadCrumbsLink section={`${section}`}/>
                 <Box>

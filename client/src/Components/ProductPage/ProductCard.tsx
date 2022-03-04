@@ -18,6 +18,7 @@ const Product = ({
     unit,
     price
 } : IProduct) => {
+    let inStock = true
     return (
         <Box
             className='trans'
@@ -43,9 +44,15 @@ const Product = ({
                     width: 'fit-content',
                     position: 'absolute',
                     top: '90%',
-                    color: 'green'
+                    ml: '5px',
+                    color: `${inStock
+                        ? 'green'
+                        : 'red'}`
                 }}>
-                    {`${unit || '$'}`}{price}
+
+                    {inStock
+                        ? `${unit || '$'}${price} `
+                        : 'out of stock'}
                 </Box>
             </Box>
             <Box sx={{

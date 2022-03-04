@@ -6,8 +6,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
-
 const ProductSideBar = () => {
+    let price = 120;
+    let unit = '$'
+    let inStock = false
+
     return (
         <Grid
             item
@@ -37,9 +40,9 @@ const ProductSideBar = () => {
                 sx={{
                 mt: '0px'
             }}
-                color='green'
+                color={`${inStock ? 'green' : 'red'}`}
                 fontWeight='500'
-                text='$120'/>
+                text={`${inStock ? price + unit : 'Out of stock!' } `}/>
             <CTypo
                 sx={{
                 pb: '1em'

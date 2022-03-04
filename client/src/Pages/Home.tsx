@@ -6,15 +6,13 @@ import Recommended from '../Components/Recommended/Recommended';
 import Ad from '../Components/Ad/Ad';
 
 const Home = () => {
-    
-  return <Box  sx={{}} >
-      <LandingPage  />
 
-    <Categories/>
-    <Recommended/>
-    <Ad/>
-  </Box>
-  ;
+    return <Box>
+        <LandingPage/>
+        <Categories/>
+        <Recommended/>
+        <Ad/>
+    </Box>;
 
 };
 

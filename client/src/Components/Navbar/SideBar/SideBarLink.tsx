@@ -2,15 +2,24 @@ import Box from '@mui/material/Box';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import {Link} from 'react-router-dom';
 import CBox from '../../CustomMui/CBox';
+import {toggleCartState} from '../../../Redux/Slices/CartSlice';
+import {useDispatch} from 'react-redux';
+import {toggleSideBarState} from '../../../Redux/Slices/SideBarSlice';
+import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice';
 
 interface ISideBarLink {
     link : string
     text : string
-    setOpen ?: React.Dispatch < React.SetStateAction < boolean >>;
+    HandleLinkButtonClick ?: () => void
+
 }
-const SideBarLink = ({link, text ,setOpen} : ISideBarLink) => {
+const SideBarLink = ({link, text ,HandleLinkButtonClick} : ISideBarLink) => {
+
+    const dispatch = useDispatch()
+
+  
     return (
-        <Link onClick={()=> setOpen && setOpen(false)} className='transed ' to={`${link}`}>
+        <Link onClick={() => HandleLinkButtonClick && HandleLinkButtonClick()} className='transed ' to={`${link}`}>
             <CBox >
 
                 <Box
