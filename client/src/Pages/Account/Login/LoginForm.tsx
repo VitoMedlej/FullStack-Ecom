@@ -13,7 +13,7 @@ const LoginForm = () => {
             display: 'flex',
             textAlign: 'center',
             flexDirection: 'column',
-            boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+            boxShadow: 'rgb(0 0 0 / 15%) 0px 8px 24px',
             width: '100%'
         }}>
             <Box>

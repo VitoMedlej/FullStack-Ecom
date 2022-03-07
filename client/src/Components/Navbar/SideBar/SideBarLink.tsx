@@ -21,7 +21,6 @@ const SideBarLink = ({link, text ,HandleLinkButtonClick} : ISideBarLink) => {
     return (
         <Link onClick={() => HandleLinkButtonClick && HandleLinkButtonClick()} className='transed ' to={`${link}`}>
             <CBox >
-
                 <Box
                     sx={{
                     my: '1em',
