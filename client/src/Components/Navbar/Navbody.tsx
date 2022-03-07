@@ -62,7 +62,7 @@ const Navbody = ({} : INavBar) => {
             <Link className='Alink' to='/account/login'>
                 login
             </Link>
-            <Link className='Alink' to='/dashboard'>
+            <Link className='Alink' to='/dashboard/main'>
                 Dashboard
             </Link>
             <Link className='Alink' to='/'>

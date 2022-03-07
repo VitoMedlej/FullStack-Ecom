@@ -8,11 +8,18 @@ const Dashboard = () => {
     return (
         <Box>
 
-            <Box sx={{position: 'relative',display:'flex'}} className='limit'>
+            <Box
+                sx={{
+                background:'#f7f7f7',
+                position: 'relative',
+                display: 'flex'
+            }}>
 
                 <DashboardSideBar/>
+                <Box sx={{width:{xs:'100%',lg:'1200px',margin:'0 auto'}}}>
 
-                <Main/>
+                    <Main/>
+                </Box>
 
             </Box>
         </Box>

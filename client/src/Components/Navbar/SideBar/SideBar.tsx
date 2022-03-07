@@ -97,8 +97,8 @@ const SideBar = ({} : ISideBar) => {
                 text={'HOME'}/>
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
-                link='/ee'
-                text={'HOME'}/>
+                link='/dashboard/main'
+                text={'DASHBOARD'}/>
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
                 link='/cart'

@@ -10,11 +10,13 @@ interface CButton {
     children?: any
     margin?: string
     borderRadius?: string
+    isSubmitButton?: boolean;
     className?: string
 }
 
 const CButton = ({
     text,
+    isSubmitButton,
     background,
     className,
     margin,
@@ -26,7 +28,7 @@ const CButton = ({
 } : CButton) => {
     return (
         <Button
-            
+            type={isSubmitButton ? 'submit' : 'button'}
             variant='contained'
             className={className && className}
             sx={{

@@ -1,22 +1,30 @@
 import Box from "@mui/material/Box"
+import { useParams } from "react-router-dom"
 import CBox from "../../../Components/CustomMui/CBox"
+import CTypo from "../../../Components/CustomMui/CTypo"
 import MainNavbar from "./MainNavbar"
+import About from './About/About';
+import Products from "./Products/Products"
+import AddProduct from "./AddProduct/AddProduct"
 
 const Main = () => {
+
+    const {route} = useParams()
     return (
         <Box
             sx={{
-            background: '#F7F7F7',
+          
             width: '100%',
             height: '100vh'
         }}>
             <MainNavbar/>
-            <CBox sx={{
-                pt: '2em'
-            }}>
-                main section
-            </CBox>
-         
+          
+            
+                {route === 'main' && <About/>}
+                {route === 'products' && <Products/>}
+                {route === 'add-products' && <AddProduct/>}
+
+
         </Box>
     )
 }

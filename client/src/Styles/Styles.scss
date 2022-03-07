@@ -59,12 +59,42 @@ a {
     border-radius: 17px;
     .searchInput {
         border-radius: 17px;
-
         border: none;
         background: #f1f1f1;
         padding: 10px 12px;
         outline: none;
         font-size: 1rem;
+
+    }
+}
+.searchForm2 {
+    border-radius: 4px;
+    // border: 1px solid #8080803b;
+    .wfull {
+        width: 100%;
+    }
+    .searchInput {
+
+        border: 1px solid #8080803b;
+        background: transparent;
+        padding: 10px 12px;
+        outline: none;
+        font-size: 1rem;
+        background: white;
+        border-radius: 4px;
+        &:focus {
+            border: 1px solid #1976d26e;
+            box-shadow: 1px 1px 5px #0b75df54;
+
+        }
+        input {
+            background: transparent;
+            &:focus {
+                border: 1px solid #1976d26e;
+
+            }
+
+        }
     }
 }
 .landing {
@@ -125,7 +155,11 @@ a {
 .m0 {
     margin: 0;
 }
-
+.normalButton {
+    outline: none;
+    border: none;
+    background: transparent;
+}
 @media (min-width: 1305px) {
     .limit {
         width: 1200px;
