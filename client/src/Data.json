@@ -18,8 +18,8 @@
         ],
         "Manufacturer" : "",
         "inStock" : true,
-        "details": {
-            "color": "red",
+        "color" :[],
+        "details": {                                                                                                                                                                                                                                                               
             "weight": "300g",
             "style": "5125-fas",
             "made in" : "china"

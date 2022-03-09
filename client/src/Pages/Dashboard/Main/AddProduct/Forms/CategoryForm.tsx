@@ -13,26 +13,22 @@ const CategoryForm = ({stateValue, handleChange} : ICategoryForm) => {
     return (
         <CBox
             sx={{
-            pt: '1.7em',
-            width: {
-                xs: '90%',
-                sm: '300px'
-            }
+            mt: '1.5em',
+            
         }}>
-            <FormControl fullWidth>
+            <FormControl sx={{width: '100%'}} >
 
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                 <Select
-                    
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={stateValue}
                     name='category'
                     label="Category"
                     onChange={handleChange}>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem value={'shoes'}>shoes</MenuItem>
+                    <MenuItem value={'suits'}>suits</MenuItem>
+                    <MenuItem value={'accessories'}>accessories</MenuItem>
                 </Select>
             </FormControl>
         </CBox>

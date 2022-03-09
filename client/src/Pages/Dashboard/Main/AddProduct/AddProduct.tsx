@@ -1,29 +1,48 @@
 import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField";
 import CBox from '../../../../Components/CustomMui/CBox';
 import CTypo from '../../../../Components/CustomMui/CTypo';
 import CButton from '../../../../Components/CustomMui/CButton';
-import Button from "@mui/material/Button";
-import FormControl from '@mui/material/FormControl';
 import Form from "./Forms/Form";
-import {useState} from "react";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select, {SelectChangeEvent} from "@mui/material/Select";
 import CategoryForm from './Forms/CategoryForm';
 import CreateProductHook from "../../../../Helpers/Hooks/CreateProductHook";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import ImageForm from "./Forms/ImageForm";
+import StockStatusForm from './Forms/StockStatusForm';
+import SelectForm from './Forms/SelectForm';
 
 const AddProduct = () => {
-    const {handleChange, formData} = CreateProductHook()
+    const {handleChange, handleSelectChange, handleCategoryChange, handleCheckChange, handleTextChange, formData, HandleImagesChange} = CreateProductHook()
 
+    const sizes = [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+    ];
+    const optionsList = [
+        'Oliver Hansen',
+        'Van Henry',
+        'April Tucker',
+        'Ralph Hubbard',
+        'Omar Alexander',
+        'Carlos Abbott',
+        'Miriam Wagner',
+        'Bradley Wilkerson',
+        'Virginia Andrews',
+        'Kelly Snyder'
+    ];
     return (
         <CBox
             sx={{
             width: {
-                xs: '100%',
-                sm: '100%',
+                xs: 'auto',
                 md: '600px'
             },
             pt: '2em',
@@ -56,35 +75,59 @@ const AddProduct = () => {
                 <Form
                     placeholder='title'
                     stateValue={formData.title}
-                    handleChange={handleChange}
+                    handleChange={handleTextChange}
                     formName={'title'}
                     formTitle='Product title'/>
                 <Form
                     placeholder='Manufacturer'
                     stateValue={formData.Manufacturer}
-                    handleChange={handleChange}
+                    handleChange={handleTextChange}
                     formName={'Manufacturer'}
                     formTitle='Manufacturer'/>
-
-                <CategoryForm stateValue={formData.category} handleChange={handleChange}/>
+                <Form
+                    placeholder='Price'
+                    formType='number'
+                    stateValue={formData.price}
+                    handleChange={handleTextChange}
+                    formName={'price'}
+                    formTitle='price'/>
 
                 <Form
                     formType={'textarea'}
                     placeholder='description'
                     stateValue={formData.description}
-                    handleChange={handleChange}
+                    handleChange={handleTextChange}
                     formName={'description'}
                     formTitle='Product description'/>
-                <CBox sx={{pt:'1.5em'}}>
-                    <FormControlLabel  control={< Checkbox name='checked' onChange={handleChange} checked={formData.checked} />} label="In stock"/>
-                </CBox>
-                <CBox>
+
+                <Form
+                    formType={'textarea'}
+                    placeholder='Specifications'
+                    stateValue={formData.specifications}
+                    handleChange={handleTextChange}
+                    formName={'specifications'}
+                    formTitle='Product Specifications'/>
+
+                <CategoryForm stateValue={formData.category} handleChange={handleCategoryChange}/>
+
+                <SelectForm handleSelectChange={handleSelectChange} inputLabel='sizes' optionsList={sizes}/>
+                <SelectForm handleSelectChange={handleSelectChange} inputLabel='names' optionsList={optionsList}/>
+
+                <StockStatusForm
+                    handleChange={handleCheckChange}
+                    stateValue={formData.inStock}/>
+                <ImageForm HandleImagesChange={HandleImagesChange}/>
+                <CBox
+                    sx={{
+                    mt: '3em',
+                    borderTop: '1px solid #8080805e'
+                }}>
 
                     <CButton
                         background='#1976d2'
                         color='white'
-                        margin='0'
-                        text='Submit'
+                        margin='1.5em'
+                        text='Create product'
                         isSubmitButton={true}/>
                 </CBox>
             </Box>
