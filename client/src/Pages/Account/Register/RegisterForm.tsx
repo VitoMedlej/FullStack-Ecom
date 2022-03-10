@@ -64,7 +64,7 @@ const RegisterForm = () => {
                             md: '80%'
                         }
                     }}
-                        id="outlined-basic"
+                        id="outlined-basic2"
                         label="Email"
                         variant="outlined"/>
                     <TextField
@@ -75,7 +75,7 @@ const RegisterForm = () => {
                             md: '80%'
                         }
                     }}
-                        id="outlined-basic-Password"
+                        id="outlined-basic-Password2"
                         label="Password"
                         variant="outlined"/>
                 </Box>

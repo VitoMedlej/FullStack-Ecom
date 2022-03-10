@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
-const port = 3001 || process.env.PORT
+const port = 9000 || process.env.PORT
+
+
 
 
 app.get('/', (req, res)  =>{
-    res.sen('hasf.html')
+    console.log(process.env.PORT);
+    
+    res.send('hasf.html')
 })
 
 app.listen(port,()=>{

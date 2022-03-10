@@ -32,11 +32,11 @@ const SelectForm = ({optionsList,handleSelectChange, inputLabel} : ISelectForm) 
         setPersonName] = useState < any > ([]);
 
     const handleChange = (event : SelectChangeEvent < typeof personName >) => {
-        const {target: {
-                value
-            }} = event;
+        const {target: {value}} = event;
+        
+
         setPersonName(value)
-        handleSelectChange(value)
+        handleSelectChange(event)
             
     };
 
@@ -50,7 +50,7 @@ const SelectForm = ({optionsList,handleSelectChange, inputLabel} : ISelectForm) 
                 <InputLabel id="demo-multiple-checkbox-label">{`${inputLabel}`}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
-                    id="demo-multiple-checkbox"
+                    id="demo-multiple-checkbox2"
                     multiple
                     name={`${inputLabel}`}
                     value={personName}

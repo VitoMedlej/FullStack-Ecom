@@ -8,6 +8,8 @@ interface IForm {
     formName : string
     handleChange : (e : React.ChangeEvent < HTMLInputElement | HTMLTextAreaElement >) => void
     formType?: string
+    required?: boolean
+    sx?: any
     stateValue : number | string | string[]
     placeholder?: string
 }
@@ -17,6 +19,9 @@ const Form = ({
     formType,
     placeholder,
     stateValue,
+    required,
+
+    sx,
     formName,
     handleChange
 } : IForm) => {
@@ -24,48 +29,36 @@ const Form = ({
         switch (param) {
             case 'textarea':
                 return <TextField
-                sx={{width:'100%'}}
+                required={required ? required : true}
+                    sx={{
+                    width: '100%'
+                }}
                     onChange={handleChange}
                     placeholder={`${placeholder}`}
                     multiline
                     value={stateValue}
                     rows={5}
-                    id="outlined-basic"
+                    id="outlined-basic3"
                     variant="outlined"
-                    name={`${formName}`}  
-                   />
-
-                // <textarea rows={5} 
-                // placeholder={`${placeholder}`}
-                // value={stateValue}
-                // onChange={handleChange}    
-                //     className='searchInput wfull'
-                // name={`${formName}`}         id=""></textarea>
+                    name={`${formName}`}/>
 
             default:
                 return <TextField
-                sx={{width:'100%'}}
+                    sx={{
+                    width: `100%`
+                }}
                     onChange={handleChange}
                     placeholder={`${placeholder}`}
                     type={formType || "text"}
                     value={stateValue}
                     variant="outlined"
-                    name={`${formName}`}  
-                   />
-
-
-                // <input
-                //     placeholder={`${placeholder}`}
-                //     value={stateValue}
-                //     onChange={handleChange}
-                //     type={formType || "text"}
-                //     name={`${formName}`}
-                //     className='searchInput wfull'/>
+                    name={`${formName}`}/>
 
         }
     }
     return (
         <CBox sx={{
+            ...sx,
             pt: '1.5em'
         }}>
             <Box>
