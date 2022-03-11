@@ -28,13 +28,17 @@ app.get('/', (req, res)  =>{
 
 const sendtodb = async (product) => {
     try {
+    
       await  product.save()
+    console.log('ended');
+    
     }
     catch (err) {
         console.log(err);
         
     }
 }
+
 
 app.post('/dashboard/add-products',async (req,res,next)=>{
     const Data = req.body

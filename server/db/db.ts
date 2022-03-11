@@ -11,7 +11,6 @@ try {
 }
 catch (err) {
     console.log(err);
-    
 }
 }
 const db = mongoose.connection
