@@ -5,9 +5,14 @@ const bodyParser = require('body-parser');
 const port = 9000 || process.env.PORT
 const {connectToDB ,db} = require('../db/db')
 const productModel = require('../db/Models/ProductModel')
+require('dotenv').config();
+
+
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
 
 
 
@@ -28,9 +33,9 @@ app.get('/', (req, res)  =>{
 
 const sendtodb = async (product) => {
     try {
-    
+        await connectToDB()
       await  product.save()
-    console.log('ended');
+        console.log('ended');
     
     }
     catch (err) {
@@ -40,10 +45,11 @@ const sendtodb = async (product) => {
 }
 
 
+
 app.post('/dashboard/add-products',async (req,res,next)=>{
     const Data = req.body
     const product = new productModel(Data)
-   await sendtodb(product)
+    await sendtodb(product)
     res.send('SHIT SUCCECEDED')
     
    
