@@ -195,7 +195,7 @@ const AddProduct = () => {
                 }}>
 
                     <CButton
-                        disabled={true}
+                        disabled={false}
                         background='#1976d2'
                         color='white'
                         margin='1.5em'
