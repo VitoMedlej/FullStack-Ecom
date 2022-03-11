@@ -20,7 +20,6 @@ const Form = ({
     placeholder,
     stateValue,
     required,
-
     sx,
     formName,
     handleChange
@@ -29,7 +28,7 @@ const Form = ({
         switch (param) {
             case 'textarea':
                 return <TextField
-                required={required ? required : true}
+                // required={required ? required : true}
                     sx={{
                     width: '100%'
                 }}

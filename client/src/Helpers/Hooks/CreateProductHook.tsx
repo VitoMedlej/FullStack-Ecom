@@ -2,7 +2,7 @@ import {SelectChangeEvent} from "@mui/material/Select";
 import {useState} from "react";
 import {nanoid} from 'nanoid'
 
-interface IformData {
+export interface IformData {
     title : string;
     sizes : number[];
     price : string;
@@ -17,11 +17,9 @@ interface IformData {
         comment: string
     }[]
     id : string;
-
     weight : string;
     style : string;
     country : string
-
     colors : string[]
     Manufacturer : string;
 }

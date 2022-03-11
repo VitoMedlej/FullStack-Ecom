@@ -8,6 +8,7 @@ import CreateProductHook from "../../../../Helpers/Hooks/CreateProductHook";
 import ImageForm from "./Forms/ImageForm";
 import StockStatusForm from './Forms/StockStatusForm';
 import SelectForm from './Forms/SelectForm';
+import {IformData} from '../../../../Helpers/Hooks/CreateProductHook'
 
 const AddProduct = () => {
     const {
@@ -31,6 +32,25 @@ const AddProduct = () => {
         14,
         15
     ];
+    const PostDataToDB = async(data : IformData) => {
+        try {
+
+        const response = await fetch(' http://localhost:9000/dashboard/add-products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data}),
+        })
+        const result = await response.text()
+        console.log('result: ', result);
+    }
+
+    catch(err) {
+        console.log(err ,'wtf');
+        
+    }
+    }
     const colors = ['black', 'white', 'red', 'yellow'];
     return (
         <CBox
@@ -56,7 +76,7 @@ const AddProduct = () => {
             <Box
                 onSubmit={async(e : React.FormEvent < HTMLInputElement >) => {
                 e.preventDefault();
-                console.log(formData);
+                PostDataToDB(formData)
             }}
                 sx={{
                 background: 'white',
@@ -67,13 +87,12 @@ const AddProduct = () => {
                 component='form'>
 
                 <Form
-                   
                     placeholder='title'
                     stateValue={formData.title}
                     handleChange={handleTextChange}
                     formName={'title'}
                     formTitle='Product title'/>
-               
+
                 <Form
                     placeholder='Price'
                     formType='number'
@@ -101,11 +120,12 @@ const AddProduct = () => {
                 <CBox
                     sx={{
                     display: 'flex',
-                    flexWrap: 'wrap',justifyContent:'space-between'
+                    flexWrap: 'wrap',
+                    justifyContent: 'space-between'
                 }}>
 
                     <Form
-                     required={false}
+                        required={false}
                         sx={{
                         px: '0',
                         mx: '5px'
@@ -116,8 +136,7 @@ const AddProduct = () => {
                         formName={'weight'}
                         formTitle='Product weight'/>
                     <Form
-                     required={false}
-
+                        required={false}
                         sx={{
                         px: '0',
                         mx: '5px'
@@ -128,8 +147,7 @@ const AddProduct = () => {
                         formName={'style'}
                         formTitle='Styles'/>
                     <Form
-                     required={false}
-
+                        required={false}
                         sx={{
                         px: '0',
                         mx: '5px'
@@ -139,18 +157,17 @@ const AddProduct = () => {
                         handleChange={handleTextChange}
                         formName={'country'}
                         formTitle='Made in'/>
-                         <Form
-                     required={false}
-
-                           sx={{
-                            px: '0',
-                            mx: '5px'
-                        }}
-                    placeholder='Manufacturer'
-                    stateValue={formData.Manufacturer}
-                    handleChange={handleTextChange}
-                    formName={'Manufacturer'}
-                    formTitle='Manufacturer'/>
+                    <Form
+                        required={false}
+                        sx={{
+                        px: '0',
+                        mx: '5px'
+                    }}
+                        placeholder='Manufacturer'
+                        stateValue={formData.Manufacturer}
+                        handleChange={handleTextChange}
+                        formName={'Manufacturer'}
+                        formTitle='Manufacturer'/>
 
                 </CBox>
                 <CategoryForm
@@ -178,6 +195,7 @@ const AddProduct = () => {
                 }}>
 
                     <CButton
+                        disabled={true}
                         background='#1976d2'
                         color='white'
                         margin='1.5em'

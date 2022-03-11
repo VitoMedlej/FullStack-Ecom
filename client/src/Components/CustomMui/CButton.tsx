@@ -12,10 +12,12 @@ interface CButton {
     borderRadius?: string
     isSubmitButton?: boolean;
     className?: string
+    disabled ?: boolean
 }
 
 const CButton = ({
     text,
+    disabled,
     isSubmitButton,
     background,
     className,
@@ -28,6 +30,7 @@ const CButton = ({
 } : CButton) => {
     return (
         <Button
+        disabled={disabled || false}
             type={isSubmitButton ? 'submit' : 'button'}
             variant='contained'
             className={className && className}
