@@ -27,15 +27,15 @@ const MenuProps = {
 
 
 
-const SelectForm = ({optionsList,handleSelectChange, inputLabel} : ISelectForm) => {
-    const [personName,
-        setPersonName] = useState < any > ([]);
-
-    const handleChange = (event : SelectChangeEvent < typeof personName >) => {
+const SelectForm = ({optionsList  ,handleSelectChange, inputLabel} : ISelectForm) => {
+ 
+    const [selectValue,
+        setSelectValue] = useState < any > ([]);
+    const handleChange = (event : SelectChangeEvent < typeof selectValue >) => {
         const {target: {value}} = event;
         
 
-        setPersonName(value)
+        setSelectValue(value)
         handleSelectChange(event)
             
     };
@@ -53,7 +53,7 @@ const SelectForm = ({optionsList,handleSelectChange, inputLabel} : ISelectForm) 
                     id="demo-multiple-checkbox2"
                     multiple
                     name={`${inputLabel}`}
-                    value={personName}
+                    value={selectValue}
                     onChange={handleChange}
                     input={< OutlinedInput label = {
                     `${inputLabel}`
@@ -62,7 +62,7 @@ const SelectForm = ({optionsList,handleSelectChange, inputLabel} : ISelectForm) 
                     MenuProps={MenuProps}>
                     {optionsList.map((option) => (
                         <MenuItem key={option} value={option}>
-                            <Checkbox checked={personName.indexOf(option) > -1}/>
+                            <Checkbox checked={selectValue.indexOf(option) > -1}/>
                             <ListItemText primary={option}/>
                         </MenuItem>
                     ))}

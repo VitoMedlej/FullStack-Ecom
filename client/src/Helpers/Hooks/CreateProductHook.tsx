@@ -24,31 +24,37 @@ export interface IformData {
     Manufacturer : string;
 }
 
-const CreateProductHook = () => {
 
+const defaultProductValues = {
+    title: "ASF",
+    sizes: [4],
+    colors: ['white'],
+    price: '22',
+    images: [''],
+    inStock: false,
+    weight: '22',
+    style: '22',
+    country: '22',
+    description: "22",
+    category: '22',
+    id:`${ nanoid()}`,
+    specifications: ['asf'],
+    Manufacturer: "22",
+    reviews: []
+}
+
+const CreateProductHook = () => {
+ 
     const [formData,
-        setFormData] = useState < IformData > ({
-        title: "",
-        sizes: [],
-        colors: [],
-        price: '',
-        images: [''],
-        inStock: false,
-        weight: '',
-        style: '',
-        country: '',
-        description: "",
-        category: '',
-        id:`${ nanoid()}`,
-        specifications: [],
-        Manufacturer: "",
-        reviews: []
-    })
+        setFormData] = useState < IformData > (defaultProductValues)
     const HandleImagesChange = (array : string[]) => {
         setFormData({
             ...formData,
             images: [...array]
         })
+    }
+    const resetForm = () => {
+        setFormData(defaultProductValues)
     }
 
     const handleTextChange = (e : React.ChangeEvent < HTMLInputElement | HTMLTextAreaElement >) => {
@@ -90,7 +96,9 @@ const CreateProductHook = () => {
         handleTextChange,
         handleCheckChange,
         HandleImagesChange,
-        formData
+        formData,
+       
+        resetForm
     }
 }
 

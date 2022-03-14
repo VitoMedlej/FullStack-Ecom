@@ -28,7 +28,7 @@ const Form = ({
         switch (param) {
             case 'textarea':
                 return <TextField
-                // required={required ? required : true}
+                required={required ? required : true}
                     sx={{
                     width: '100%'
                 }}
@@ -43,6 +43,8 @@ const Form = ({
 
             default:
                 return <TextField
+                required={required ? required : true}
+
                     sx={{
                     width: `100%`
                 }}

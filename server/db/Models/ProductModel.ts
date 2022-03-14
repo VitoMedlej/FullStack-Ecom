@@ -1,33 +1,31 @@
-const mongoose = require("mongoose");
+const mongoosea = require("mongoose");
 
-
-
-
-const ProductSchema = mongoose.Schema({
+const ProductSchema = mongoosea.Schema({
     title: {
         type: String,
-      
+        required: true
     },
+    sizes: [Number],
     price: {
-        type:  String
-    },
-    sizes: {
-        type: [Number],
+        type: String,
+        required: true
     },
     images: {
-        type: [String]
+        type: [String],
+        required: true
     },
-    specifications: {
-        type: [String]
-    },
+    specifications: [String],
     inStock: {
-        type: Boolean
+        type: Boolean,
+        required: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     category: {
-        type: String
+        type: String,
+        required: true
     },
     reviews: [
         {
@@ -37,23 +35,16 @@ const ProductSchema = mongoose.Schema({
         }
     ],
     id: {
-        type: String
+        type: String,
+        required: true
     },
-    weight: {
-        type: String
-    },
-    style: {
-        type: String
-    },
-    country: {
-        type: String
-    },
-    colors: {type :[String]},
-    Manufacturer: {
-        type: String
-    }
-},{ strict: false })
+    weight: String,
+    style: String,
+    country: String,
+    colors: [String],
+    Manufacturer: String
+}, {strict: true})
 
-const User = mongoose.model("User", ProductSchema, 'Products');
+const productModel = mongoosea.model("Product", ProductSchema, 'Products')
 
-module.exports = User;
+module.exports = productModel

@@ -9,14 +9,25 @@ import ImageForm from "./Forms/ImageForm";
 import StockStatusForm from './Forms/StockStatusForm';
 import SelectForm from './Forms/SelectForm';
 import {IformData} from '../../../../Helpers/Hooks/CreateProductHook'
+import Snackbar, {SnackbarOrigin} from "@mui/material/Snackbar";
+import {useState} from "react";
+import Alert from "@mui/material/Alert";
+import CircularProgress from "@mui/material/CircularProgress";
+import PostDataHook from '../../../../Helpers/Hooks/PostDataHook'
+
+
+
 
 const AddProduct = () => {
+    const {PostDataToDB ,isLoading ,results}  = PostDataHook()
     const {
         handleSelectChange,
         handleCategoryChange,
         handleCheckChange,
         handleTextChange,
         formData,
+    
+        resetForm,
         HandleImagesChange
     } = CreateProductHook()
 
@@ -32,26 +43,14 @@ const AddProduct = () => {
         14,
         15
     ];
-    const PostDataToDB = async(data : IformData) => {
-        try {
+  
 
-        const response = await fetch(' http://localhost:9000/dashboard/add-products', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data}),
-        })
-        const result = await response.text()
-        console.log('result: ', result);
-    }
-
-    catch(err) {
-        console.log(err ,'wtf');
-        
-    }
-    }
     const colors = ['black', 'white', 'red', 'yellow'];
+    const [isOpen ,setOpen] = useState(false)
+    const handleClick = () => {
+        setOpen(!isOpen)
+    }
+
     return (
         <CBox
             sx={{
@@ -73,10 +72,37 @@ const AddProduct = () => {
                 mt: 0
             }}/>
 
+            <Snackbar
+            onClick={()=>handleClick()}
+                sx={{
+                mt: '2em'
+            }}
+                anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'center'
+            }}
+              
+                // open={true}
+                autoHideDuration={2000}
+               >
+                <Alert
+                    sx={{
+                    fontSize:'1em',
+                    background: 'rgb(56, 142, 60)',
+                    color: 'white'
+                }}
+                    severity="success">Product has been added successfully!</Alert>
+            </Snackbar>
+
+
             <Box
                 onSubmit={async(e : React.FormEvent < HTMLInputElement >) => {
                 e.preventDefault();
-                PostDataToDB(formData)
+                // PostDataToDB(formData)
+                console.log('sent');
+                setOpen(true)
+                resetForm()
+
             }}
                 sx={{
                 background: 'white',
@@ -175,11 +201,13 @@ const AddProduct = () => {
                     handleChange={handleCategoryChange}/>
 
                 <SelectForm
+                
                     handleSelectChange={handleSelectChange}
                     inputLabel='sizes'
                     optionsList={sizes}/>
 
                 <SelectForm
+                  
                     handleSelectChange={handleSelectChange}
                     inputLabel='colors'
                     optionsList={colors}/>
@@ -194,13 +222,15 @@ const AddProduct = () => {
                     borderTop: '1px solid #8080805e'
                 }}>
 
-                    <CButton
-                        disabled={false}
+                        <CButton
+                        disabled={isLoading}
                         background='#1976d2'
                         color='white'
                         margin='1.5em'
                         text='Create product'
-                        isSubmitButton={true}/>
+                        isSubmitButton={true}>
+                        </CButton>
+                      
                 </CBox>
             </Box>
         </CBox>
