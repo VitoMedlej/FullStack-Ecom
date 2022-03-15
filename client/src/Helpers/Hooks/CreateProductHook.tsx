@@ -26,20 +26,20 @@ export interface IformData {
 
 
 const defaultProductValues = {
-    title: "ASF",
-    sizes: [4],
-    colors: ['white'],
-    price: '22',
+    title: "",
+    sizes: [],
+    colors: [''],
+    price: '',
     images: [''],
     inStock: false,
-    weight: '22',
-    style: '22',
-    country: '22',
-    description: "22",
-    category: '22',
+    weight: '',
+    style: '',
+    country: '',
+    description: "",
+    category: '',
     id:`${ nanoid()}`,
-    specifications: ['asf'],
-    Manufacturer: "22",
+    specifications: [''],
+    Manufacturer: "",
     reviews: []
 }
 

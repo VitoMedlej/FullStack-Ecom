@@ -15,18 +15,14 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import PostDataHook from '../../../../Helpers/Hooks/PostDataHook'
 
-
-
-
 const AddProduct = () => {
-    const {PostDataToDB ,isLoading ,results}  = PostDataHook()
+    const {PostDataToDB, isLoading, results} = PostDataHook()
     const {
         handleSelectChange,
         handleCategoryChange,
         handleCheckChange,
         handleTextChange,
         formData,
-    
         resetForm,
         HandleImagesChange
     } = CreateProductHook()
@@ -43,10 +39,11 @@ const AddProduct = () => {
         14,
         15
     ];
-  
 
     const colors = ['black', 'white', 'red', 'yellow'];
-    const [isOpen ,setOpen] = useState(false)
+    const [isOpen,
+        setOpen] = useState(false)
+
     const handleClick = () => {
         setOpen(!isOpen)
     }
@@ -73,7 +70,7 @@ const AddProduct = () => {
             }}/>
 
             <Snackbar
-            onClick={()=>handleClick()}
+                onClick={() => handleClick()}
                 sx={{
                 mt: '2em'
             }}
@@ -81,28 +78,33 @@ const AddProduct = () => {
                 vertical: 'top',
                 horizontal: 'center'
             }}
-              
-                // open={true}
-                autoHideDuration={2000}
-               >
+                open={isOpen}
+                autoHideDuration={2000}>
                 <Alert
                     sx={{
-                    fontSize:'1em',
-                    background: 'rgb(56, 142, 60)',
+                    fontSize: '1em',
+                    background:`${results == '200' ? 'rgb(56, 142, 60)' : 'red'}`,
                     color: 'white'
                 }}
-                    severity="success">Product has been added successfully!</Alert>
-            </Snackbar>
+                    severity={`${results == '200'
+                    ? 'success'
+                    : 'error'}`}>
 
+                    {`${results == '200'
+                        ? ' Product has been added successfully!'
+                        : 'There was an error adding the product!'}`}
+                </Alert>
+            </Snackbar>
 
             <Box
                 onSubmit={async(e : React.FormEvent < HTMLInputElement >) => {
                 e.preventDefault();
-                // PostDataToDB(formData)
-                console.log('sent');
-                setOpen(true)
+                PostDataToDB(formData);
+                setOpen(true);
+                setTimeout(() => {
+                    setOpen(false)
+                }, 3000);
                 resetForm()
-
             }}
                 sx={{
                 background: 'white',
@@ -201,13 +203,11 @@ const AddProduct = () => {
                     handleChange={handleCategoryChange}/>
 
                 <SelectForm
-                
                     handleSelectChange={handleSelectChange}
                     inputLabel='sizes'
                     optionsList={sizes}/>
 
                 <SelectForm
-                  
                     handleSelectChange={handleSelectChange}
                     inputLabel='colors'
                     optionsList={colors}/>
@@ -222,15 +222,14 @@ const AddProduct = () => {
                     borderTop: '1px solid #8080805e'
                 }}>
 
-                        <CButton
+                    <CButton
                         disabled={isLoading}
                         background='#1976d2'
                         color='white'
                         margin='1.5em'
                         text='Create product'
-                        isSubmitButton={true}>
-                        </CButton>
-                      
+                        isSubmitButton={true}></CButton>
+
                 </CBox>
             </Box>
         </CBox>

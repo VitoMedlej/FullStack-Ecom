@@ -58,16 +58,16 @@ const Navbody = ({} : INavBar) => {
                 sm: 'block'
             }
         }}>
-
+            <Link className='Alink' to='/'>
+                Home
+            </Link>
             <Link className='Alink' to='/account/login'>
                 login
             </Link>
             <Link className='Alink' to='/dashboard/main'>
                 Dashboard
             </Link>
-            <Link className='Alink' to='/'>
-                Link1
-            </Link>
+
         </Box>
         <Box
             className='logo'

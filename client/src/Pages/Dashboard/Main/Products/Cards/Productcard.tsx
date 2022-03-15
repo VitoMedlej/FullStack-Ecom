@@ -53,7 +53,7 @@ const Productcard = ({img ,title ,price} : IProductcard) => {
                 color='green'
                     fontSize={{md:'1.1em'}}
                     fontWeight='400'
-                    text={`${price}`}></CTypo>
+                    text={`$${price}`}></CTypo>
                     </Box>
                 <Box
                     sx={{

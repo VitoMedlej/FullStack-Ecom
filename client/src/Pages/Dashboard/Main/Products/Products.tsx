@@ -6,29 +6,28 @@ import CTypo from "../../../../Components/CustomMui/CTypo"
 import SearchIcon from '@mui/icons-material/Search';
 import {useEffect, useState} from 'react';
 import {IformData} from '../../../../Helpers/Hooks/CreateProductHook'
-import CButton from "../../../../Components/CustomMui/CButton"
-
 import Productcard from './Cards/Productcard';
 import Skeleton from "@mui/material/Skeleton"
+import GetProductsHook from "../../../../Helpers/Hooks/GetProductsHook"
+
 const img = require('../../../../Helpers/Images/accessories.jfif')
+
+
 const Products = () => {
-    const [products,
-        setProducts] = useState < IformData[] > ([])
-    const GetDatafromDB = async() => {
 
-        const request = await fetch('http://localhost:9000/dashboard/products')
-        const results = await request.json()
-        setProducts(results)
+    const {products ,isLoading ,GetDatafromDB,setLoading} = GetProductsHook()
 
-    }
     useEffect(() => {
         let isdone = false
         if (!isdone) {
-
+            setLoading(true)
             GetDatafromDB()
+
         }
         return () => {
             isdone = true
+            setLoading(false)
+
         }
     }, [])
 
@@ -91,24 +90,73 @@ const Products = () => {
                     borderTop: '1px solid #8080803b'
                 }}>
 
-                    {console.log(products)
+                    {products.length > 0 && products.map((product : IformData) => <Productcard
+                        key={product.id}
+                        title={product.title}
+                        img={product.images[0] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
+                        price={product.price}/>)
 }
+                    {isLoading && [1,2,3,4,5,6].map((number) => {
+                               return <Skeleton
+                               key={number -1}
+                                sx={{
 
-                    {products
-                        ? products.map((product : IformData) => <Productcard
-                            key={product.id}
-                            title={product.title}
-                            img={product.images[0] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
-                            price={product.price}/>)
+                                width: {
+                                    xs: '99%',
+                                    md: '49%',
+                                    lg: '32%'
+                                },
+                                height: {
+                                    xs: '200px',
+                                    md: '300px'
+                                }
+                            }}></Skeleton>
+                    })}
 
-                        : <CTypo
+                    {!isLoading && products.length == 0 && <Box
+                        sx={{
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}>
+                        <CTypo
                             fontSize={{
-                            xs: '1.3em',
-                            sm: '1.5'
+                            xs: '1.1em'
                         }}
-                            text='Loading content ,please wait...'></CTypo>
-}
+                            sx={{
+                            mr: '4px'
+                        }}
+                            text='Failed to load data ,'></CTypo>
+                        <CTypo
+                        onClick={()=>{
 
+                            setLoading(true);
+                            GetDatafromDB()
+                        }
+
+                        }
+                            color='red'
+                            sx={{
+                            cursor: 'pointer'
+                        }}
+                            fontSize={{
+                            xs: '1.1em'
+                        }}
+                            text='retry?'></CTypo>
+                    </Box>}
+
+                    {/* <Skeleton
+                        sx={{
+                        width: {
+                            xs: '99%',
+                            md: '49%',
+                            lg: '32%'
+                        },
+                        height: {
+                            xs: '200px',
+                            md: '300px'
+                        }
+                    }}></Skeleton> */}
+                    
                 </CBox>
             </Box>
         </CBox>

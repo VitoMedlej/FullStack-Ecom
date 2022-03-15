@@ -18,9 +18,17 @@ const PostDataHook = () => {
                 })
             })            
             setResults(`${response.status}`)
+
+
             setLoading(false)
-        } catch (err) {
-            console.log(err, 'wtf');
+        }
+       
+        
+        catch (err) {
+            setLoading(false)
+            setResults(`400`)
+
+            console.log(err);
 
         }
     }

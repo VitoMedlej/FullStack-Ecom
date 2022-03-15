@@ -16,7 +16,6 @@ const SizeSelect = () => {
         setSize] = useState < number | string > (8);
 
     const handleChange = (event : SelectChangeEvent) => {
-        console.log(event);
 
         setSize(event.target.value);
 

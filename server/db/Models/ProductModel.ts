@@ -1,6 +1,7 @@
-const mongoosea = require("mongoose");
+const mongoose = require('mongoose')
 
-const ProductSchema = mongoosea.Schema({
+
+const ProductSchema = mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -45,6 +46,6 @@ const ProductSchema = mongoosea.Schema({
     Manufacturer: String
 }, {strict: true})
 
-const productModel = mongoosea.model("Product", ProductSchema, 'Products')
+const productModel = mongoose.model("Product", ProductSchema, 'Products')
 
-module.exports = productModel
+export default productModel

@@ -17,6 +17,7 @@ const ImageForm = ({HandleImagesChange}:IImageForm) => {
                 mt: '0'
             }} text='Images'></CTypo>
             <Widget
+           
             clearable
                 multiple
                 onFileSelect={async(group : any) => {
@@ -24,7 +25,7 @@ const ImageForm = ({HandleImagesChange}:IImageForm) => {
 
                     const files = await Promise.all(group.files());
                     const urls = files.map((file: { cdnUrl: any; }) => file.cdnUrl);
-                    console.log(urls)
+                  
                     HandleImagesChange(urls)
                 }
             }}
