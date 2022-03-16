@@ -9,6 +9,7 @@ interface IProduct {
     id : string | number
     unit?: string
     title : string
+    Manufacturer : string
 }
 const Product = ({
     img,
@@ -16,13 +17,15 @@ const Product = ({
     title,
     category,
     unit,
-    price
+    price,
+    Manufacturer
 } : IProduct) => {
     let inStock = true
     return (
         <Box
             className='trans'
             sx={{
+            border: '1px solid #80808030',
             margin: '5px',
             ':hover': {
                 transform: "translateY(-5px)",
@@ -36,9 +39,10 @@ const Product = ({
         }}>
             <Link className='linkz' to={`/category/${category}/products/${id}`}/>
             <Box sx={{
+                    height: '400px',
                 position: 'relative'
             }}>
-                <img className='img' src={`${img}`} alt="product image"/>
+                <img className='img2' src={`${img}`} alt="product image"/>
                 <Box
                     sx={{
                     width: 'fit-content',
@@ -71,20 +75,17 @@ const Product = ({
                     }
                 }}
                     text={title || 'Item'}/>
+
                 <CTypo
-                    fontSize={{
-                    xs: '.75em',
-                    md: '.79em',
-                    xl: '.84em'
+                    sx={{
+                    mt: '0',
+                    width: '95%',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis'
                 }}
                     color='#767677'
-                    sx={{
-                    mt: {
-                        xs: '0px'
-                    }
-                }}
-                    text='Nike Shoes'/>
-
+                    text='fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf '/>
             </Box>
         </Box>
 

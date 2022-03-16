@@ -21,7 +21,7 @@ const Products = () => {
         let isdone = false
         if (!isdone) {
             setLoading(true)
-            GetDatafromDB()
+            GetDatafromDB('/dashboard/products')
 
         }
         return () => {
@@ -130,7 +130,7 @@ const Products = () => {
                         onClick={()=>{
 
                             setLoading(true);
-                            GetDatafromDB()
+                            GetDatafromDB('/dashboard/products')
                         }
 
                         }

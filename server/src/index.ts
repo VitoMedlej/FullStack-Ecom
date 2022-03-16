@@ -15,6 +15,8 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
+
 app.get('/dashboard/products', async(req, res) => {
     await connectToDB()
 
@@ -30,6 +32,15 @@ app.get('/categories', async(req, res) => {
     const dataArray = await Category.find({})
     res.json([...dataArray])
 
+})
+app.get('/category/:category', async(req, res) => {
+    await connectToDB()
+    const params = req.params.category
+    const product = mongoose.model('Product')
+    const prods = await product.find({'category' : `${params}`});
+    
+
+    res.json([...prods])
 })
 
 app.post('/dashboard/add-products', async(req, res, next) => {

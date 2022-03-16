@@ -8,10 +8,13 @@ const GetProductsHook = () => {
         setProducts] = useState < IformData[] > ([])
     const [isLoading,
         setLoading] = useState(false)
-    const GetDatafromDB = async() => {
-        try {
 
-            const request = await fetch('http://localhost:9000/dashboard/products')
+       
+    const GetDatafromDB = async(url : string) => {
+        try {
+            setLoading(true)
+
+            const request = await fetch(`http://localhost:9000${url}`)
             const results = await request.json()
             setProducts(results)
             setLoading(false)

@@ -5,10 +5,20 @@ import CTypo from '../Components/CustomMui/CTypo';
 import Product from '../Components/ProductPage/ProductCard';
 import BreadCrumbsLink from '../Components/ProductPage/BreadCrumbsLink';
 import {useParams} from 'react-router-dom';
+import GetProductsHook from '../Helpers/Hooks/GetProductsHook';
+import {useEffect} from 'react';
+import Skeleton from '@mui/material/Skeleton';
 const pic = require('../Helpers/Images/nike.jfif')
 
 const Category = () => {
     const {section} = useParams()
+
+    const {GetDatafromDB, isLoading, products} = GetProductsHook()
+
+    useEffect(() => {
+        GetDatafromDB(`/category/${section}`)
+
+    }, [])
 
     return (
 
@@ -52,18 +62,20 @@ const Category = () => {
                         md={9}
                         lg={10}>
 
-                        <Product
-                            title={'fasfasfasf asfasf asfasf wqr qwr qwrasf asfasf'}
-                            price={412}
-                            id={54125}
-                            category={'shoes'}
-                            img={pic}/>
-                        <Product
-                            title={'fasfasfasf asfasf asfasf wqr qwr qwrasf asfasf'}
-                            price={412}
-                            id={54125}
-                            category={'shoes'}
-                            img={pic}/>
+                        {!isLoading && products.length > 0 && products.map((product) => {
+                            return <Product
+                                key={product.id}
+                                title={`${product.title}`}
+                                price={product.price}
+                                id={product.id}
+                                Manufacturer={product.Manufacturer}
+                                category={`${product.category}`}
+                                img={product.images[0]}/>
+                        })
+}
+                        {isLoading && products.length === 0 && <h1>fasf</h1>
+                        }
+
 
                     </Grid>
                 </Grid>
@@ -73,3 +85,7 @@ const Category = () => {
 }
 
 export default Category
+
+function GetDataFromDB() {
+    throw new Error('Function not implemented.');
+}
