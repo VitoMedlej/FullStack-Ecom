@@ -8,29 +8,59 @@ import ProductImageSlider from './ProductImageSlider';
 import ProductDetails from './ProductDetails';
 import ProductSpec from './ProductSpec';
 import ProductDesc from './ProductDesc';
-import SwiperCore, {Autoplay} from 'swiper'
 import ProductReview from './ProductReview';
 import ProductSideBar from './ProductSideBar';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../Redux/Store';
+import {IformData} from '../../Helpers/Hooks/CreateProductHook';
+import {useState, useEffect} from 'react';
+import GetSingleProductHook from '../../Helpers/Hooks/GetSingleProductHook';
 
 const img = require('../../Helpers/Images/shoes.jfif')
 
 const Product = () => {
-    const {section} = useParams()
-    SwiperCore.use([Autoplay]);
+    const {GetProductById, data, isLoading} = GetSingleProductHook()
+    const {section, id} = useParams()
+    const [product,
+        setProduct] = useState < IformData > ()
+    const ProductsArray = useSelector((state : RootState) => state.ProductsArray.productStateArray)
+
+    useEffect(() => {
+
+        // if (ProductsArray.length > 1) {     const currentProduct =
+        // ProductsArray.find(prod => prod.id === `${id}`)     if (currentProduct) {
+        //     setProduct(currentProduct)     } } if (ProductsArray.length <= 1 &&
+        // section && id) {     GetProductById(section, id)    if (data)
+        // setProduct(data) }
+    }, [])
+    useEffect(() => {
+        if (section && id && !product) {
+
+            GetProductById(section, id)
+
+        }
+    }, [])
+    useEffect(() => {
+        if (data) 
+            setProduct(data[0]);
+
+        }
+    , [data])
 
     return (
         <Box>
-
             <CBox className='limit'>
-                <BreadCrumbsLink section={`${section}`}/>
+                {/* <BreadCrumbsLink section={`${ID}`}/> */}
+
                 <Grid container>
 
-                    <ProductImageSlider/>
+                    <ProductImageSlider isLoading={isLoading}/>
 
-                <ProductSideBar/>
+                    <ProductSideBar isLoading={isLoading}
+                     title={`${product && product.title}`}/>
                     <Box>
 
-                        <ProductDesc/>
+                        <ProductDesc isLoading={isLoading}/>
                         <ProductSpec/>
                         <Grid md={8} item xs={12}>
                             <CTypo
@@ -55,6 +85,7 @@ const Product = () => {
                         </Grid>
 
                     </Box>
+
                 </Grid>
             </CBox>
         </Box>

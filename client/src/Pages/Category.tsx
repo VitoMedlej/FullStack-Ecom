@@ -8,21 +8,35 @@ import {useParams} from 'react-router-dom';
 import GetProductsHook from '../Helpers/Hooks/GetProductsHook';
 import {useEffect} from 'react';
 import Skeleton from '@mui/material/Skeleton';
+import {useSelector, useDispatch} from 'react-redux'
+import { saveProductsArray } from '../Redux/Slices/ProductsSlice';
+import { RootState } from '../Redux/Store';
+
+
 const pic = require('../Helpers/Images/nike.jfif')
 
 const Category = () => {
     const {section} = useParams()
+    const dispatch = useDispatch()
 
     const {GetDatafromDB, isLoading, products} = GetProductsHook()
 
     useEffect(() => {
         GetDatafromDB(`/category/${section}`)
-
     }, [])
+
+  
+    
+    useEffect(() => {
+        // console.table(products);
+        dispatch(saveProductsArray(products))
+    }, [products])
 
     return (
 
-        <Box component='section'>
+        <Box sx={{
+            minHeight: '100vh'
+        }} component='section'>
             <CBox
                 sx={{
                 borderBottom: '1px solid #8080802e',
@@ -68,14 +82,34 @@ const Category = () => {
                                 title={`${product.title}`}
                                 price={product.price}
                                 id={product.id}
-                                Manufacturer={product.Manufacturer}
+                                description={product.description}
                                 category={`${product.category}`}
                                 img={product.images[0]}/>
                         })
 }
-                        {isLoading && products.length === 0 && <h1>fasf</h1>
-                        }
-
+                        {isLoading && products.length === 0 && [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6
+                        ].map((number) => {
+                            return <Skeleton
+                                key={number}
+                                sx={{
+                                height: '400px',
+                                mx: '5px',
+                                width: {
+                                    xs: '46%',
+                                    md: '32%'
+                                }
+                            }}></Skeleton>
+                        })
+}
+                        {!isLoading && products.length === 0 && <CTypo
+                            color='red'
+                            text='Error loading data ,please check your internet and try again'/>}
 
                     </Grid>
                 </Grid>

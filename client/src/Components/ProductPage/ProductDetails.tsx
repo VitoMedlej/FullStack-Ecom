@@ -19,7 +19,7 @@ const ProductDetails = () => {
             value: 'red'
         }
     ]
-    // ,value : string | number
+   
     return (
         <Grid container >
             <Grid item md={2} xs={3}>

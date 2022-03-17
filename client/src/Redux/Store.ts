@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import CartSliceReducer from './Slices/CartSlice'
 import BackDropSlice from './Slices/BackDropSlice'
 import SideBarSlice from './Slices/SideBarSlice'
+import ProductsSlice from './Slices/ProductsSlice'
 
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     isCartOpen : CartSliceReducer,
     isBackDrop : BackDropSlice,
     isSideBar : SideBarSlice,
+    ProductsArray : ProductsSlice,
 
 
   },

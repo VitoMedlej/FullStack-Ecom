@@ -9,7 +9,7 @@ interface IProduct {
     id : string | number
     unit?: string
     title : string
-    Manufacturer : string
+    description : string
 }
 const Product = ({
     img,
@@ -18,7 +18,7 @@ const Product = ({
     category,
     unit,
     price,
-    Manufacturer
+    description
 } : IProduct) => {
     let inStock = true
     return (
@@ -85,7 +85,7 @@ const Product = ({
                     textOverflow: 'ellipsis'
                 }}
                     color='#767677'
-                    text='fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf fasfasfasfasf '/>
+                    text={`${description}`}/>
             </Box>
         </Box>
 

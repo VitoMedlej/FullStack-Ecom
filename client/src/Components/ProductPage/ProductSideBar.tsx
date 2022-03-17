@@ -5,8 +5,14 @@ import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import Skeleton from "@mui/material/Skeleton";
 
-const ProductSideBar = () => {
+
+interface IProductSideBar {
+    title : string
+    isLoading : boolean
+}
+const ProductSideBar = ({title ,isLoading} : IProductSideBar) => {
     let price = 120;
     let unit = '$'
     let inStock = false
@@ -25,7 +31,9 @@ const ProductSideBar = () => {
                 md: '20px'
             }
         }}>
-            <CTypo
+        {!isLoading ? 
+        <>
+           <CTypo
                 sx={{
                 mt: '0px'
             }}
@@ -35,7 +43,7 @@ const ProductSideBar = () => {
                 sm: '1.6em',
                 md: '1.8em'
             }}
-                text='ULTRABOOST 22 SHOES'/>
+                text={title}/>  
             <CTypo
                 sx={{
                 mt: '0px'
@@ -50,8 +58,21 @@ const ProductSideBar = () => {
                 fontWeight='300'
                 color='gray'
                 text='Sign up to get up to 15% off!'/>
+                
+        </>
+                
+                :
+                <>
+                <Skeleton variant="text" />
+                <Skeleton variant="text" width='50%' /> 
+                <Skeleton variant="text" width='70%' />
+                </>
+                
+            }
 
-            <Box>
+      {!isLoading ?  
+      <>
+      <Box>
                 <CTypo
                     color='gray'
                     sx={{
@@ -60,7 +81,9 @@ const ProductSideBar = () => {
                     fontWeight='300'
                     text='Select Size'/>
                 <SizeSelect/>
-            </Box>
+            </Box> 
+          
+
             <Box
                 sx={{
                 mt: '2em',
@@ -93,6 +116,16 @@ const ProductSideBar = () => {
                 </IconButton>
 
             </Box>
+      </>
+
+              :
+              <Box    sx={{
+                  mt: '5em'
+              }}>
+              <Skeleton height='50px' variant="rectangular"></Skeleton>
+              <Skeleton sx={{mt:'1em'}} height='50px' variant="rectangular"></Skeleton>
+              </Box>
+              }
 
         </Grid>
     )
