@@ -15,8 +15,10 @@ const Recommended = () => {
 
     useEffect(() => {
         GetFeaturedProducts()
+        
     }, [])
  
+    
     SwiperCore.use([Autoplay]);
 
     return (

@@ -6,21 +6,42 @@ import ProductCard from '../Components/ProductPage/ProductCard';
 import BreadCrumbsLink from '../Components/ProductPage/BreadCrumbsLink';
 import {useParams} from 'react-router-dom';
 import GetProductsHook from '../Helpers/Hooks/GetProductsHook';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import {useSelector, useDispatch} from 'react-redux'
 import {saveProductsArray} from '../Redux/Slices/ProductsSlice';
 import {RootState} from '../Redux/Store';
+import Pagination from '@mui/material/Pagination';
 
 const Category = () => {
     const {section} = useParams()
     const dispatch = useDispatch()
+    const [currentPage,setCurrentPage] = useState(0)
 
-    const {GetDatafromDB, isLoading, products} = GetProductsHook()
+
+    const handlePageChange = (e:React.MouseEvent<HTMLElement, MouseEvent>) => {
+        
+        const value =  e.target as HTMLElement;
+    if (value.textContent) {
+        const page : number = parseInt(value.textContent)
+       
+        setCurrentPage(page - 1)
+    }
+    }
+
+    console.log(currentPage);
+    
+    const {GetDatafromDB, pages, isLoading, products} = GetProductsHook()
 
     useEffect(() => {
         GetDatafromDB(`/category/${section}`)
+        
     }, [])
+
+    useEffect(() => {
+        GetDatafromDB(`/category/${section}`,currentPage)
+        window.scrollTo(0,0)
+    }, [currentPage])
 
     useEffect(() => {
         dispatch(saveProductsArray(products))
@@ -81,10 +102,7 @@ const Category = () => {
                                 id={product._id}
                                 Manufacturer={product.Manufacturer}
                                 category={`${product.category}`}
-                                img={product.images[0]
-                                     || product.images[1] 
-                                     || product.images[2]
-                                     || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}/>
+                                img={product.images[0] || product.images[1] || product.images[2] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}/>
                         })
 }
 
@@ -111,6 +129,9 @@ const Category = () => {
                         {!isLoading && products.length === 0 && <CTypo
                             color='red'
                             text='Error loading data ,please check your internet and try again'/>}
+                        <Pagination
+                        onClick={(e)=>handlePageChange(e)}
+                        sx={{  mt: '2em',width:'100%'}} count={pages || 0} />
 
                     </Grid>
 
@@ -122,6 +143,3 @@ const Category = () => {
 
 export default Category
 
-function GetDataFromDB() {
-    throw new Error('Function not implemented.');
-}

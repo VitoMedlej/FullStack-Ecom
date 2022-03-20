@@ -16,8 +16,7 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-
-app.get('/',async (req, res) => {
+app.get('/', async(req, res) => {
     await connectToDB()
     const FeaturedProduct = mongoose.model('featured')
     const dataArray = await FeaturedProduct.find({})
@@ -42,14 +41,23 @@ app.get('/categories', async(req, res) => {
 })
 app.get('/category/:category', async(req, res) => {
     await connectToDB()
+    const ProductLimitSize = 9
+    const currentPageNumber = req.query.page || 0
     const params = req.params.category
     const product = mongoose.model('Product')
-    // const prods = await product.find({'category' : `${params}`}); const results =
-    // await product.find({'category' : `${params}`} ,'title category price id
-    // description images inStock');
-    const results = await product.find({'category': `${params}`}).limit(9);
 
-    res.json([...results])
+    const totalProducts = await product.countDocuments({'category': `${params}`})
+    const TotalPages = Math.ceil(totalProducts / ProductLimitSize)
+
+    const results = await product
+        .find({'category': `${params}`})
+        .limit(ProductLimitSize)
+        .skip(ProductLimitSize * currentPageNumber);
+
+    res.json({
+        products: [...results],
+        TotalPages: TotalPages
+    })
 })
 app.get('/category/:category/products/:id', async(req, res) => {
     try {
@@ -58,7 +66,6 @@ app.get('/category/:category/products/:id', async(req, res) => {
         const id = req.params.id
         const product = mongoose.model('Product')
         const results = await product.find({'_id': `${id}`, category: `${category}`});
-
 
         res.json(results)
 
@@ -75,15 +82,15 @@ app.delete('/dashboard/products/:id', async(req, res) => {
     try {
         await connectToDB()
         const product = mongoose.model('Product')
-        const request = await product.deleteOne({id:`${id}`})
+        const request = await product.deleteOne({id: `${id}`})
         const result = await request.json()
-        
-        }
-    catch (err) {
-        res.status(400).send(`some error ,${err}`)
+
+    } catch (err) {
+        res
+            .status(400)
+            .send(`some error ,${err}`)
     }
 })
-
 
 app.post('/dashboard/add-products', async(req, res, next) => {
     try {
@@ -99,7 +106,7 @@ app.post('/dashboard/add-products', async(req, res, next) => {
         console.log(err);
         res
             .status(400)
-            .send('fucckk you')
+            .send('error')
     }
 })
 

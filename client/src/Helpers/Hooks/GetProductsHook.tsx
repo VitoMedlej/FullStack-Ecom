@@ -8,14 +8,17 @@ const GetProductsHook = () => {
         setLoading] = useState(false)
     const [error,
         setError] = useState('')
+    const [pages,setPages] = useState(0)
 
-    const GetDatafromDB = async(url : string) => {
+    const GetDatafromDB = async(url : string ,page ?: number) => {
         try {
             setLoading(true)
 
-            const request = await fetch(`http://localhost:9000${url}`)
+            const request = await fetch(`http://localhost:9000${url}?page=${page || 0}`)
             const results = await request.json()
-            setProducts(results)
+            console.log('results: ', results);
+            setProducts(results.products)
+            setPages(results.TotalPages)
             setLoading(false)
             setError('')
         } catch (err) {
@@ -31,6 +34,7 @@ const GetProductsHook = () => {
     return {
         products,
         isLoading,
+        pages,
         error,
         setProducts,
         GetDatafromDB,
