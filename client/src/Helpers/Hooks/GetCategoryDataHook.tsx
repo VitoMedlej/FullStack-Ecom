@@ -6,6 +6,7 @@ interface ICateData {
     title : string;
     desc : string;
     img : string;
+    _id ?: string
 }
 
 

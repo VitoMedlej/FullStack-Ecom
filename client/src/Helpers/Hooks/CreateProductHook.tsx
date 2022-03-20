@@ -22,8 +22,9 @@ export interface IformData {
     country : string
     colors : string[]
     Manufacturer : string;
+    _id ?: string | number
 }
-
+const date : number = Number(new Date())  / 1000 
 
 const defaultProductValues = {
     title: "",
@@ -37,7 +38,7 @@ const defaultProductValues = {
     country: '',
     description: "",
     category: '',
-    id:`${ nanoid()}`,
+    id:`${ nanoid() + date }`,
     specifications: [''],
     Manufacturer: "",
     reviews: []

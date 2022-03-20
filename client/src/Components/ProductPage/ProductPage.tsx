@@ -15,11 +15,11 @@ import {RootState} from '../../Redux/Store';
 import {IformData} from '../../Helpers/Hooks/CreateProductHook';
 import {useState, useEffect} from 'react';
 import GetSingleProductHook from '../../Helpers/Hooks/GetSingleProductHook';
+import Skeleton from '@mui/material/Skeleton';
 
-const img = require('../../Helpers/Images/shoes.jfif')
 
 const Product = () => {
-    const {GetProductById, data, isLoading} = GetSingleProductHook()
+    const {GetProductById, error, data, isLoading} = GetSingleProductHook()
     const {section, id} = useParams()
     const [product,
         setProduct] = useState < IformData > ()
@@ -27,66 +27,85 @@ const Product = () => {
 
     useEffect(() => {
 
-        // if (ProductsArray.length > 1) {     const currentProduct =
-        // ProductsArray.find(prod => prod.id === `${id}`)     if (currentProduct) {
-        //     setProduct(currentProduct)     } } if (ProductsArray.length <= 1 &&
-        // section && id) {     GetProductById(section, id)    if (data)
-        // setProduct(data) }
-    }, [])
-    useEffect(() => {
-        if (section && id && !product) {
+        // some conditions had to be done ,trying to reduce api requests as much as I
+        // could.
+        console.log('ProductsArray',ProductsArray);
+        
+        if (section && id && !product && !ProductsArray[0].title) {
 
             GetProductById(section, id)
-
+            return;
         }
-    }, [])
-    useEffect(() => {
-        if (data) 
-            setProduct(data[0]);
+   
 
+            // setProduct(ProductsArray[0])
+             
+              const currentProduct =   ProductsArray.find(x => x._id === `${id}`);
+             
+            if (currentProduct) setProduct(currentProduct)
+            return;
+        
+
+    }, [])
+    
+    useEffect(() => {
+        
+        
+        if (data) 
+        {
+            setProduct(data[0])}
         }
     , [data])
 
     return (
         <Box>
             <CBox className='limit'>
-                {/* <BreadCrumbsLink section={`${ID}`}/> */}
+                <BreadCrumbsLink section={`${section}`}/> {!error
+                    ? <Grid container>
 
-                <Grid container>
+                            <ProductImageSlider
+                                imagesArray={product && product.images}
+                                isLoading={isLoading}/>
 
-                    <ProductImageSlider isLoading={isLoading}/>
-
-                    <ProductSideBar isLoading={isLoading}
-                     title={`${product && product.title}`}/>
-                    <Box>
-
-                        <ProductDesc isLoading={isLoading}/>
-                        <ProductSpec/>
-                        <Grid md={8} item xs={12}>
-                            <CTypo
-                                fontWeight='500'
-                                fontSize={{
-                                xs: '1.2em',
-                                sm: '1.4em',
-                                md: '1.5em'
-                            }}
+                            <ProductSideBar
+                                sizes={product && product.sizes}
+                                inStock={product && product.inStock}
+                                isLoading={isLoading}
+                                price={product && product.price}
+                                title={`${product && product.title}`}/>
+                            <Box
                                 sx={{
-                                mt: {
-                                    xs: '3.5em',
-                                    md: '2em'
-                                }
-                            }}
-                                text='Product Details'/>
+                                width: '100%'
+                            }}>
 
-                            <ProductDetails/>
+                                <ProductDesc
+                                    description={product && product.description}
+                                    isLoading={isLoading}/>
+                                <ProductSpec
+                                    specifications={product && product.specifications}
+                                    isLoading={isLoading}/>
+                                <Grid md={8} item xs={12}>
 
-                            <ProductReview/>
+                                    <ProductDetails
+                                    style={product && product.style}
+                                    weight={product && product.weight}
+                                      colors={product && product.colors[0]}
+                                        isLoading={isLoading}/> {!isLoading
+                                        ? <ProductReview/>
+                                        : <Skeleton
+                                            sx={{
+                                            mt: '4em',
+                                            padding: '2.5em'
+                                        }}
+                                            variant='rectangular'/>
+}
+
+                                </Grid>
+
+                            </Box>
 
                         </Grid>
-
-                    </Box>
-
-                </Grid>
+                    : <CTypo color='red' text='Failed to load item! ,Please try again...'></CTypo>}
             </CBox>
         </Box>
     )

@@ -140,6 +140,24 @@ a {
      object-fit: contain;
 }
 
+.textHidden {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textLimit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.swiper {
+  width: 100%;
+}
+
 .customImg {
   width: 80%;
   height: 100%;

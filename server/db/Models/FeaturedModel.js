@@ -1,7 +1,8 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 
-const ProductSchema = mongoose.Schema({
+
+const FeaturedProductsSchema = mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -46,6 +47,6 @@ const ProductSchema = mongoose.Schema({
     Manufacturer: String
 }, {strict: true})
 
-const productModel = mongoose.model("Product", ProductSchema, 'Products')
+const FeaturedModel = mongoose.model('featured' ,FeaturedProductsSchema, 'FeaturedProducts')
 
-export default productModel
+module.exports = FeaturedModel

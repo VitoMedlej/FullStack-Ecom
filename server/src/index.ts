@@ -9,6 +9,7 @@ const getfromDB = require('../db/Methods/GetFromDB')
 const mongoose = require('mongoose')
 const sendToDB = require('../db/Methods/SendToDB')
 const Category = require('../db/Models/CategoryModel')
+const FeaturedModel = require('../db/Models/FeaturedModel')
 require('dotenv').config();
 
 app.use(cors())
@@ -16,6 +17,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 
+app.get('/',async (req, res) => {
+    await connectToDB()
+    const FeaturedProduct = mongoose.model('featured')
+    const dataArray = await FeaturedProduct.find({})
+    res.json([...dataArray])
+})
 
 app.get('/dashboard/products', async(req, res) => {
     await connectToDB()
@@ -37,62 +44,46 @@ app.get('/category/:category', async(req, res) => {
     await connectToDB()
     const params = req.params.category
     const product = mongoose.model('Product')
-    // const prods = await product.find({'category' : `${params}`});
-    const results = await product.find({'category' : `${params}`} ,'title category price id description images inStock');
-  
+    // const prods = await product.find({'category' : `${params}`}); const results =
+    // await product.find({'category' : `${params}`} ,'title category price id
+    // description images inStock');
+    const results = await product.find({'category': `${params}`}).limit(9);
+
     res.json([...results])
 })
-app.get('/category/:category/products/:id',async (req,res)=>{
+app.get('/category/:category/products/:id', async(req, res) => {
     try {
+        await connectToDB()
+        const category = req.params.category
+        const id = req.params.id
+        const product = mongoose.model('Product')
+        const results = await product.find({'_id': `${id}`, category: `${category}`});
 
-        // const category = req.params.category
-        // const id = req.params.id
-        // const product = mongoose.model('Product')
-        // const results = await product.find({'id' : `${id}`,category:`${category}`});
-        
-        // res.json(results)
 
-        res.json([
-            {
-                "_id": "622f8312ffbece5bdcd9b844",
-                "title": "shampoooooo",
-                "sizes": [
-                    6,
-                    7,
-                    8,
-                    9,
-                    11,
-                    10
-                ],
-                "price": "8",
-                "images": [
-                    "https://ucarecdn.com/f9605bd2-0445-4998-8b5c-d8940f08f26d/"
-                ],
-                "specifications": [
-                    "good shitgood shit\ngood shitgood shit\ngood shitgood shit\ngood shitgood shit"
-                ],
-                "inStock": true,
-                "description": "good shit",
-                "category": "accessories",
-                "reviews": [],
-                "id": "yAEyiAcFs1OobdHB757Hi",
-                "weight": "100ml",
-                "style": "hair",
-                "country": "lebanon",
-                "colors": [
-                    "black",
-                    "white"
-                ],
-                "Manufacturer": "anez",
-                "__v": 0
-            }
-        ])
+        res.json(results)
+
+    } catch (err) {
+        res
+            .status(404)
+            .send(` ${err}`)
     }
-    catch(err) {
-        res.status(404).send('error ',err)
-    }
-    
+
 })
+
+app.delete('/dashboard/products/:id', async(req, res) => {
+    const id = req.params.id
+    try {
+        await connectToDB()
+        const product = mongoose.model('Product')
+        const request = await product.deleteOne({id:`${id}`})
+        const result = await request.json()
+        
+        }
+    catch (err) {
+        res.status(400).send(`some error ,${err}`)
+    }
+})
+
 
 app.post('/dashboard/add-products', async(req, res, next) => {
     try {
@@ -105,9 +96,10 @@ app.post('/dashboard/add-products', async(req, res, next) => {
             .status(200)
             .send('product has been added')
     } catch (err) {
+        console.log(err);
         res
             .status(400)
-            .send(`some shit went wrong like ${err}`)
+            .send('fucckk you')
     }
 })
 

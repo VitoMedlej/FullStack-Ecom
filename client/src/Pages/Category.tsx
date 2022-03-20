@@ -2,18 +2,15 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import CBox from '../Components/CustomMui/CBox';
 import CTypo from '../Components/CustomMui/CTypo';
-import Product from '../Components/ProductPage/ProductCard';
+import ProductCard from '../Components/ProductPage/ProductCard';
 import BreadCrumbsLink from '../Components/ProductPage/BreadCrumbsLink';
 import {useParams} from 'react-router-dom';
 import GetProductsHook from '../Helpers/Hooks/GetProductsHook';
 import {useEffect} from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import {useSelector, useDispatch} from 'react-redux'
-import { saveProductsArray } from '../Redux/Slices/ProductsSlice';
-import { RootState } from '../Redux/Store';
-
-
-const pic = require('../Helpers/Images/nike.jfif')
+import {saveProductsArray} from '../Redux/Slices/ProductsSlice';
+import {RootState} from '../Redux/Store';
 
 const Category = () => {
     const {section} = useParams()
@@ -25,10 +22,7 @@ const Category = () => {
         GetDatafromDB(`/category/${section}`)
     }, [])
 
-  
-    
     useEffect(() => {
-        // console.table(products);
         dispatch(saveProductsArray(products))
     }, [products])
 
@@ -69,7 +63,10 @@ const Category = () => {
                         sx={{
                         display: 'flex',
                         flexWrap: 'wrap',
-                        justifyContent: 'start'
+                        justifyContent: {
+                            xs: 'center',
+                            sm: 'space-between'
+                        }
                     }}
                         item
                         xs={12}
@@ -77,16 +74,20 @@ const Category = () => {
                         lg={10}>
 
                         {!isLoading && products.length > 0 && products.map((product) => {
-                            return <Product
-                                key={product.id}
+                            return <ProductCard
+                                key={product._id}
                                 title={`${product.title}`}
                                 price={product.price}
-                                id={product.id}
-                                description={product.description}
+                                id={product._id}
+                                Manufacturer={product.Manufacturer}
                                 category={`${product.category}`}
-                                img={product.images[0]}/>
+                                img={product.images[0]
+                                     || product.images[1] 
+                                     || product.images[2]
+                                     || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}/>
                         })
 }
+
                         {isLoading && products.length === 0 && [
                             1,
                             2,
@@ -112,6 +113,7 @@ const Category = () => {
                             text='Error loading data ,please check your internet and try again'/>}
 
                     </Grid>
+
                 </Grid>
             </CBox>
         </Box>

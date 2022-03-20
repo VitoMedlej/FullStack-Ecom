@@ -40,7 +40,7 @@ const Categories = () => {
 
                     {categories && categories.map(item => {
                         return <CateCard
-                            key={item.id}
+                            key={item._id}
                             link={item.link}
                             title={item.title}
                             desc={item.desc}

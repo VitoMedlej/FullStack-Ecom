@@ -14,6 +14,7 @@ const defaultProductValues = {
     description: "",
     category: '',
     id:'',
+    _id:'',
     specifications: [''],
     Manufacturer: "",
     reviews: []

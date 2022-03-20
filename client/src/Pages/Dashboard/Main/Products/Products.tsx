@@ -9,13 +9,22 @@ import {IformData} from '../../../../Helpers/Hooks/CreateProductHook'
 import Productcard from './Cards/Productcard';
 import Skeleton from "@mui/material/Skeleton"
 import GetProductsHook from "../../../../Helpers/Hooks/GetProductsHook"
+import DeleteProductHook from "../../../../Helpers/Hooks/DeleteProductHook"
 
 const img = require('../../../../Helpers/Images/accessories.jfif')
 
-
 const Products = () => {
 
-    const {products ,isLoading ,GetDatafromDB,setLoading} = GetProductsHook()
+    const {
+        products,
+        setProducts,
+        error,
+        isLoading,
+        GetDatafromDB,
+        setLoading
+    } = GetProductsHook()
+
+    const {DeleteProductById, isReqLoading, results} = DeleteProductHook()
 
     useEffect(() => {
         let isdone = false
@@ -91,29 +100,46 @@ const Products = () => {
                 }}>
 
                     {products.length > 0 && products.map((product : IformData) => <Productcard
-                        key={product.id}
+                        id={product.id}
+                        GetDatafromDB={GetDatafromDB}
+                        DeleteProductById={DeleteProductById}
+                        key={`${product._id}`}
                         title={product.title}
-                        img={product.images[0] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
+                        img={product.images[0] || product.images[1] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
                         price={product.price}/>)
 }
-                    {isLoading && [1,2,3,4,5,6].map((number) => {
-                               return <Skeleton
-                               key={number -1}
-                                sx={{
-
-                                width: {
-                                    xs: '99%',
-                                    md: '49%',
-                                    lg: '32%'
-                                },
-                                height: {
-                                    xs: '200px',
-                                    md: '300px'
-                                }
-                            }}></Skeleton>
+                    {isLoading && products.length === 0 && [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6
+                    ].map((number) => {
+                        return <Skeleton
+                            key={number - 1}
+                            sx={{
+                            width: {
+                                xs: '99%',
+                                md: '49%',
+                                lg: '32%'
+                            },
+                            height: {
+                                xs: '200px',
+                                md: '300px'
+                            }
+                        }}></Skeleton>
                     })}
-
-                    {!isLoading && products.length == 0 && <Box
+                    {!error && !isLoading && products.length === 0 && <CTypo
+                        sx={{
+                        cursor: 'pointer'
+                    }}
+                        fontSize={{
+                        xs: '1.1em'
+                    }}
+                        text='No products were found!'></CTypo>
+}
+                    {error && !isLoading && products.length == 0 && <Box
                         sx={{
                         display: 'flex',
                         alignItems: 'center'
@@ -127,13 +153,10 @@ const Products = () => {
                         }}
                             text='Failed to load data ,'></CTypo>
                         <CTypo
-                        onClick={()=>{
-
+                            onClick={() => {
                             setLoading(true);
                             GetDatafromDB('/dashboard/products')
-                        }
-
-                        }
+                        }}
                             color='red'
                             sx={{
                             cursor: 'pointer'
@@ -156,7 +179,7 @@ const Products = () => {
                             md: '300px'
                         }
                     }}></Skeleton> */}
-                    
+
                 </CBox>
             </Box>
         </CBox>

@@ -83,7 +83,9 @@ const AddProduct = () => {
                 <Alert
                     sx={{
                     fontSize: '1em',
-                    background:`${results == '200' ? 'rgb(56, 142, 60)' : 'red'}`,
+                    background: `${results == '200'
+                        ? 'rgb(56, 142, 60)'
+                        : 'red'}`,
                     color: 'white'
                 }}
                     severity={`${results == '200'

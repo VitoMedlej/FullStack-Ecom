@@ -6,19 +6,19 @@ interface IProduct {
     img : string
     price : number | string
     category : string
-    id : string | number
+    id : string | undefined | number 
     unit?: string
     title : string
-    description : string
+    Manufacturer : string
 }
-const Product = ({
+const ProductCard = ({
     img,
     id,
     title,
     category,
     unit,
     price,
-    description
+    Manufacturer
 } : IProduct) => {
     let inStock = true
     return (
@@ -26,14 +26,15 @@ const Product = ({
             className='trans'
             sx={{
             border: '1px solid #80808030',
-            margin: '5px',
+            my: '5px',
             ':hover': {
                 transform: "translateY(-5px)",
                 boxShadow: '1px 1px 5px #eaeaea'
             },
             position: 'relative',
             width: {
-                xs: '47%',
+                xs: '100%',
+                sm : '49%',
                 md: '32%'
             }
         }}>
@@ -42,9 +43,11 @@ const Product = ({
                     height: '400px',
                 position: 'relative'
             }}>
-                <img className='img2' src={`${img}`} alt="product image"/>
+                <img className='img' src={`${img}`} alt="product image"/>
                 <Box
                     sx={{
+                        background:'white',
+                    padding:'4px',
                     width: 'fit-content',
                     position: 'absolute',
                     top: '90%',
@@ -77,6 +80,7 @@ const Product = ({
                     text={title || 'Item'}/>
 
                 <CTypo
+                className='textLimit'
                     sx={{
                     mt: '0',
                     width: '95%',
@@ -85,11 +89,11 @@ const Product = ({
                     textOverflow: 'ellipsis'
                 }}
                     color='#767677'
-                    text={`${description}`}/>
+                    text={`${Manufacturer}`}/>
             </Box>
         </Box>
 
     )
 }
 
-export default Product
+export default ProductCard

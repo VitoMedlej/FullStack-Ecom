@@ -11,11 +11,12 @@ import Skeleton from "@mui/material/Skeleton";
 interface IProductSideBar {
     title : string
     isLoading : boolean
+    inStock ?: boolean
+    sizes ?: number[]
+    price ?: number | string
 }
-const ProductSideBar = ({title ,isLoading} : IProductSideBar) => {
-    let price = 120;
+const ProductSideBar = ({title,price,sizes ,isLoading ,inStock} : IProductSideBar) => {
     let unit = '$'
-    let inStock = false
 
     return (
         <Grid
@@ -80,7 +81,7 @@ const ProductSideBar = ({title ,isLoading} : IProductSideBar) => {
                 }}
                     fontWeight='300'
                     text='Select Size'/>
-                <SizeSelect/>
+                <SizeSelect sizes={sizes}/>
             </Box> 
           
 

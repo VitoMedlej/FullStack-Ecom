@@ -26,7 +26,7 @@ const PostDataHook = () => {
         
         catch (err) {
             setLoading(false)
-            setResults(`400`)
+            setResults(`400 ,${err}`)
 
             console.log(err);
 

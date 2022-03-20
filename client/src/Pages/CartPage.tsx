@@ -5,7 +5,7 @@ import CTypo from "../Components/CustomMui/CTypo"
 import CButton from '../Components/CustomMui/CButton';
 import CartSummary from "../Components/Cart/CartSummary";
 import CartList from "../Components/Cart/CartList";
-const img = require('../Helpers/Images/nike.jfif')
+
 
 const CartPage = () => {
   
