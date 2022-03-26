@@ -1,9 +1,8 @@
 import {useState} from "react"
 import {IformData} from "./CreateProductHook"
 
-const GetProductsHook = () => {
-    const [products,
-        setProducts] = useState < IformData[] > ([])
+const GetTotalPagesHook = () => {
+
     const [isLoading,
         setLoading] = useState(false)
     const [error,
@@ -11,18 +10,15 @@ const GetProductsHook = () => {
     const [pages,
         setPages] = useState(0)
 
-    const GetDatafromDB = async(url : string) => {
+    const GetPages = async(url : string) => {
         try {
             setLoading(true)
-
-            const request = await fetch(`${url}`)
             //http://localhost:9000${url}?page=${page || 0}
+            const request = await fetch(`${url}`)
             const results = await request.json()
-            console.log('results: ', results);
-            setProducts(results.products)
             setPages(results.TotalPages)
-            setLoading(false)
             setError('')
+            setLoading(false)
         } catch (err) {
             setError(`${err}`)
             setLoading(false)
@@ -34,14 +30,12 @@ const GetProductsHook = () => {
     }
 
     return {
-        products,
-        isLoading,
+        isLoading ,
         pages,
         error,
-        setProducts,
-        GetDatafromDB,
+        GetPages,
         setLoading
     }
 }
 
-export default GetProductsHook
+export default GetTotalPagesHook

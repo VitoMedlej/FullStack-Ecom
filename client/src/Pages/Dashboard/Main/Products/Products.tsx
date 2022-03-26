@@ -10,32 +10,62 @@ import Productcard from './Cards/Productcard';
 import Skeleton from "@mui/material/Skeleton"
 import GetProductsHook from "../../../../Helpers/Hooks/GetProductsHook"
 import DeleteProductHook from "../../../../Helpers/Hooks/DeleteProductHook"
+import { useNavigate } from 'react-router-dom';
+import Pagination from "@mui/material/Pagination"
+
 
 const img = require('../../../../Helpers/Images/accessories.jfif')
 
 const Products = () => {
+    const navigate = useNavigate();
+    const [currentPage,
+        setCurrentPage] = useState(0)
 
     const {
         products,
-        setProducts,
+        pages,
         error,
         isLoading,
         GetDatafromDB,
         setLoading
     } = GetProductsHook()
 
-    const {DeleteProductById, isReqLoading, results} = DeleteProductHook()
+    const {DeleteProductById,
+        isReqLoading,
+        results} = DeleteProductHook()
+
+    const handlePageChange = (e : React.MouseEvent < HTMLElement, MouseEvent >) => {
+
+        const value = e.target as HTMLElement;
+        if (value.textContent) {
+            const page : number = parseInt(value.textContent)
+
+            setCurrentPage(page - 1)
+            navigate(`/dashboard/products?limit=9&?page=${page}`);
+        }
+
+    }
+    useEffect(() => {
+        GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
+      
+        window.scrollTo(0,0)
+    }, [currentPage])
+
+   
 
     useEffect(() => {
+        navigate(`/dashboard/products?limit=9&?page=0`);
+
         let isdone = false
         if (!isdone) {
             setLoading(true)
-            GetDatafromDB('/dashboard/products')
+            GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
 
         }
         return () => {
             isdone = true
             setLoading(false)
+            console.log(products);
 
         }
     }, [])
@@ -108,7 +138,7 @@ const Products = () => {
                         img={product.images[0] || product.images[1] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
                         price={product.price}/>)
 }
-                    {isLoading && products.length === 0 && [
+                    {isLoading  && products.length === 0 && [
                         1,
                         2,
                         3,
@@ -139,7 +169,8 @@ const Products = () => {
                     }}
                         text='No products were found!'></CTypo>
 }
-                    {error && !isLoading && products.length == 0 && <Box
+                    {error && !isLoading && products.length == 0 && 
+                    <Box
                         sx={{
                         display: 'flex',
                         alignItems: 'center'
@@ -165,21 +196,12 @@ const Products = () => {
                             xs: '1.1em'
                         }}
                             text='retry?'></CTypo>
+
+
                     </Box>}
-
-                    {/* <Skeleton
-                        sx={{
-                        width: {
-                            xs: '99%',
-                            md: '49%',
-                            lg: '32%'
-                        },
-                        height: {
-                            xs: '200px',
-                            md: '300px'
-                        }
-                    }}></Skeleton> */}
-
+                    <Pagination
+                        onClick={(e)=>handlePageChange(e)}
+                        sx={{  mt: '2em',width:'100%'}} count={pages || 0} />
                 </CBox>
             </Box>
         </CBox>

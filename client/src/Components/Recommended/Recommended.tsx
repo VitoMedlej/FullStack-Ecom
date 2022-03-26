@@ -72,7 +72,9 @@ const Recommended = () => {
                      
                         {FeaturedArray && FeaturedArray.map((item : IformData) => {
 
-                            return <SwiperSlide key={item._id || item.id}>
+                            return <SwiperSlide
+                            className='swiperSlideCard'
+                            key={item._id || item.id}>
 
                                 <RecoCard
                                     description={item.description}
@@ -83,7 +85,8 @@ const Recommended = () => {
                             </SwiperSlide>
                         })}
 
-                    </Swiper>}
+                    </Swiper>
+                    }
 
                 </Box>
             </CBox>

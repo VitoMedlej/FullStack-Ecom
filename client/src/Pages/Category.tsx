@@ -12,34 +12,35 @@ import {useSelector, useDispatch} from 'react-redux'
 import {saveProductsArray} from '../Redux/Slices/ProductsSlice';
 import {RootState} from '../Redux/Store';
 import Pagination from '@mui/material/Pagination';
+import GetTotalPagesHook from '../Helpers/Hooks/GetTotalPagesHook';
+import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
     const {section} = useParams()
     const dispatch = useDispatch()
     const [currentPage,setCurrentPage] = useState(0)
-
+    const navigate = useNavigate();
+    const {GetDatafromDB, pages, isLoading, products} = GetProductsHook()
 
     const handlePageChange = (e:React.MouseEvent<HTMLElement, MouseEvent>) => {
         
         const value =  e.target as HTMLElement;
     if (value.textContent) {
         const page : number = parseInt(value.textContent)
-       
+        
         setCurrentPage(page - 1)
+        navigate(`/category/shoes?limit=9&?page=${page}`);
     }
-    }
-
-    console.log(currentPage);
     
-    const {GetDatafromDB, pages, isLoading, products} = GetProductsHook()
+    }
 
     useEffect(() => {
-        GetDatafromDB(`/category/${section}`)
-        
+        GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
     }, [])
 
     useEffect(() => {
-        GetDatafromDB(`/category/${section}`,currentPage)
+        GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+      
         window.scrollTo(0,0)
     }, [currentPage])
 

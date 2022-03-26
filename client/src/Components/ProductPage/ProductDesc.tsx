@@ -29,7 +29,8 @@ const ProductDesc = ({isLoading ,description} : IProductDesc) => {
                 text=' Description'/>
             <CTypo
                 sx={{
-                    wordBreak: 'break-all',
+                
+                    wordBreak: 'keep-all',
                     mt: '1em'
                 }}
                 fontWeight='300'

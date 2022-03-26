@@ -52,6 +52,7 @@ const ProductImageSlider = ({isLoading, imagesArray} : IProductImageSlider) => {
             <CButton
             onClick={()=>setClassName(className=== 'img'? 'img2' : 'img')}
             hover={{background:'none',boxShadow:'none'}}
+            borderRadius='0'
             sx={{
                 border:'1px solid #8080804f',
                 boxShadow: 'none'

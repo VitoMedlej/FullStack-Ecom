@@ -17,7 +17,6 @@ interface IProductSideBar {
 }
 const ProductSideBar = ({title,price,sizes ,isLoading ,inStock} : IProductSideBar) => {
     let unit = '$'
-
     return (
         <Grid
             item
@@ -51,7 +50,7 @@ const ProductSideBar = ({title,price,sizes ,isLoading ,inStock} : IProductSideBa
             }}
                 color={`${inStock ? 'green' : 'red'}`}
                 fontWeight='500'
-                text={`${inStock ? price + unit : 'Out of stock!' } `}/>
+                text={`${inStock ? price+ unit : 'Out of stock!' } `}/>
             <CTypo
                 sx={{
                 pb: '1em'
