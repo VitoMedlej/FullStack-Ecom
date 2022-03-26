@@ -52,7 +52,7 @@ const LoginForm = () => {
                         md: '80%'
                     }
                 }}
-                    id="outlined-basic"
+                    id="outlined-basic1"
                     label="Email"
                     variant="outlined"/>
                 <TextField

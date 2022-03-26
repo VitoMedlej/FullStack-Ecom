@@ -29,7 +29,10 @@ const About = () => {
                 <CTypo
                     color='#515151'
                     fontWeight="300"
-                    text={`I've created this dashboard/admin panel ,Call it whatever you'd like ,Just for me. But why make it public? Well ,I needed a way to make dummy data without writing json manually since it would take years and it's not conventinal now is it?. I could've made an ugly looking platform for personal use but I decided to make this good looking dashboard instead :D, Note that you can neither read nor write data but only view the products. `}/>
+                    text={`I've created this dashboard/admin panel ,Call it whatever you'd like ,Just for 
+                    me. But why make it public? Well ,I needed a way 
+                    to make dummy data without writing json manually since
+                     it would take years and it's not conventinal now is it?. I could've made an ugly looking platform for personal use but I decided to make this good looking dashboard instead :D,I'll be improving my skills .Also Note that you can neither read nor write data but only view the products. `}/>
             </CBox>
         </Box>
         </CBox>

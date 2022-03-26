@@ -10,7 +10,6 @@ import RegisterForm from "./Register/RegisterForm"
 
 const Login = () => {
     const { handler } = useParams();
-    console.log('handler: ', handler);
 
     return (
         <Box>

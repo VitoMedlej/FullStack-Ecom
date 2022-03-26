@@ -7,7 +7,8 @@ import CTypo from '../../CustomMui/CTypo';
 import CartProductForm from './CartProductForm';
 import CButton from '../../CustomMui/CButton';
 import Button from '@mui/material/Button';
-const img = require('../../../Helpers/Images/nike.jfif')
+const img = require('../../../Helpers/Images/shoes/v2/MOLEN-2233-BLK-1_1024x1024@2x.jpg')
+
 
 const CartProduct = () => {
     return (

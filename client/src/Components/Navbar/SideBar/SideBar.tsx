@@ -93,7 +93,7 @@ const SideBar = ({} : ISideBar) => {
 
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
-                link='/ee'
+                link='/'
                 text={'HOME'}/>
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
@@ -102,11 +102,11 @@ const SideBar = ({} : ISideBar) => {
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
                 link='/cart'
-                text={'cart'}/>
+                text={'CART'}/>
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
-                link='/ee'
-                text={'HOME'}/>
+                link='/account/login'
+                text={'LOGIN'}/>
 
         </AppBar>
     )
