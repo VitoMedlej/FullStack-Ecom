@@ -3,10 +3,17 @@ import TextField from "@mui/material/TextField"
 import {Link} from "react-router-dom"
 import CButton from "../../../Components/CustomMui/CButton"
 import CTypo from "../../../Components/CustomMui/CTypo"
+import LoginHook from "../../../Helpers/Hooks/AccountHandlingHooks/LoginHook"
 
 const LoginForm = () => {
+    const {loginDetails, handleSubmit} = LoginHook()
     return (
         <Box
+            component='form'
+            onSubmit={(e : any) => {
+            e.preventDefault();
+            console.log(loginDetails);
+        }}
             sx={{
             borderRadius: '7px',
             py: '1em',
@@ -37,6 +44,9 @@ const LoginForm = () => {
                     text='Please enter your credentials to proceed'/>
             </Box>
             <Box
+                onChange={(e : React.ChangeEvent < HTMLInputElement >) => {
+                handleSubmit(e)
+            }}
                 sx={{
                 width: '100%',
                 mt: {
@@ -46,6 +56,9 @@ const LoginForm = () => {
             }}>
 
                 <TextField
+                    required
+                    value={loginDetails.email}
+                    name='email'
                     sx={{
                     width: {
                         xs: '90%',
@@ -56,6 +69,9 @@ const LoginForm = () => {
                     label="Email"
                     variant="outlined"/>
                 <TextField
+                    required
+                    value={loginDetails.password}
+                    name='password'
                     sx={{
                     my: '1em',
                     width: {
@@ -69,6 +85,7 @@ const LoginForm = () => {
             </Box>
 
             <CButton
+                isSubmitButton={true}
                 hover={{
                 background: ' white ',
                 color: 'black'

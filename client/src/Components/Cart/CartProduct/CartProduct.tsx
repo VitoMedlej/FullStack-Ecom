@@ -36,7 +36,7 @@ const CartProduct = () => {
                         md:'1.2em'
                     }}>
                         <Link to='/'>
-                            Some shit title
+                            Some title
                         </Link>
                     </CTypo>
 

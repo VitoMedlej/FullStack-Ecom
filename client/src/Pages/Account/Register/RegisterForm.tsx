@@ -2,10 +2,21 @@ import {Box, FormControl, TextField} from "@mui/material"
 import {Link} from "react-router-dom"
 import CButton from "../../../Components/CustomMui/CButton"
 import CTypo from "../../../Components/CustomMui/CTypo"
+import RegisterHook from "../../../Helpers/Hooks/AccountHandlingHooks/RegisterHook"
 
 const RegisterForm = () => {
+    const  {userDetails, handleSubmit}  = RegisterHook()
     return (
         <Box
+        component='form'
+        onSubmit={(e:any)=>{
+            
+            e.preventDefault();
+            
+           console.log('userDetails',userDetails);
+           
+        
+        }}
             sx={{
             borderRadius: '7px',
             py: '1em',
@@ -35,9 +46,12 @@ const RegisterForm = () => {
                 }}
                     text='Please create a new account'/>
             </Box>
-            <FormControl>
+        
 
                 <Box
+                 onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{
+                    handleSubmit(e)
+                }}
                     sx={{
                     width: '100%',
                     mt: {
@@ -46,6 +60,9 @@ const RegisterForm = () => {
                     }
                 }}>
                     <TextField
+                   required
+                   value={userDetails.username}
+                    name='username'
                         sx={{
                         mb: '1em',
                         width: {
@@ -57,6 +74,9 @@ const RegisterForm = () => {
                         label="Username"
                         variant="outlined"/>
                     <TextField
+                    required
+                        value={userDetails.email}
+                        name='email'
                         sx={{
                         mb: '1em',
                         width: {
@@ -68,6 +88,9 @@ const RegisterForm = () => {
                         label="Email"
                         variant="outlined"/>
                     <TextField
+                    required
+                          value={userDetails.password}
+                          name='password'
                         sx={{
                         mb: '1em',
                         width: {
@@ -81,6 +104,7 @@ const RegisterForm = () => {
                 </Box>
 
                 <CButton
+                    isSubmitButton={true}
                     hover={{
                     background: ' white ',
                     color: 'black'
@@ -95,7 +119,7 @@ const RegisterForm = () => {
                     margin: '1.5em auto'
                 }}
                     text='Create account'></CButton>
-            </FormControl>
+     
 
             <Box
                 sx={{

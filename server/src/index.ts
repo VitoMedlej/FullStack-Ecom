@@ -24,9 +24,6 @@ app.use(require('./Routes/categoryRoutes.js'))
 app.use(require('./Routes/dashBoardRoutes.js'))
 
 
-
-
-
 app.listen(port, () => {
     console.log("server running at port :" + port);
 

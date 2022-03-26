@@ -3,10 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose')
 
 
-
-
-
-
 router.get('/dashboard/products', async(req, res) => {
     const product = mongoose.model('Product')
     const dataArray = await product.find({})
