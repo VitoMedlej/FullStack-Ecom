@@ -35,13 +35,25 @@ const Category = () => {
     }
 
     useEffect(() => {
-        GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+        let isMounted = true
+
+        if (isMounted) GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+        return () => {
+            isMounted = false
+        }
+    
     }, [])
 
     useEffect(() => {
-        GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+        let isMounted = true
+        if (isMounted) {GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
       
-        window.scrollTo(0,0)
+        window.scrollTo(0,0)}
+
+        return () => {
+            isMounted = false
+        }
+
     }, [currentPage])
 
     useEffect(() => {

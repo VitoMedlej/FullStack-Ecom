@@ -14,7 +14,12 @@ const Recommended = () => {
     const {FeaturedArray, isLoading, GetFeaturedProducts} = GetFeaturedHook();
 
     useEffect(() => {
-        GetFeaturedProducts()
+        let isMounted = true
+        if (isMounted) GetFeaturedProducts()
+        
+        return () => {
+            isMounted = false
+        }
         
     }, [])
  

@@ -46,17 +46,21 @@ const Products = () => {
 
     }
     useEffect(() => {
-        GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
-      
-        window.scrollTo(0,0)
+        let isMounted = true
+        if (isMounted)  {GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
+        
+        window.scrollTo(0,0)}
+        return () => {
+            isMounted = false
+        }
     }, [currentPage])
 
    
 
     useEffect(() => {
+        let isdone = false
         navigate(`/dashboard/products?limit=9&?page=0`);
 
-        let isdone = false
         if (!isdone) {
             setLoading(true)
             GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)

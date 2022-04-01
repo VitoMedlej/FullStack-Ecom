@@ -29,8 +29,11 @@ const Product = () => {
 
         // some conditions had to be done ,trying to reduce api requests as much as I
         // could.
-        console.log('ProductsArray',ProductsArray);
-        
+
+        let isMounted = true
+        if (isMounted) {
+
+      
         if (section && id && !product && !ProductsArray[0].title) {
 
             GetProductById(section, id)
@@ -44,17 +47,25 @@ const Product = () => {
              
             if (currentProduct) setProduct(currentProduct)
             return;
-        
+        }
+        return () => {
+            isMounted = false
+        }
 
     }, [])
     
     useEffect(() => {
+        let isMounted = true
         
-        
-        if (data) 
-        {
-            setProduct(data[0])}
+        if (data && isMounted) {
+            setProduct(data[0])
         }
+        
+
+        return () => {
+            isMounted = false
+        }
+    }
     , [data])
 
     return (

@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose')
-
+const productModel = require('../../db/Models/ProductModel')
+const sendToDB = require('../../db/Methods/SendToDB')
 
 router.get('/dashboard/products', async(req, res) => {
     const product = mongoose.model('Product')
@@ -26,13 +27,15 @@ router.delete('/dashboard/products/:id', async(req, res) => {
 
 router.post('/dashboard/add-products', async(req, res, next) => {
     try {
+        if (req.body) {
 
-        const producta = new product(req.body)
-        sendToDB(producta)
+            const product = new productModel(req.body)
+            sendToDB(product)
 
-        res
-            .status(200)
-            .send('product has been added')
+            res
+                .status(200)
+                .send('product has been added')
+        }
     } catch (err) {
         console.log(err);
         res
@@ -40,6 +43,5 @@ router.post('/dashboard/add-products', async(req, res, next) => {
             .send('error')
     }
 })
-
 
 module.exports = router

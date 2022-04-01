@@ -14,7 +14,13 @@ const Categories = () => {
     const {GetCategories, categories, isLoading} = GetCategoryDataHook()
 
     useEffect(() => {
-        GetCategories()
+        let isMounted = true
+        if (isMounted) {
+
+            GetCategories()
+        }
+       return () => {
+           isMounted = false}
     }, [])
 
     return (

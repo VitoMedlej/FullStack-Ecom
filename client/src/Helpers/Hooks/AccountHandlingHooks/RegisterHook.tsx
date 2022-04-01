@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 
 const RegisterHook = () => {
+    const defaultValue = {username: '', email: '', password: ''}
     const [userDetails,
-        setuserDetails] = useState({username: '', email: '', password: ''})
+        setuserDetails] = useState(defaultValue)
 
     const handleSubmit = (e : React.ChangeEvent < HTMLInputElement >) => {
         setuserDetails({
@@ -10,7 +11,10 @@ const RegisterHook = () => {
             [e.target.name]: e.target.value
         })
     }
-    return {userDetails, handleSubmit}
+    const resetForm = () => {
+        setuserDetails(defaultValue)
+    }
+    return {userDetails, resetForm, handleSubmit}
 }
 
 export default RegisterHook

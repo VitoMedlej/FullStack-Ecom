@@ -10,9 +10,11 @@ const LoginForm = () => {
     return (
         <Box
             component='form'
-            onSubmit={(e : any) => {
+            onSubmit={async (e : any) => {
             e.preventDefault();
-            console.log(loginDetails);
+                
+
+
         }}
             sx={{
             borderRadius: '7px',
