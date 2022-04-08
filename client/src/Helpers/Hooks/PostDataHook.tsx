@@ -5,22 +5,24 @@ const PostDataHook = () => {
 
     const [isLoading ,setLoading] = useState(false)
     const [results,setResults] = useState('')
-    const PostDataToDB = async(data : IformData) => {
+    const PostDataToDB = async(data : IformData ,token : string) => {
         try {
             setLoading(true)
             const response = await fetch(' http://localhost:9000/dashboard/add-products', {
                 method: 'POST',
                 headers: {
+                    'Authorization' : token,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     ...data
                 })
-            })            
+            })     
+          
+                   
             setResults(`${response.status}`)
-
-
             setLoading(false)
+            return response.statusText
         }
        
         

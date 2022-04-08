@@ -3,29 +3,49 @@ import Button from "@mui/material/Button"
 import CTypo from "../../../../../Components/CustomMui/CTypo"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../Redux/Store";
+import { IformData } from "../../../../../Helpers/Hooks/CreateProductHook";
 const img = require('../../../../../Helpers/Images/shoes.jfif')
 
 interface IProductcard {
     img : string;
     title : string;
+    category : string;
     price : number | string;
-    DeleteProductById : (id : string) => Promise < void >;
-    id : string
-    GetDatafromDB :  (url: string) => Promise<void>
+    DeleteProductById : (id : string ,token : string) => Promise < string | number | void >;
+    id : string | undefined;
+    isReqLoading : boolean;
+    products : IformData[]
+    GetDatafromDB : (url : string) => Promise < void >
+    setProducts: React.Dispatch<React.SetStateAction<IformData[]>>;
+    setSnackText : React.Dispatch<React.SetStateAction<string>>;
+    setOpen : React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Productcard = ({
     img,
+    setProducts,
+    setOpen,
+    products,
     GetDatafromDB,
     DeleteProductById,
+    isReqLoading,
     title,
     price,
+    setSnackText,
+    category,
     id
 } : IProductcard) => {
 
-    return (
+    const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
+ 
 
-        <Box
+    return (
+<>
+
+      {id ?<Box
             sx={{
             borderRadius: '.25rem',
             boxShadow: '0 0.1rem 0.25rem rgb(0 0 0 / 8%)',
@@ -59,7 +79,10 @@ const Productcard = ({
                     }
                 }}>
 
-                    <CTypo color='#6c757d' text={`${title}`}></CTypo>
+                    <Link to={`/category/${category}/products/${id}`}>
+
+                        <CTypo color='#6c757d' text={`${title}`}/>
+                    </Link>
                     <CTypo
                         sx={{
                         mt: '1px'
@@ -81,8 +104,8 @@ const Productcard = ({
                     }
                 }}>
                     <Button
-                    onClick={()=>console.log(title ,'with id of : ',id)
-                    }
+                     disabled={!userInfo ? true : false || isReqLoading }
+                     
                         sx={{
                         width: '45%',
                         border: '1px solid rgba(108, 117, 125, 0.25)',
@@ -94,9 +117,33 @@ const Productcard = ({
                         }}/>
                     </Button>
                     <Button
-                        onClick={() => {
-                        DeleteProductById(id);
-                        GetDatafromDB('/dashboard/products')
+                    disabled={!userInfo ? true : false || isReqLoading }
+                        onClick={async () => {
+                        if (id && userInfo && products) {
+                            try {
+                              const response = await  DeleteProductById(id,userInfo.token);
+                              
+                              if (response > 200) {
+                                  
+                                  setSnackText('Error! ,you are not allowed to do this action')
+                                  setOpen(true)
+                                  return;
+                                }
+                                const filtered= products.filter(product => product._id !== id);
+                                setProducts(filtered ? filtered : products);
+                                setSnackText('Product Removed!')
+                                setOpen(true)
+                            
+
+                            }
+                            catch(err){
+                                console.log(err);
+                                
+                            }
+  
+                    
+                            // GetDatafromDB('/dashboard/products')
+                        }
                     }}
                         sx={{
                         width: '45%',
@@ -108,6 +155,10 @@ const Productcard = ({
                 </Box>
             </Box>
         </Box>
+           : <Box>
+               Error ,Something went wrong
+           </Box> }
+        </>
 
     )
 }

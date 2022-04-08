@@ -10,9 +10,9 @@ import Productcard from './Cards/Productcard';
 import Skeleton from "@mui/material/Skeleton"
 import GetProductsHook from "../../../../Helpers/Hooks/GetProductsHook"
 import DeleteProductHook from "../../../../Helpers/Hooks/DeleteProductHook"
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Pagination from "@mui/material/Pagination"
-
+import {Snackbar, Alert} from "@mui/material"
 
 const img = require('../../../../Helpers/Images/accessories.jfif')
 
@@ -20,19 +20,29 @@ const Products = () => {
     const navigate = useNavigate();
     const [currentPage,
         setCurrentPage] = useState(0)
+    const [isOpen,
+        setOpen] = useState(false)
+    const [snackText,
+        setSnackText] = useState('Error! ,something went wrong')
 
+    useEffect(() =>{
+        if (isOpen) {
+            setTimeout(() => {
+                setOpen(false)
+            }, 3000);
+        }
+    },[isOpen])    
     const {
         products,
         pages,
         error,
         isLoading,
         GetDatafromDB,
+        setProducts,
         setLoading
     } = GetProductsHook()
 
-    const {DeleteProductById,
-        isReqLoading,
-        results} = DeleteProductHook()
+    const {DeleteProductById, isReqLoading, results} = DeleteProductHook()
 
     const handlePageChange = (e : React.MouseEvent < HTMLElement, MouseEvent >) => {
 
@@ -47,15 +57,15 @@ const Products = () => {
     }
     useEffect(() => {
         let isMounted = true
-        if (isMounted)  {GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
-        
-        window.scrollTo(0,0)}
+        if (isMounted) {
+            GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
+
+            window.scrollTo(0, 0)
+        }
         return () => {
             isMounted = false
         }
     }, [currentPage])
-
-   
 
     useEffect(() => {
         let isdone = false
@@ -69,7 +79,6 @@ const Products = () => {
         return () => {
             isdone = true
             setLoading(false)
-            console.log(products);
 
         }
     }, [])
@@ -132,17 +141,50 @@ const Products = () => {
                     py: '2em',
                     borderTop: '1px solid #8080803b'
                 }}>
+                    <Snackbar
+                        onClick={() => setOpen(!isOpen)}
+                        sx={{
+                        mt: '2em'
+                    }}
+                        anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center'
+                    }}
+                        open={isOpen}
+                        autoHideDuration={2000}>
+                        <Alert
+                            sx={{
+                            fontSize: '1em',
+                            background: `${results == '200'
+                                ? 'rgb(56, 142, 60)'
+                                : 'red'}`,
+                            color: 'white'
+                        }}
+                            severity={`${results == '200'
+                            ? 'success'
+                            : 'error'}`}>
+
+                            {`${snackText}`}
+                        </Alert>
+                    </Snackbar>
 
                     {products.length > 0 && products.map((product : IformData) => <Productcard
-                        id={product.id}
+                        category={product.category}
+                        id={product
+                        ?._id}
+                        setSnackText={setSnackText}
                         GetDatafromDB={GetDatafromDB}
+                        isReqLoading={isReqLoading}
+                        products={products}
+                        setProducts={setProducts}
                         DeleteProductById={DeleteProductById}
+                        setOpen={setOpen}
                         key={`${product._id}`}
                         title={product.title}
                         img={product.images[0] || product.images[1] || 'https://www.groupestate.gr/images/joomlart/demo/default.jpg'}
                         price={product.price}/>)
 }
-                    {isLoading  && products.length === 0 && [
+                    {isLoading && products.length === 0 && [
                         1,
                         2,
                         3,
@@ -173,8 +215,7 @@ const Products = () => {
                     }}
                         text='No products were found!'></CTypo>
 }
-                    {error && !isLoading && products.length == 0 && 
-                    <Box
+                    {error && !isLoading && products.length == 0 && <Box
                         sx={{
                         display: 'flex',
                         alignItems: 'center'
@@ -201,11 +242,14 @@ const Products = () => {
                         }}
                             text='retry?'></CTypo>
 
-
                     </Box>}
                     <Pagination
-                        onClick={(e)=>handlePageChange(e)}
-                        sx={{  mt: '2em',width:'100%'}} count={pages || 0} />
+                        onClick={(e) => handlePageChange(e)}
+                        sx={{
+                        mt: '2em',
+                        width: '100%'
+                    }}
+                        count={pages || 0}/>
                 </CBox>
             </Box>
         </CBox>

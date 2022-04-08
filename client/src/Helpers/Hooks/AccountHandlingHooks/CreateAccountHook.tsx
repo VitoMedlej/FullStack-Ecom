@@ -1,19 +1,22 @@
-import { useState } from "react"
+import {useState} from "react"
+import {useDispatch} from "react-redux";
+import {saveUser} from "../../../Redux/Slices/UserSlice";
+import {Results} from './ValidateAccountHook';
 
 interface IuserDetails {
     username : string,
     password : string,
     email : string
 }
-type Results = {
-    message : string
-}
-
 
 const CreateAccountHook = () => {
-    const [isLoading ,setLoading] = useState(false)
-    const [results ,setResults] = useState<Results>()
-    const [statusCode ,setStatusCode] = useState<number | string>()
+    const [isLoading,
+        setLoading] = useState(false)
+    const [results,
+        setResults] = useState < Results > ()
+    const [statusCode,
+        setStatusCode] = useState < number | string > ()
+    const dispatch = useDispatch()
     const CreateAccount = async(userDetails : IuserDetails) => {
 
         try {
@@ -28,10 +31,12 @@ const CreateAccountHook = () => {
                     ...userDetails
                 })
             })
-            const results = await request.json()
+            const res = await request.json()
             setStatusCode(request.status);
-            
-            setResults(results);
+
+            setResults(res);
+            dispatch(saveUser(res.user))
+            localStorage.setItem('user', JSON.stringify(res.user))
             setLoading(false)
         } catch (err) {
             setLoading(false)
@@ -39,7 +44,7 @@ const CreateAccountHook = () => {
 
         }
     }
-    return {CreateAccount ,setResults ,statusCode ,results ,isLoading}
+    return {CreateAccount, setResults, statusCode, results, isLoading}
 
 }
 

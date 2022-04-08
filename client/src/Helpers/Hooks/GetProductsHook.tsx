@@ -13,12 +13,16 @@ const GetProductsHook = () => {
 
     const GetDatafromDB = async(url : string) => {
         try {
+          
+
             setLoading(true)
 
             const request = await fetch(`${url}`)
-            //http://localhost:9000${url}?page=${page || 0}
+        
+
             const results = await request.json()
-            console.log('results: ', results);
+        
+
             setProducts(results.products)
             setPages(results.TotalPages)
             setLoading(false)

@@ -4,8 +4,13 @@ import CButton from "../../../Components/CustomMui/CButton"
 import CTypo from "../../../Components/CustomMui/CTypo"
 import CreateAccountHook from "../../../Helpers/Hooks/AccountHandlingHooks/CreateAccountHook"
 import RegisterHook from "../../../Helpers/Hooks/AccountHandlingHooks/RegisterHook"
+import {useSelector, useDispatch} from 'react-redux';
+import {saveUser} from "../../../Redux/Slices/UserSlice"
+import {useNavigate} from "react-router-dom";
 
 const RegisterForm = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {userDetails, handleSubmit, resetForm} = RegisterHook()
     const {CreateAccount, isLoading, setResults, statusCode, results} = CreateAccountHook()
     return (
@@ -15,12 +20,16 @@ const RegisterForm = () => {
             e.preventDefault();
             if (!isLoading && userDetails.username && userDetails.email && userDetails.password.length > 3) {
                 await CreateAccount(userDetails);
-                resetForm()
-                console.log('results :',results);
-                
+                resetForm();
+                if (results && results.user) {
+                    navigate('/dashboard/main');
+                    return;
+                }
+                resetForm();
             }
             else {
-                setResults({message:'Please use a stronger password'})
+                resetForm();
+                setResults({message: 'Please check your credentials and try again'})
             }
         }}
             sx={{

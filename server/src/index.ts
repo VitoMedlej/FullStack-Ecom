@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 connectToDB()
 
 
+
 app.use(require('./Routes/homePageRoutes.js'))
 app.use(require('./Routes/accountRoutes.js'))
 app.use(require('./Routes/authRoutes.js'))
@@ -30,9 +31,4 @@ app.listen(port, () => {
     console.log("server running at port :" + port);
 
 });
-
-
-
-
-
 

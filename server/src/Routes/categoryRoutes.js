@@ -32,7 +32,7 @@ router.get('/category/:category?', async(req, res) => {
 
     const results = await product.find(category
         ? {
-            'category': `${category}`
+            category
         }
         : {})
         .limit(ProductLimitSize)
@@ -50,9 +50,12 @@ router.get('/category/:category/products/:id', async(req, res) => {
         const category = req.params.category
         const id = req.params.id
         const product = mongoose.model('Product')
-        const results = await product.find({'_id': `${id}`, category: `${category}`});
+        const results = await product.find({'_id': `${id}`, category});
 
         res.json(results)
+        //http://localhost:3000/category/shoes/products/lUhdwg8nmgG_OfPT3v810qwrqwr%20
+        //http://localhost:3000/category/accessories/products/623638a72ab762d084a7acc7
+
 
     } catch (err) {
         res

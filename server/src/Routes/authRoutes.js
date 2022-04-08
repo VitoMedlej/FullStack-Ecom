@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken')
 router.post('/account/login', async(req, res) => {
     try {
         const {email, password} = req.body
-
+      
         if (!password || !email) {
             res
                 .status(404)
@@ -25,11 +25,38 @@ router.post('/account/login', async(req, res) => {
         }
 
         if (user) {
+           
             try {
 
                 const isVaild = await bcrypt.compare(password, user.password)
+                if (!isVaild) {
+                    res
+                        .status(400)
+                        .json({message: 'Incorrect credentials!'})
+                    return;
+                }
+                
+                const token = await jwt.sign({
+                    id: user._id,
+                    isAdmin : user.isAdmin ,
+                    username: user.username,
+                    email: user.email
+                }, process.env.JWT_SECRET ,{  expiresIn : '24h'})
+              
+                res 
+                    .status(200)
+                    .json({
 
-                res.json({isVaild})
+                        user: {
+                            token,
+                            id: user._id,
+                          
+                            username: user.username,
+                            email: user.email
+                        },
+                        message: 'Logged in successfully'
+                    })
+
             } catch (err) {
                 console.log(err);
                 throw err

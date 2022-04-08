@@ -10,10 +10,12 @@ import StockStatusForm from './Forms/StockStatusForm';
 import SelectForm from './Forms/SelectForm';
 import {IformData} from '../../../../Helpers/Hooks/CreateProductHook'
 import Snackbar, {SnackbarOrigin} from "@mui/material/Snackbar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import PostDataHook from '../../../../Helpers/Hooks/PostDataHook'
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../Redux/Store";
 
 const AddProduct = () => {
     const {PostDataToDB, isLoading, results} = PostDataHook()
@@ -39,14 +41,25 @@ const AddProduct = () => {
         14,
         15
     ];
+    const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
 
     const colors = ['black', 'white', 'red', 'yellow'];
     const [isOpen,
         setOpen] = useState(false)
-
+    const [color,setColor] = useState('')
+    const [snackText,
+        setSnackText] = useState('Error! ,something went wrong')
     const handleClick = () => {
         setOpen(!isOpen)
     }
+
+    useEffect(() => {
+        if (isOpen) {
+            setTimeout(() => {
+                setOpen(false)
+            }, 3000);
+        }
+    }, [isOpen])
 
     return (
         <CBox
@@ -83,30 +96,29 @@ const AddProduct = () => {
                 <Alert
                     sx={{
                     fontSize: '1em',
-                    background: `${results == '200'
-                        ? 'rgb(56, 142, 60)'
-                        : 'red'}`,
+                    background : color || 'red',
                     color: 'white'
                 }}
-                    severity={`${results == '200'
+                    severity={`${color !== 'red'
                     ? 'success'
                     : 'error'}`}>
 
-                    {`${results == '200'
-                        ? ' Product has been added successfully!'
-                        : 'There was an error adding the product!'}`}
+                    {`${snackText}`}
                 </Alert>
             </Snackbar>
 
             <Box
                 onSubmit={async(e : React.FormEvent < HTMLInputElement >) => {
                 e.preventDefault();
-                PostDataToDB(formData);
+                if (userInfo) {
+                  const responseText = await  PostDataToDB(formData, `${userInfo.token}`);
+                  setSnackText(`${responseText}`)
+                  setColor('green')
+                    resetForm();
+                }
+                setColor('red')
+                setSnackText(`Something went wrong ,please try again.`)
                 setOpen(true);
-                setTimeout(() => {
-                    setOpen(false)
-                }, 3000);
-                resetForm()
             }}
                 sx={{
                 background: 'white',

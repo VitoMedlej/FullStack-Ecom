@@ -22,27 +22,46 @@ export interface IformData {
     country : string
     colors : string[]
     Manufacturer : string;
-    _id ?: string | number
+    _id ?: string 
 }
 const date : number = Number(new Date())  / 1000 
 
+// const defaultProductValues = {
+//     title: "",
+//     sizes: [],
+//     colors: [''],
+//     price: '',
+//     images: [''],
+//     inStock: false,
+//     weight: '',
+//     style: '',
+//     country: '',
+//     description: "",
+//     category: '',
+//     id:`${ nanoid() + date }`,
+//     specifications: [''],
+//     Manufacturer: "",
+//     reviews: []
+// }
 const defaultProductValues = {
-    title: "",
-    sizes: [],
-    colors: [''],
-    price: '',
-    images: [''],
+    title: "asfasfasfasf",
+    sizes: [6],
+    colors: ['red'],
+    price: '144',
+    images: ['1asf124'],
     inStock: false,
-    weight: '',
-    style: '',
-    country: '',
-    description: "",
-    category: '',
+    weight: '124g',
+    style: 'qwrqwrf',
+    country: 'qwrqwr',
+    description: "qwrqwr",
+    category: 'shoes',
     id:`${ nanoid() + date }`,
-    specifications: [''],
-    Manufacturer: "",
+    specifications: ['asfasf'],
+    Manufacturer: "asfasfasf",
     reviews: []
 }
+
+
 
 const CreateProductHook = () => {
  

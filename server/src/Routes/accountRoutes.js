@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../../db/Models/userModel')
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken')
+
 router.post('/account/register', async(req, res) => {
     try {
         const {username, email, password} = req.body
@@ -31,15 +32,17 @@ router.post('/account/register', async(req, res) => {
 
         const token = await jwt.sign({
             id: newUser._id,
+            isAdmin: false,
             username: newUser.username,
             email: newUser.email
-        }, process.env.JWT_SECRET)
+        }, process.env.JWT_SECRET, {expiresIn: '24h'})
 
         res
             .status(200)
             .json({
-                token,
                 user: {
+                    token,
+
                     username: newUser.username,
                     id: newUser._id,
                     email: newUser.email

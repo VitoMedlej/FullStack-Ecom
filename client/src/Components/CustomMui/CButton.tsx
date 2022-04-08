@@ -8,7 +8,7 @@ interface CButton {
     sx?: SxProps < Theme > | undefined
     hover?: any
     children?: any
-    margin?: string
+    margin ?: string 
     borderRadius?: string
     isSubmitButton?: boolean;
     className?: string
