@@ -27,3 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 client/node_modules/.acorn-globals-nsLt0xac/index.js
 client/build/static/css/main.2892c4ea.css
+*.yaml
