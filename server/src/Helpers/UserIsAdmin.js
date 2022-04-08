@@ -10,7 +10,7 @@ const UserIsAdmin = async (user ,UserDB) => {
         const savedUser = await UserDB.findOne({email, id})
     
         if (!savedUser || !savedUser.isAdmin) {
-            console.log('not admin');
+          
      
              return false;
         } 

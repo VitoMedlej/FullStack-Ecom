@@ -16,7 +16,6 @@ export interface IformData {
         stars: number,
         comment: string
     }[]
-    id : string;
     weight : string;
     style : string;
     country : string
@@ -26,38 +25,21 @@ export interface IformData {
 }
 const date : number = Number(new Date())  / 1000 
 
-// const defaultProductValues = {
-//     title: "",
-//     sizes: [],
-//     colors: [''],
-//     price: '',
-//     images: [''],
-//     inStock: false,
-//     weight: '',
-//     style: '',
-//     country: '',
-//     description: "",
-//     category: '',
-//     id:`${ nanoid() + date }`,
-//     specifications: [''],
-//     Manufacturer: "",
-//     reviews: []
-// }
 const defaultProductValues = {
-    title: "asfasfasfasf",
-    sizes: [6],
-    colors: ['red'],
-    price: '144',
-    images: ['1asf124'],
+    title: "",
+    sizes: [],
+    colors: [''],
+    price: '',
+    images: [''],
     inStock: false,
-    weight: '124g',
-    style: 'qwrqwrf',
-    country: 'qwrqwr',
-    description: "qwrqwr",
-    category: 'shoes',
-    id:`${ nanoid() + date }`,
-    specifications: ['asfasf'],
-    Manufacturer: "asfasfasf",
+    weight: '',
+    style: '',
+    country: '',
+    description: "",
+    category: '',
+   
+    specifications: [''],
+    Manufacturer: "",
     reviews: []
 }
 

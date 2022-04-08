@@ -33,13 +33,10 @@ const CartList = () => {
                 mt: '2em'
             }}>
 
-                <CartProduct/>
-                <CartProduct/>
-                <CartProduct/>
-                <CartProduct/>
-                <CartProduct/>
-                <CartProduct/>
-                <CartProduct/>
+                
+            <CTypo fontWeight='300' text={` you haven't added any products yet!`}></CTypo>
+                 {/* <CartProduct/>  */}
+          
             </Box>
 
         </Grid>

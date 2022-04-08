@@ -20,11 +20,6 @@ const LoginForm = () => {
     const {ValidateAccount, setResults, statusCode, results, isLoading} = ValidateAccountHook()
     const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
 
-    useEffect(() => {
-        console.log('userInfo',userInfo);
-        
-        
-    },[userInfo])
 
     return (
         <Box

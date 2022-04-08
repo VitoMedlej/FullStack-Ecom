@@ -18,7 +18,7 @@ const USPbar = () => {
             fontSize:'.9rem',
             py:'5px'
           
-        }}>Lorem ipsum dolor sit amet!</Typography>
+        }}>Register now to get 15% off everything! </Typography>
     </Box>;
 };
 

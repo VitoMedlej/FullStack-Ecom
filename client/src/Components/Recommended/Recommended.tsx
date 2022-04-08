@@ -79,7 +79,7 @@ const Recommended = () => {
 
                             return <SwiperSlide
                             className='swiperSlideCard'
-                            key={item._id || item.id}>
+                            key={item._id}>
 
                                 <RecoCard
                                     description={item.description}
