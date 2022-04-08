@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box"
 import IconButton from "@mui/material/IconButton"
-import TextField from "@mui/material/TextField"
 import CBox from "../../../../Components/CustomMui/CBox"
 import CTypo from "../../../../Components/CustomMui/CTypo"
 import SearchIcon from '@mui/icons-material/Search';
@@ -14,7 +13,6 @@ import {useNavigate} from 'react-router-dom';
 import Pagination from "@mui/material/Pagination"
 import {Snackbar, Alert} from "@mui/material"
 
-const img = require('../../../../Helpers/Images/accessories.jfif')
 
 const Products = () => {
     const navigate = useNavigate();

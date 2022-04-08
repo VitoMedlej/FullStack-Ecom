@@ -7,7 +7,6 @@ import {Link} from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../Redux/Store";
 import { IformData } from "../../../../../Helpers/Hooks/CreateProductHook";
-const img = require('../../../../../Helpers/Images/shoes.jfif')
 
 interface IProductcard {
     img : string;
@@ -142,7 +141,6 @@ const Productcard = ({
                             }
   
                     
-                            // GetDatafromDB('/dashboard/products')
                         }
                     }}
                         sx={{

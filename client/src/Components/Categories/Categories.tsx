@@ -5,9 +5,7 @@ import GetCategoryDataHook from '../../Helpers/Hooks/GetCategoryDataHook';
 import CBox from '../CustomMui/CBox';
 import CTypo from '../CustomMui/CTypo';
 import CateCard from './CateCard'
-const shoes = require('../../Helpers/Images/shoes.jfif')
-const accessories = require('../../Helpers/Images/accessories.jfif')
-const suits = require('../../Helpers/Images/suits.jfif')
+
 
 
 const Categories = () => {

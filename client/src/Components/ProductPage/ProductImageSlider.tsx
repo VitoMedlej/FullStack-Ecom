@@ -6,7 +6,6 @@ import {Skeleton} from '@mui/material';
 import CTypo from '../CustomMui/CTypo';
 import CButton from '../CustomMui/CButton';
 import { useState } from 'react';
-// const img = require('../../Helpers/Images/shoes.jfif')
 
 interface IProductImageSlider {
     isLoading : boolean
