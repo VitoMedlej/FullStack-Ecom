@@ -37,7 +37,7 @@ const Category = () => {
     useEffect(() => {
         let isMounted = true
 
-        if (isMounted) GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+        if (isMounted) GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
         return () => {
             isMounted = false
         }
@@ -46,7 +46,7 @@ const Category = () => {
 
     useEffect(() => {
         let isMounted = true
-        if (isMounted) {GetDatafromDB(`http://localhost:9000/category/${section}?limit=9&page=${currentPage || 0}`)
+        if (isMounted) {GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
       
         window.scrollTo(0,0)}
 

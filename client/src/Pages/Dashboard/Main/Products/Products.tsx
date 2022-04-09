@@ -56,7 +56,7 @@ const Products = () => {
     useEffect(() => {
         let isMounted = true
         if (isMounted) {
-            GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
+            GetDatafromDB(`https://elvito.herokuapp.com/category/?limit=9&page=${currentPage || 0}`)
 
             window.scrollTo(0, 0)
         }
@@ -71,7 +71,7 @@ const Products = () => {
 
         if (!isdone) {
             setLoading(true)
-            GetDatafromDB(`http://localhost:9000/category/?limit=9&page=${currentPage || 0}`)
+            GetDatafromDB(`https://elvito.herokuapp.com/category/?limit=9&page=${currentPage || 0}`)
 
         }
         return () => {

@@ -11,7 +11,7 @@ const DeleteProductHook = () => {
         try {
 
             setReqLoading(true)
-            const request = await fetch(`http://localhost:9000/dashboard/products/${id}`, {
+            const request = await fetch(`https://elvito.herokuapp.com/dashboard/products/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': token

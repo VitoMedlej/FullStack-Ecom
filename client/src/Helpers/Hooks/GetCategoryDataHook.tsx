@@ -21,7 +21,7 @@ const GetCategoryDataHook = () => {
         try {
             setLoading(true)
 
-            const request = await fetch('http://localhost:9000/categories')
+            const request = await fetch('https://elvito.herokuapp.com/categories')
             const results = await request.json()
             setCategories(results)
             setLoading(false)

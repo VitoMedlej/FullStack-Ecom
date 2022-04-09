@@ -10,7 +10,7 @@ const GetSingleProductHook = () => {
     const GetProductById = async(category : string, id : string) => {
         try {
             setLoading(true)
-            const result = await fetch(`http://localhost:9000/category/${category}/products/${id}`)
+            const result = await fetch(`https://elvito.herokuapp.com/category/${category}/products/${id}`)
             const data = await result.json()
                 
                 setData(data)

@@ -13,7 +13,7 @@ const GetTotalPagesHook = () => {
     const GetPages = async(url : string) => {
         try {
             setLoading(true)
-            //http://localhost:9000${url}?page=${page || 0}
+            
             const request = await fetch(`${url}`)
             const results = await request.json()
             setPages(results.TotalPages)
@@ -22,9 +22,7 @@ const GetTotalPagesHook = () => {
         } catch (err) {
             setError(`${err}`)
             setLoading(false)
-
             console.log(err);
-
         }
 
     }
