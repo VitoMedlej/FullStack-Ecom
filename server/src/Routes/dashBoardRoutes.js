@@ -11,6 +11,7 @@ const CheckUserRole = require('../Helpers/UserIsAdmin')
 router.get('/dashboard/products', async(req, res) => {
     const product = mongoose.model('Product')
     const dataArray = await product.find({})
+    console.log('should work');
     res.json([...dataArray])
 })
 

@@ -21,9 +21,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 connectToDB()
 
 
-app.get('/',(req,res)=>{
-    res.send('hello nigga')
-})
 
 app.use(require('./src/Routes/homePageRoutes'))
 app.use(require('./src/Routes/accountRoutes.js'))
