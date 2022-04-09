@@ -4,7 +4,7 @@ const getfromDB = async () => {
     try {
         await ProductModel.fetchData((data)=>{
            return data
-           
+      
        })
     } 
     catch (err) {
@@ -12,4 +12,4 @@ const getfromDB = async () => {
 
     }
 }
-export default getfromDB
+module.exports = getfromDB
