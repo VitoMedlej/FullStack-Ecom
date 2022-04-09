@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "main": "index.ts",
     "scripts": {
+        "dep":"node ./src/index.ts",
         "start": "nodemon ./src/index.ts"
     },
     "keywords": [],

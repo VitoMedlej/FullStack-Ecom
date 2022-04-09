@@ -19,7 +19,7 @@ connectToDB()
 
 
 app.get('/',(req,res)=>{
-    res.send('hello')
+    res.send('hello nigga')
 })
 
 // app.use(require('./Routes/homePageRoutes.js'))
