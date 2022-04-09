@@ -3,9 +3,8 @@
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
-        "a": "node index.js",
-        "deploy": "cd src && npm install && node index.js",
-        "start": "nodemon ./src/index.js"
+        "launch" : "node index.js",
+        "start": "nodemon index.js"
     },
     "keywords": [],
     "author": "",

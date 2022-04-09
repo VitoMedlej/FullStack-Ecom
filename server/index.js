@@ -4,12 +4,12 @@ const cors = require('cors')
 const bodyParser = require('body-parser');
 const port =   process.env.PORT || 3000 
 // const {connectToDB, db} = require('../db/db')
-const User = require('../db/Models/userModel')
-const product = require('../db/Models/ProductModel')
-const getfromDB = require('../db/Methods/GetFromDB')
-const mongoose = require('mongoose')
-const Category = require('../db/Models/CategoryModel')
-const FeaturedModel = require('../db/Models/FeaturedModel')
+// const User = require('../db/Models/userModel')
+// const product = require('../db/Models/ProductModel')
+// const getfromDB = require('../db/Methods/GetFromDB')
+// const mongoose = require('mongoose')
+// const Category = require('../db/Models/CategoryModel')
+// const FeaturedModel = require('../db/Models/FeaturedModel')
 require('dotenv').config();
 
 app.use(cors())
