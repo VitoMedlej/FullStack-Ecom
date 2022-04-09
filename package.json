@@ -4,7 +4,7 @@
   "description": "reepoo",
   "main": "./server/src/index.js",
   "scripts": {
-    "start": "cd server && npm run start",
+    "start": "node ./server/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
