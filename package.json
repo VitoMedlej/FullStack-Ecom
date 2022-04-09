@@ -2,9 +2,9 @@
   "name": "repo",
   "version": "1.0.0",
   "description": "reepoo",
-  "main": "./server/src/index.js",
+  "main": "index.js",
   "scripts": {
-    "start" : "cd server && npm run start",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/VitoMedlej/FullStack-Ecom/issues"
   },
-  "homepage": "https://github.com/VitoMedlej/FullStack-Ecom#readme"
+  "homepage": "https://github.com/VitoMedlej/FullStack-Ecom#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
