@@ -4,7 +4,7 @@
   "description": "reepoo",
   "main": "index.js",
   "scripts": {
-    "dev" : "cd server && npm start",
+    "dev" : "cd server && node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
