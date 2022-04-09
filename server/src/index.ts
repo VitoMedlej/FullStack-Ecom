@@ -18,14 +18,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 connectToDB()
 
 
+express.get('/',(req,res)=>{
+    res.send('hello')
+})
 
-app.use(require('./Routes/homePageRoutes.js'))
-app.use(require('./Routes/accountRoutes.js'))
-app.use(require('./Routes/authRoutes.js'))
+// app.use(require('./Routes/homePageRoutes.js'))
+// app.use(require('./Routes/accountRoutes.js'))
+// app.use(require('./Routes/authRoutes.js'))
 
-app.use(require('./Routes/categoryRoutes.js'))
+// app.use(require('./Routes/categoryRoutes.js'))
 
-app.use(require('./Routes/dashBoardRoutes.js'))
+// app.use(require('./Routes/dashBoardRoutes.js'))
 
 app.listen(port, () => {
     console.log("server running at port :" + port);
