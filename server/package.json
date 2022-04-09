@@ -4,7 +4,7 @@
     "main": "index.js",
     "scripts": {
         "a": "node index.js",
-        "deploy": "cd src && node index.js",
+        "deploy": "cd src && npm install && node index.js",
         "start": "nodemon ./src/index.js"
     },
     "keywords": [],
