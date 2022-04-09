@@ -5,6 +5,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import CButton from '../CustomMui/CButton';
 import CTypo from '../CustomMui/CTypo';
+import { Link } from "react-router-dom";
 
 interface Ilanding {
     className?: string
@@ -45,14 +46,16 @@ const LandingPage = ({className} : Ilanding) => {
                     lg: '1.15em'
                 }}
                     text={`it’s time to shake things up with el-vito's new releases for men`}/>
-
+                <Link to='/category/shoes'>
+                
                 <CButton
                     hover={{
-                    color: 'white',
-                    background: 'transparent',
-                    border: '1px solid white'
-                }}
+                        color: 'white',
+                        background: 'transparent',
+                        border: '1px solid white'
+                    }}
                     text='SHOP NOW'/>
+                    </Link>
             </CBox>
         </Box>
 

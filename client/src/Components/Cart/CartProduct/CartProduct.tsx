@@ -7,7 +7,7 @@ import CTypo from '../../CustomMui/CTypo';
 import CartProductForm from './CartProductForm';
 import CButton from '../../CustomMui/CButton';
 import Button from '@mui/material/Button';
-const img = require('../../../Helpers/Images/nike.jfif')
+const img = 'https://ucarecdn.com/e2879886-9fdb-41ce-a85a-67bb466b67ea/'
 
 const CartProduct = () => {
     return (
@@ -35,7 +35,7 @@ const CartProduct = () => {
                         md:'1.2em'
                     }}>
                         <Link to='/'>
-                            Some shit title
+                            Some title
                         </Link>
                     </CTypo>
 

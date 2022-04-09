@@ -6,7 +6,7 @@ import Category from './Pages/Category';
 import Product from './Components/ProductPage/ProductPage';
 import ScrollToTop from './Helpers/Hooks/ScrollToTop';
 import Backdrop from '@mui/material/Backdrop';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import {toggleCartState} from './Redux/Slices/CartSlice'
 import {RootState} from './Redux/Store';
@@ -15,13 +15,22 @@ import {toggleBackDropState} from './Redux/Slices/BackDropSlice'
 import CartPage from './Pages/CartPage';
 import AccountPage from './Pages/Account/AccountPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import { saveUser } from './Redux/Slices/UserSlice';
 const App = () => {
     const [open,
         setOpen] = useState(true);
 
     const isBackDrop = useSelector((state : RootState) => state.isBackDrop.isBackDrop)
     const dispatch = useDispatch()
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            const foundUser = JSON.parse(loggedInUser);
 
+            dispatch(saveUser(foundUser));
+
+        }
+    }, []);
     return (
         <Router>
             <Backdrop
