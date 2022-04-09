@@ -2,9 +2,9 @@
   "name": "repo",
   "version": "1.0.0",
   "description": "reepoo",
-  "main": "index.js",
+  "main": "./server/src/index.js",
   "scripts": {
-    "start": "cd server && npm run dep",
+    "start": "cd server && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {

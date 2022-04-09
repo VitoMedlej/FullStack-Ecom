@@ -1,10 +1,10 @@
 {
     "name": "backend",
     "version": "1.0.0",
-    "main": "index.ts",
+    "main": "index.js",
     "scripts": {
-        "dep":"node ./src/index.ts",
-        "start": "nodemon ./src/index.ts"
+        "dep":"cd src && node index.js",
+        "start": "nodemon ./src/index.js"
     },
     "keywords": [],
     "author": "",

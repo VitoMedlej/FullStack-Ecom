@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
 const port =   process.env.PORT || 3000 
-const {connectToDB, db} = require('../db/db')
+// const {connectToDB, db} = require('../db/db')
 const User = require('../db/Models/userModel')
 const product = require('../db/Models/ProductModel')
 const getfromDB = require('../db/Methods/GetFromDB')
@@ -15,7 +15,7 @@ require('dotenv').config();
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-connectToDB()
+// connectToDB()
 
 
 app.get('/',(req,res)=>{
