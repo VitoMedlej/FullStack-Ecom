@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 connectToDB()
 
 
-express.get('/',(req,res)=>{
+app.get('/',(req,res)=>{
     res.send('hello')
 })
 
