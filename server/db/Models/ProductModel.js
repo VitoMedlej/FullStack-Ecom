@@ -35,10 +35,7 @@ const ProductSchema = mongoose.Schema({
             comment: String
         }
     ],
-    id: {
-        type: String,
-        required: true
-    },
+ 
     weight: String,
     style: String,
     country: String,
