@@ -35,7 +35,7 @@ router.post('/account/register', async(req, res) => {
             isAdmin: false,
             username: newUser.username,
             email: newUser.email
-        }, process.env.JWT_SECRET, {expiresIn: '24h'})
+        }, process.env.JWT_SECRET)
 
         res
             .status(200)

@@ -41,7 +41,7 @@ router.post('/account/login', async(req, res) => {
                     isAdmin : user.isAdmin ,
                     username: user.username,
                     email: user.email
-                }, process.env.JWT_SECRET ,{  expiresIn : '24h'})
+                }, process.env.JWT_SECRET )
               
                 res 
                     .status(200)
