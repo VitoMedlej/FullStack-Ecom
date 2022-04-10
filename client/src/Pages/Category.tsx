@@ -13,42 +13,46 @@ import {saveProductsArray} from '../Redux/Slices/ProductsSlice';
 import {RootState} from '../Redux/Store';
 import Pagination from '@mui/material/Pagination';
 import GetTotalPagesHook from '../Helpers/Hooks/GetTotalPagesHook';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const Category = () => {
     const {section} = useParams()
     const dispatch = useDispatch()
-    const [currentPage,setCurrentPage] = useState(0)
+    const [currentPage,
+        setCurrentPage] = useState(0)
     const navigate = useNavigate();
     const {GetDatafromDB, pages, isLoading, products} = GetProductsHook()
 
-    const handlePageChange = (e:React.MouseEvent<HTMLElement, MouseEvent>) => {
-        
-        const value =  e.target as HTMLElement;
-    if (value.textContent) {
-        const page : number = parseInt(value.textContent)
-        
-        setCurrentPage(page - 1)
-        navigate(`/category/shoes?limit=9&?page=${page}`);
-    }
-    
+    const handlePageChange = (e : React.MouseEvent < HTMLElement, MouseEvent >) => {
+
+        const value = e.target as HTMLElement;
+        if (value.textContent) {
+            const page : number = parseInt(value.textContent)
+
+            setCurrentPage(page - 1)
+            navigate(`/category/shoes?limit=9&?page=${page}`);
+        }
+
     }
 
     useEffect(() => {
         let isMounted = true
 
-        if (isMounted) GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+        if (isMounted) 
+            GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
         return () => {
             isMounted = false
         }
-    
+
     }, [])
 
     useEffect(() => {
         let isMounted = true
-        if (isMounted) {GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
-      
-        window.scrollTo(0,0)}
+        if (isMounted) {
+            GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+
+            window.scrollTo(0, 0)
+        }
 
         return () => {
             isMounted = false
@@ -143,8 +147,12 @@ const Category = () => {
                             color='red'
                             text='Error loading data ,please check your internet and try again'/>}
                         <Pagination
-                        onClick={(e)=>handlePageChange(e)}
-                        sx={{  mt: '2em',width:'100%'}} count={pages || 0} />
+                            onClick={(e) => handlePageChange(e)}
+                            sx={{
+                            mt: '2em',
+                            width: '100%'
+                        }}
+                            count={pages || 0}/>
 
                     </Grid>
 
@@ -155,4 +163,3 @@ const Category = () => {
 }
 
 export default Category
-

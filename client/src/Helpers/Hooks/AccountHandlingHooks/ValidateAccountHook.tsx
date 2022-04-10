@@ -41,11 +41,13 @@ const ValidateAccountHook = () => {
             const res = await request.json()
          
             setStatusCode(request.status);
+            
             setResults(res);
             dispatch(saveUser(res.user));
-         
-            localStorage.setItem('user', JSON.stringify(res.user))
+            if (res.user) localStorage.setItem('user', JSON.stringify(res.user))
             setLoading(false)
+  
+            return request.status
         } catch (err) {
             setLoading(false)
             console.log(err);

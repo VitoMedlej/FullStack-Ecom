@@ -27,8 +27,12 @@ const LoginForm = () => {
             onSubmit={async(e : any) => {
             e.preventDefault();
             if (!isLoading && loginDetails.email && loginDetails.password) {
-                await ValidateAccount(loginDetails)
-
+             const stat =  await ValidateAccount(loginDetails)
+             console.log('stat: ', stat);
+            if (stat === 200) {
+                navigate('/dashboard/main')
+                
+            }
             }
             // resetForm(true)
         }}

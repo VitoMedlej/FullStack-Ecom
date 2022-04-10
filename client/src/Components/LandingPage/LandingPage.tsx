@@ -29,15 +29,17 @@ const LandingPage = ({className} : Ilanding) => {
             <CBox className={`limit ${className && className}`}>
 
                 <CTypo
+                sx={{mt:'0'}}
                     fontWeight={'bolder'}
                     fontSize={{
-                    xs: '1.8em',
+                    xs: '2em',
                     sm: '2.3em',
                     md: '3em',
                     lg: '3.3em'
                 }}
                     text={`Dress Like The Boss You Are`}/>
                 <CTypo
+                
                     fontWeight={300}
                     fontSize={{
                     xs: '.8em',

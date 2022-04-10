@@ -61,7 +61,7 @@ const About = () => {
                                     width: '150px',
                                     height: '150px'
                                 }}>
-                                    <img className='img' src={`https://ucarecdn.com/467a9f35-5e55-4dfb-8ac9-3dd567352103/default.JPG`} alt=""/>
+                                    <img className='img' src={`https://source.unsplash.com/user/c_v_r/200x200`} alt=""/>
                                 </Box>
                                 <Box
                                     sx={{
@@ -87,6 +87,7 @@ const About = () => {
                                         }
                                     }}
                                         text={`${userInfo.email}`}></CTypo>
+                               
                                     <CButton
                                         onClick={()=>{
                                             localStorage.removeItem("user")

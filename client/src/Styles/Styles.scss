@@ -7,6 +7,7 @@ body {
 
 }
 
+
 .FooterLink {
     color: #cfcfcfd3;
     &:hover {
@@ -21,6 +22,24 @@ body {
     transition: all 0.2s ease;
     &:hover {
         background: #e7e7e7;
+    }
+}
+.appbar {
+    position: -webkit-sticky;
+}
+.ScrollToTopButton {
+    button {
+
+        position: fixed;
+        z-index: 2512512512;
+        color: white;
+        bottom: 0;
+        right: 0;
+        margin: 25px;
+        background: #000000ad;
+        &:hover {
+            background: #000000ad;
+        }
     }
 }
 .Alink {
@@ -188,6 +207,8 @@ a {
     border: none;
     background: transparent;
 }
+
+
 @media (min-width: 1305px) {
     .limit {
         width: 1200px;

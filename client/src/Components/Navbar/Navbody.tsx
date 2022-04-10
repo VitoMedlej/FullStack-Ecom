@@ -1,6 +1,6 @@
 import AppBar from '@mui/material/AppBar';
 import CBox from '../CustomMui/CBox';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -14,41 +14,51 @@ import {RootState} from '../../Redux/Store';
 import {toggleCartState} from '../../Redux/Slices/CartSlice'
 import {toggleBackDropState} from '../../Redux/Slices/BackDropSlice'
 import {toggleSideBarState} from '../../Redux/Slices/SideBarSlice'
-
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 interface INavBar {}
 
-const Bg = (theme : string, color?: string, DarkTheme?: string) : string => {
-    if (theme === 'dark') 
-        return `${DarkTheme}` || 'black'
-    else {
-        return `${color || 'white'}`
-    }
-}
-const Color = (theme?: string) => {
-    if (theme === 'dark') 
-        return `white`
-    else 
-        return 'black'
-}
+
+
+// const Bg = (theme : string, color?: string, DarkTheme?: string) : string => {
+//     if (theme === 'dark') 
+//         return `${DarkTheme}` || 'black'
+//     else {
+//         return `${color || 'white'}`
+//     }
+// }
+// const Color = (theme?: string) => {
+//     if (theme === 'dark') 
+//         return `white`
+//     else 
+//         return 'black'
+// }
 
 const Navbody = ({} : INavBar) => {
-
+    gsap.registerPlugin(ScrollToPlugin);
+    const {pathname} = useLocation();
+    const dispatch = useDispatch()
     const isCartOpen = useSelector((state : RootState) => state.isCartOpen.isCartOpen)
     const isBackDrop = useSelector((state : RootState) => state.isBackDrop.isBackDrop)
     const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
-
-    const dispatch = useDispatch()
-
+    const HandleHomeButton = () => {
+        if (pathname === '/') {
+            gsap.to(window, {
+                duration: .8,
+                scrollTo: "#top"
+            })
+        }
+    }
     return <CBox
         className='limit trans'
         sx={{
         zIndex: '51251251',
         position: 'relative',
         height: '30px',
-        background: Bg('light'),
+        background: 'white',
         display: 'flex',
         alignItems: 'center',
-        color: Color(),
+        color: 'black',
         py: '15px'
     }}>
         <Box
@@ -58,7 +68,9 @@ const Navbody = ({} : INavBar) => {
                 sm: 'block'
             }
         }}>
-            <Link className='Alink' to='/'>
+            <Link
+                onClick={()=>HandleHomeButton()}
+            className='Alink' to='/'>
                 Home
             </Link>
             <Link className='Alink' to='/account/login'>
@@ -79,7 +91,12 @@ const Navbody = ({} : INavBar) => {
                 sm: 'translateX(50%)'
             }
         }}>
-            <Link to='/' className='link'>
+            <Link
+                onClick={() => {
+                    HandleHomeButton()
+            }}
+                to='/'
+                className='link'>
                 <Typography
                     sx={{
                     fontFamily: 'Poppins, sans-serif',

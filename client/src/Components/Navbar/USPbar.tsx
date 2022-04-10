@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 
 const USPbar = () => {
     return <Box
+    id='uspbar'
         sx={{
         width: '100%',
         zIndex: '5125125',

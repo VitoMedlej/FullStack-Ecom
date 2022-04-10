@@ -13,11 +13,11 @@ const Navbar = ({setBackDrop, backdrop} : INavbar) => {
 
 
     return <AppBar
-        className='trans'
+        className='trans appbar'
         sx={{
         boxShadow: 'none',
         background: 'white'
-    }}
+        }}
         position="sticky">
         <USPbar/>
 

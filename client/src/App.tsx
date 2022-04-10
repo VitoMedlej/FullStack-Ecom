@@ -16,6 +16,8 @@ import CartPage from './Pages/CartPage';
 import AccountPage from './Pages/Account/AccountPage';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import { saveUser } from './Redux/Slices/UserSlice';
+import ScrollToTopButton from './Helpers/ScrollToTopButton';
+
 const App = () => {
     const [open,
         setOpen] = useState(true);
@@ -33,6 +35,9 @@ const App = () => {
     }, []);
     return (
         <Router>
+            <div id='top'>
+              
+            </div>
             <Backdrop
                 open={isBackDrop}
                 onClick={() => {
@@ -44,7 +49,9 @@ const App = () => {
                 color: '#fff',
                 zIndex: '558'
             }}/>
+            
             <ScrollToTop/>
+            <ScrollToTopButton  />
             <Navbar setBackDrop={setOpen} backdrop={open}/>
             <Routes>
                 <Route path='/' element={< Home />}/>

@@ -36,7 +36,7 @@ const Footer = () => {
                             }
                         }}
                             fontWeight='300'>
-                            <Link className='FooterLink' to='/foo'>Home</Link>
+                            <Link className='FooterLink' to='/'>Home</Link>
                         </CTypo>
                         <CTypo
                             className='trans'
@@ -46,7 +46,7 @@ const Footer = () => {
                             }
                         }}
                             fontWeight='300'>
-                            <Link className='FooterLink' to='/foo'>asfasf</Link>
+                            <Link className='FooterLink' to='/dashboard/main'>Dashboard</Link>
                         </CTypo>
                         <CTypo
                             className='trans'
@@ -56,7 +56,7 @@ const Footer = () => {
                             }
                         }}
                             fontWeight='300'>
-                            <Link className='FooterLink' to='/foo'>asfasf</Link>
+                            <Link className='FooterLink' to='/cart'>Cart</Link>
                         </CTypo>
                     </Grid>
                     <Grid
@@ -78,7 +78,7 @@ const Footer = () => {
                             vito.medlej@gmail.com
                         </CTypo>
                         <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
-                            Phone : 03/3414142
+                            Phone : +961 81 826 445
                         </CTypo>
                         <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
                             Location : Beirut/Lebanon
@@ -99,31 +99,31 @@ const Footer = () => {
                         <CTypo fontWeight='500' text='Social Media'/>
                         <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
 
-                            <Link
+                            <a
                                 className='FooterLink flexed'
                                 target='_blank'
-                                to={'https://www.facebook.com/vito.medlej.5/'}>
+                                href={ 'https://www.facebook.com/vito.medlej.5/'}>
 
                                 <FacebookOutlinedIcon
                                     sx={{
                                     mr: '5px'
                                 }}/>
                                 Facebook
-                            </Link>
+                            </a>
 
                         </CTypo>
                         <Box>
 
                             <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
 
-                                <Link target='_blank' className='FooterLink flexed' to={'/'}>
+                                <a target='_blank' className='FooterLink flexed' href={'https://github.com/VitoMedlej'}>
 
                                     <GitHubIcon
                                         sx={{
                                         mr: '5px'
                                     }}/>
                                     Github
-                                </Link>
+                                </a>
 
                             </CTypo>
                         </Box>

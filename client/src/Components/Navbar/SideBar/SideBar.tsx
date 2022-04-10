@@ -30,20 +30,22 @@ const SideBar = ({} : ISideBar) => {
             className='trans'
             sx={{
             transition: '.3s ease',
-            width: '300px',
+            width: `${isSideBar ? '300px' : '0px'}`,
             height: '100vh',
             right: `${isSideBar
                 ? '0%'
                 : '-100%'}`,
             background: 'white',
             color: 'black',
-            display: {
+            display:  {
                 xs: 'flex',
                 md: 'none'
-            },
+            } ,
             position: 'absolute',
             zIndex: 3
         }}>
+        <Box sx={{display:`${isSideBar ? 'block' : 'none'}`}}>
+
             <CBox
                 sx={{
                 borderBottom: '1px solid #e2e2e2',
@@ -91,6 +93,7 @@ const SideBar = ({} : ISideBar) => {
 
             </CBox>
 
+
             <SideBarLink
                 HandleLinkButtonClick={HandleLinkButtonClick}
                 link='/'
@@ -107,6 +110,7 @@ const SideBar = ({} : ISideBar) => {
                 HandleLinkButtonClick={HandleLinkButtonClick}
                 link='/account/login'
                 text={'LOGIN'}/>
+        </Box>
 
         </AppBar>
     )

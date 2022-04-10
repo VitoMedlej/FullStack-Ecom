@@ -36,7 +36,9 @@ const CreateAccountHook = () => {
 
             setResults(res);
             dispatch(saveUser(res.user))
-            localStorage.setItem('user', JSON.stringify(res.user))
+            if (res.user) {
+                localStorage.setItem('user', JSON.stringify(res.user))
+            }
             setLoading(false)
         } catch (err) {
             setLoading(false)
