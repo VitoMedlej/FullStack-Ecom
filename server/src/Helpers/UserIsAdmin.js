@@ -17,7 +17,7 @@ const UserIsAdmin = async (user ,UserDB) => {
         return true
     }
     catch(err) {
-        console.log(err);
+        console.log('err :', err);
         throw err
     }
 

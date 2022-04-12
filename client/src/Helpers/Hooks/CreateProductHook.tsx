@@ -5,7 +5,7 @@ import {nanoid} from 'nanoid'
 export interface IformData {
     title : string;
     sizes : number[];
-    price : string;
+    price : number;
     images : string[];
     specifications : string[]
     inStock : boolean;
@@ -22,6 +22,7 @@ export interface IformData {
     colors : string[]
     Manufacturer : string;
     _id ?: string 
+    quantity : number 
 }
 const date : number = Number(new Date())  / 1000 
 
@@ -29,7 +30,7 @@ const defaultProductValues = {
     title: "",
     sizes: [],
     colors: [''],
-    price: '',
+    price: 0,
     images: [''],
     inStock: false,
     weight: '',
@@ -37,10 +38,10 @@ const defaultProductValues = {
     country: '',
     description: "",
     category: '',
-   
     specifications: [''],
     Manufacturer: "",
-    reviews: []
+    reviews: [],
+    quantity: 1,
 }
 
 

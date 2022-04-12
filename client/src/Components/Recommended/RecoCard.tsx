@@ -8,9 +8,10 @@ interface IRecoCard {
     img : string
     title : string
     description : string
+    price : number
 }
 
-const RecoCard = ({category, id, img, title, description} : IRecoCard) => {
+const RecoCard = ({category,price, id, img, title, description} : IRecoCard) => {
     return (
         <Box
             className='trans textHidden'
@@ -61,7 +62,7 @@ const RecoCard = ({category, id, img, title, description} : IRecoCard) => {
                         text={`${description}`}></CTypo>
                 </Box>
                 <Box>
-                    <CTypo fontWeight="400" text={`200$`}></CTypo>
+                    <CTypo fontWeight="400" text={`${price}$`}></CTypo>
                 </Box>
             </Box>
         </Box>

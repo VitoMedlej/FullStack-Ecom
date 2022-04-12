@@ -9,7 +9,7 @@ const DecodeJWT = async (req) => {
         return decodedUser
     }
     catch(err) {
-        console.log(err);
+        console.log('err :', err);
         throw err
     }
 }

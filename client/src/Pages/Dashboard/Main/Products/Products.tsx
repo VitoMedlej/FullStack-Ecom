@@ -13,7 +13,6 @@ import {useNavigate} from 'react-router-dom';
 import Pagination from "@mui/material/Pagination"
 import {Snackbar, Alert} from "@mui/material"
 
-
 const Products = () => {
     const navigate = useNavigate();
     const [currentPage,
@@ -23,13 +22,13 @@ const Products = () => {
     const [snackText,
         setSnackText] = useState('Error! ,something went wrong')
 
-    useEffect(() =>{
+    useEffect(() => {
         if (isOpen) {
             setTimeout(() => {
                 setOpen(false)
             }, 3000);
         }
-    },[isOpen])    
+    }, [isOpen])
     const {
         products,
         pages,

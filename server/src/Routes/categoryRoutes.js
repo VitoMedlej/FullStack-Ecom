@@ -24,10 +24,7 @@ router.get('/category/:category?', async(req, res) => {
     const totalProducts = await product.countDocuments(category ? {'category': `${category}`} : {})
     const TotalPages = Math.ceil(totalProducts / ProductLimitSize)
 
-    // const results = await product
-    //     .find(category ? {'category': `${category}`} : {})
-    //     .limit(ProductLimitSize)
-    //     .skip(ProductLimitSize * currentPageNumber);
+ 
 
 
     const results = await product.find(category

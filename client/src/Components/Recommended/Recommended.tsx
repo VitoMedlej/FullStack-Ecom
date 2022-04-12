@@ -82,6 +82,7 @@ const Recommended = () => {
                             key={item._id}>
 
                                 <RecoCard
+                                    price={item.price}
                                     description={item.description}
                                     img={item.images[0]}
                                     title={item.title}

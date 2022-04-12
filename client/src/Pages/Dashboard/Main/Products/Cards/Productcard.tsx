@@ -12,7 +12,7 @@ interface IProductcard {
     img : string;
     title : string;
     category : string;
-    price : number | string;
+    price : number;
     DeleteProductById : (id : string ,token : string) => Promise < string | number | void >;
     id : string | undefined;
     isReqLoading : boolean;
@@ -28,7 +28,6 @@ const Productcard = ({
     setProducts,
     setOpen,
     products,
-    GetDatafromDB,
     DeleteProductById,
     isReqLoading,
     title,

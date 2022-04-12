@@ -58,13 +58,13 @@ router.post('/account/login', async(req, res) => {
                     })
 
             } catch (err) {
-                console.log(err);
+                console.log('err :', err);
                 throw err
             }
         }
 
     } catch (err) {
-        console.log(err);
+        console.log('err :', err);
     }
 })
 

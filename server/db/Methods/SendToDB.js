@@ -6,7 +6,7 @@ const SendToDB = async(product) => {
         await product.save()
 
     } catch (err) {
-        console.log(err);
+        console.log('err :', err);
 
     }
 }

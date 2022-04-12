@@ -13,8 +13,9 @@ const GetSingleProductHook = () => {
             const result = await fetch(`https://elvito.herokuapp.com/category/${category}/products/${id}`)
             const data = await result.json()
                 
-                setData(data)
-                setLoading(false)
+            setData(data)
+            setLoading(false)
+            return data
 
         } catch (err) {
             setError(`${err}`)

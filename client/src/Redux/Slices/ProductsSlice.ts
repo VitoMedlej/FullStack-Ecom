@@ -5,7 +5,7 @@ const defaultProductValues = {
     title: "",
     sizes: [],
     colors: [''],
-    price: '',
+    price: 0,
     images: [''],
     inStock: false,
     weight: '',
@@ -17,7 +17,8 @@ const defaultProductValues = {
     _id:'',
     specifications: [''],
     Manufacturer: "",
-    reviews: []
+    reviews: [],
+    quantity: 1,
 }
 
 // interface IdefaultProductValues  {

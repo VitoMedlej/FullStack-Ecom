@@ -11,7 +11,7 @@ const CheckUserRole = require('../Helpers/UserIsAdmin')
 router.get('/dashboard/products', async(req, res) => {
     const product = mongoose.model('Product')
     const dataArray = await product.find({})
-    console.log('should work');
+   
     res.json([...dataArray])
 })
 
@@ -52,11 +52,12 @@ router.delete('/dashboard/products/:id', async(req, res) => {
 router.post('/dashboard/add-products', async(req, res, next) => {
     try {
 
-        if (!req.body) {
+        if (!req.body || req.body.title) {
+
             res
                 .status(400)
                 .send('error ,product details are missing')
-
+            return;
         }
 
         const decodedUser = await DecodeJWT(req)
@@ -69,6 +70,7 @@ router.post('/dashboard/add-products', async(req, res, next) => {
                 .send('you are not authorized to add products!')
             return;
         }
+        
         const product = new productModel(req.body);
         await product.save()
 
@@ -77,8 +79,8 @@ router.post('/dashboard/add-products', async(req, res, next) => {
             .send('product has been added')
 
     } catch (err) {
-        throw err
-        console.log(err);
+        
+        console.log('err :', err);
         res
             .status(400)
             .send('error ,you are not authorized to add products!')

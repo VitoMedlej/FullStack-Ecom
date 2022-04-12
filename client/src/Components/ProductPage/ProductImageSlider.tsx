@@ -48,7 +48,7 @@ const ProductImageSlider = ({isLoading, imagesArray} : IProductImageSlider) => {
                     height: '500px'
                 }}/>
 }
-            <CButton
+         {  !isLoading ? <CButton
             onClick={()=>setClassName(className=== 'img'? 'img2' : 'img')}
             hover={{background:'none',boxShadow:'none'}}
             borderRadius='0'
@@ -58,6 +58,10 @@ const ProductImageSlider = ({isLoading, imagesArray} : IProductImageSlider) => {
             }}
                 margin='0'
                 text='Switch view'></CButton>
+                
+            : 
+            <Skeleton sx={{width:'200px',height:'60px'}}></Skeleton>
+               }
 
         </Grid>
     )

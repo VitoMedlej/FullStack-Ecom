@@ -41,7 +41,7 @@ const Product = () => {
         }
    
 
-            // setProduct(ProductsArray[0])
+
              
               const currentProduct =   ProductsArray.find(x => x._id === `${id}`);
              

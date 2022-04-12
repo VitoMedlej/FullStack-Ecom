@@ -22,6 +22,7 @@ connectToDB()
 
 
 
+
 app.use(require('./src/Routes/homePageRoutes'))
 app.use(require('./src/Routes/accountRoutes.js'))
 app.use(require('./src/Routes/authRoutes.js'))
@@ -34,6 +35,7 @@ app.listen(port, () => {
     console.log("server running at port :" + port);
 
 });
+
 
 
 
