@@ -9,6 +9,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { useParams } from "react-router-dom";
 import GetSingleProductHook from "../../Helpers/Hooks/GetSingleProductHook";
 import { IformData } from "../../Helpers/Hooks/CreateProductHook";
+import HandleAddToCartHook from "../../Helpers/Hooks/CartHandlingHooks/HandleAddToCartHook";
 
 
 interface IProductSideBar {
@@ -29,57 +30,22 @@ const ProductSideBar = ({title,price,sizes ,isLoading ,inStock} : IProductSideBa
     const {section ,id} = useParams()
 
     const {GetProductById, error, data, isLoading : Loading} = GetSingleProductHook()
+    const { HandleProductAdd} = HandleAddToCartHook()
+    
+    const HandleSubmit = async () => {
+        try {
 
-    const billCalculator = (array) => { 
-        for (let i = 0;i < array.items.length ; i++) {
-            array.bill += array.items[i].price * array.items[i].quantity
+            if ( !Loading && !isLoading) {
+                HandleProductAdd(section ,id ,GetProductById)
+            }
+        }
+        catch(err) {
+            console.log(err);
+            
         }
     }
-    const HandleProductAdd = async () => {
-        // let Cart = localStorage.getItem('Cart')
-        if (section && id && !Loading && !isLoading) {
-           const response =  await GetProductById(section,id)
-            response[0].quantity = 1 
-           let LocalCart = localStorage.getItem('Cart')
 
-            if (!LocalCart && response) {
-
-                const Cart : ICart = {
-                    items : [...response],
-                    bill : 0 ,
-                    userId : `${id}`
-                }
-               
-                
-                localStorage.setItem('Cart',JSON.stringify(Cart))
-               return 
-            }
-            
-
-            if (LocalCart) {
-                let parsedLocalCart = JSON.parse(LocalCart)
-                const CartItems = parsedLocalCart.items
-
-                for (let i = 0;i < CartItems.length ;i++) {
-                        if (response[0]._id === CartItems[i]._id) {
-                            
-                            CartItems[i].quantity += 1
-                            localStorage.setItem('Cart',JSON.stringify(parsedLocalCart))
-                         
-                            
-                        }
-                        
-                    }
-              
-            }
-            
-
-        
-
-     
-        }
-        
-    }
+   
     let unit = '$'
     return (
         <Grid
@@ -157,8 +123,8 @@ const ProductSideBar = ({title,price,sizes ,isLoading ,inStock} : IProductSideBa
             }}>
 
                 <CButton
-                disabled={Loading || isLoading }
-                onClick={()=>HandleProductAdd()
+                disabled={Loading || isLoading || !inStock }
+                onClick={()=>HandleSubmit()
                 }
                     hover={{
                     color: 'black',
