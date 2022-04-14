@@ -4,14 +4,15 @@ import BackDropSlice from './Slices/BackDropSlice'
 import SideBarSlice from './Slices/SideBarSlice'
 import ProductsSlice from './Slices/ProductsSlice'
 import UserSlice from './Slices/UserSlice'
-
+import LocalCartSlice from './Slices/LocalCartSlice'
 export const store = configureStore({
   reducer: {
     isCartOpen : CartSliceReducer,
     isBackDrop : BackDropSlice,
     isSideBar : SideBarSlice,
     ProductsArray : ProductsSlice,
-    userInfo : UserSlice
+    userInfo : UserSlice,
+    LocalCart : LocalCartSlice
 
   },
 })

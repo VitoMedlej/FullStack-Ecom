@@ -12,14 +12,15 @@ type SelectChangeEvent < T = number | string > = (Event & {
 }) | React.ChangeEvent < HTMLInputElement > 
 interface ISizeSelect {
     sizes ?: number[]
+    size  : number 
+    setSize :  React.Dispatch<React.SetStateAction< number>>
 }
-const SizeSelect = ({sizes} :ISizeSelect) => {
-    const [size,
-        setSize] = useState < number | string > ('');
+const SizeSelect = ({sizes ,setSize ,size} :ISizeSelect) => {
+  
 
     const handleChange = (event : SelectChangeEvent) => {
-
-        setSize(event.target.value);
+        const parsed = parseInt(`${event.target.value}`)
+        setSize(parsed);
 
     };
 
@@ -31,6 +32,7 @@ const SizeSelect = ({sizes} :ISizeSelect) => {
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
                 <Select
+            
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={size}

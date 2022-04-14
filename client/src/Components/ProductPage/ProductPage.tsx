@@ -16,15 +16,26 @@ import {IformData} from '../../Helpers/Hooks/CreateProductHook';
 import {useState, useEffect} from 'react';
 import GetSingleProductHook from '../../Helpers/Hooks/GetSingleProductHook';
 import Skeleton from '@mui/material/Skeleton';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
-
+export type AlertColor = 'success' | 'info' | 'warning' | 'error';
+export interface IsnackState {
+    isOpen : boolean;
+    message: string;
+    severity : AlertColor
+}
 const Product = () => {
     const {GetProductById, error, data, isLoading} = GetSingleProductHook()
     const {section, id} = useParams()
     const [product,
         setProduct] = useState < IformData > ()
+    const [snackState,setSnackState] = useState<IsnackState>({isOpen: false,message :'',severity : 'success'})
     const ProductsArray = useSelector((state : RootState) => state.ProductsArray.productStateArray)
-
+    
+    const handleClose = () => {
+        setSnackState({...snackState,isOpen : false})
+    }
     useEffect(() => {
 
         // some conditions had to be done ,trying to reduce api requests as much as I
@@ -67,9 +78,18 @@ const Product = () => {
         }
     }
     , [data])
-
+    const vertical = 'bottom'
+    const horizontal = 'left'
     return (
         <Box>
+             <Snackbar
+            sx={{mt:'2em'}}
+            anchorOrigin={{ vertical, horizontal }}
+            open={snackState.isOpen}
+            autoHideDuration={6000}
+            onClose={handleClose}>
+          <Alert  severity={snackState.severity}>{snackState.message}</Alert>
+      </Snackbar>
             <CBox className='limit'>
                 <BreadCrumbsLink section={`${section}`}/> {!error
                     ? <Grid container>
@@ -79,6 +99,8 @@ const Product = () => {
                                 isLoading={isLoading}/>
 
                             <ProductSideBar
+                                snackState={snackState}
+                                setSnackState={setSnackState}
                                 sizes={product && product.sizes}
                                 inStock={product && product.inStock}
                                 isLoading={isLoading}

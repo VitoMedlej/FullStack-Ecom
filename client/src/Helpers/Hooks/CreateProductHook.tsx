@@ -99,8 +99,7 @@ const CreateProductHook = () => {
         handleTextChange,
         handleCheckChange,
         HandleImagesChange,
-        formData,
-       
+        formData,   
         resetForm
     }
 }

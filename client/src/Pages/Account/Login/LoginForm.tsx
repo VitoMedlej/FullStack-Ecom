@@ -28,13 +28,12 @@ const LoginForm = () => {
             e.preventDefault();
             if (!isLoading && loginDetails.email && loginDetails.password) {
              const stat =  await ValidateAccount(loginDetails)
-             console.log('stat: ', stat);
             if (stat === 200) {
                 navigate('/dashboard/main')
                 
+                }
             }
-            }
-            // resetForm(true)
+            resetForm(true)
         }}
             sx={{
             borderRadius: '7px',
