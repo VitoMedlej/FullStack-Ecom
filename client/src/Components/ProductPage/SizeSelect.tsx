@@ -11,7 +11,7 @@ type SelectChangeEvent < T = number | string > = (Event & {
     };
 }) | React.ChangeEvent < HTMLInputElement > 
 interface ISizeSelect {
-    sizes ?: number[]
+    sizes ?: number[] | undefined;
     size  : number 
     setSize :  React.Dispatch<React.SetStateAction< number>>
 }

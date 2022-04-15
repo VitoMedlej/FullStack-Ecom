@@ -7,18 +7,22 @@ import CTypo from '../../CustomMui/CTypo';
 import CartProductForm from './CartProductForm';
 import CButton from '../../CustomMui/CButton';
 import Button from '@mui/material/Button';
+import HandLeItemRemoveHook from '../../../Helpers/Hooks/CartHandlingHooks/HandLeItemRemoveHook';
 // const img = 'https://ucarecdn.com/e2879886-9fdb-41ce-a85a-67bb466b67ea/'
 
 interface ICartProduct{
     img : string;
     title : string
-    qty : number | string;
+    qty : number
     id : string | undefined
     category : string
     price : number
     description : string
+    size :  number[] | string;
 }
-const CartProduct = ({img ,description,title,price ,qty,id,category}:ICartProduct) => {
+
+const CartProduct = ({img ,description,title,price,size ,qty,id,category}:ICartProduct) => {
+    const  {HandleRemoveItem} = HandLeItemRemoveHook()
     return (
 
         <Box
@@ -42,10 +46,10 @@ const CartProduct = ({img ,description,title,price ,qty,id,category}:ICartProduc
                 <Box>
 
                     <CTypo sx={{mt:'0'}} fontSize={{
-                        xs: '1.1em',
-                        md:'1.2em'
+                        xs: '1em',
+                        md:'1.1em'
                     }}>
-                        <Link to='/'>
+                        <Link to={`/category/${category}/products/${id}`}>
                            {title}
                         </Link>
                     </CTypo>
@@ -53,8 +57,9 @@ const CartProduct = ({img ,description,title,price ,qty,id,category}:ICartProduc
                     <CTypo
                     className=''
                         fontSize={{
-                        xs: '.8em',
-                        sm: '1em'
+                        xs: '.7em',
+                        sm: '9em',
+                        md:'1em',
                     }}
                         color='gray'
                         fontWeight='300'
@@ -75,12 +80,13 @@ const CartProduct = ({img ,description,title,price ,qty,id,category}:ICartProduc
                         text={`$${price}`}></CTypo>
                 </Box>
 
-                <CartProductForm/>
+                <CartProductForm SelectedQuantity={qty} SelectedSize={`${size}`}/>
                 <Box sx={{
                     mt: '1em'
                 }}>
 
                     <Button
+                    onClick={()=>HandleRemoveItem(id)}
                         sx={{
                         padding: '0',
                         ':hover': {

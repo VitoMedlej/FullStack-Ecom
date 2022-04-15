@@ -18,7 +18,7 @@ interface IProductSideBar {
     title : string
     isLoading : boolean
     inStock?: boolean
-    sizes?: number[]
+    sizes?: number[] | undefined 
     price?: number
     setSnackState :  React.Dispatch<React.SetStateAction<IsnackState>>
     snackState : IsnackState

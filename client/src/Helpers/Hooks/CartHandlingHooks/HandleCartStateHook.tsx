@@ -23,7 +23,7 @@ const HandleCartStateHook = () => {
        if (ReduxLocalCart) setProductsArray(ReduxLocalCart.items)
     },[ReduxLocalCart])
     
-    return {productsArray}
+    return {productsArray ,ReduxLocalCart}
 }
 
 export default HandleCartStateHook

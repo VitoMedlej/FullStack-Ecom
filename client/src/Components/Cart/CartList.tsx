@@ -39,6 +39,7 @@ const CartList = () => {
             {
                 productsArray && productsArray.length > 0 ?
                 productsArray.map(product => {
+                    console.log('productsArray: ', productsArray);
 
                   return  <CartProduct
                     price={product.price}
@@ -47,13 +48,13 @@ const CartList = () => {
                     img={product.images[0] || product.images[1]}
                     title={product.title}
                     qty={product.quantity}
-                    
-                    description={product.description}
+                    size={`${product.sizes}`}
+                    description={product.description.substring(0,60)}
                   
                   key={product._id}/> 
                 })
                 : 
-                <CTypo fontWeight='300' text={` you haven't added any products yet!`}></CTypo>
+                <CTypo fontWeight='300' text={`Your bag is empty! ,Add some products!`}></CTypo>
             }
           
             </Box>

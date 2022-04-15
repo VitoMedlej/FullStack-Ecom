@@ -94,6 +94,7 @@ const CartBar = () => {
                               
                                 
                                return <CartItem
+                               price={item.price}
                                category={item.category}
                                id={item._id}
                                key={item._id}

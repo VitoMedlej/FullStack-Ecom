@@ -4,7 +4,7 @@ import {nanoid} from 'nanoid'
 
 export interface IformData {
     title : string;
-    sizes : number[];
+    sizes : number[] 
     price : number;
     images : string[];
     specifications : string[]

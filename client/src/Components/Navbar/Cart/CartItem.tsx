@@ -18,8 +18,9 @@ interface ICartItem {
     qty : number | string;
     id : string | undefined
     category : string
+    price : number | string
 }
-const CartItem = ({img, id,category, qty, title} : ICartItem) => {
+const CartItem = ({img, id,category,price, qty, title} : ICartItem) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {HandleRemoveItem} = HandLeItemRemoveHook()
@@ -93,7 +94,7 @@ const CartItem = ({img, id,category, qty, title} : ICartItem) => {
                     }}
                         fontWeight='300'
                         color='green'
-                        text='$200'></CTypo>
+                        text={`$${price}`}></CTypo>
                     <CTypo
                         fontSize={{
                         xs: '.9em',
