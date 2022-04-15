@@ -10,6 +10,7 @@ import {billCalculator} from "../../../Helpers/Hooks/CartHandlingHooks/HandleAdd
 import { useNavigate } from "react-router-dom";
 import { toggleBackDropState } from "../../../Redux/Slices/BackDropSlice";
 import { toggleCartState } from "../../../Redux/Slices/CartSlice";
+import HandLeItemRemoveHook from "../../../Helpers/Hooks/CartHandlingHooks/HandLeItemRemoveHook";
 
 interface ICartItem {
     img : string;
@@ -21,29 +22,10 @@ interface ICartItem {
 const CartItem = ({img, id,category, qty, title} : ICartItem) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {HandleRemoveItem} = HandLeItemRemoveHook()
+
     // const ReduxLocalCart = useSelector((state : RootState) => state.LocalCart.LocalCart)
 
-    const HandleRemoveItem = () => {
-        let localStorageCart = localStorage.getItem('Cart')
-
-        if (id && localStorageCart) {
-            let productsArray = JSON.parse(localStorageCart)
-            console.log('productsArray: ', productsArray);
-
-            let filteredProductsArray = productsArray
-                .items
-                .filter((item : IformData) => item._id !== id)
-
-            const filteredCart = {
-                ...productsArray,
-                bill: billCalculator(filteredProductsArray),
-                items: filteredProductsArray
-            }
-            localStorage.setItem('Cart', JSON.stringify(filteredCart))
-            dispatch(saveLocalCart(filteredCart))
-
-        }
-    }
 
     return (
         <Box
@@ -123,7 +105,7 @@ const CartItem = ({img, id,category, qty, title} : ICartItem) => {
                 </Box>
                 <Box>
                     <IconButton
-                        onClick={() => HandleRemoveItem()}
+                        onClick={() => HandleRemoveItem(id)}
                         sx={{
                         padding: {
                             xs: '0',

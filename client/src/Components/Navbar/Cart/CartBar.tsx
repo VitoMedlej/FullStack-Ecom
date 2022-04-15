@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import CBox from '../../CustomMui/CBox';
 import Box from '@mui/material/Box';
@@ -10,107 +9,88 @@ import {toggleCartState} from '../../../Redux/Slices/CartSlice'
 import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
-import { saveLocalCart } from '../../../Redux/Slices/LocalCartSlice';
-import { IformData } from '../../../Helpers/Hooks/CreateProductHook';
+import HandleCartStateHook from '../../../Helpers/Hooks/CartHandlingHooks/HandleCartStateHook';
 
-interface ICartBar {}
-interface ICartItems {}
-const CartBar = ({} : ICartBar) => {
+
+const CartBar = () => {
     const dispatch = useDispatch()
-    const [productsArray,setProductsArray] = useState<IformData[] | null>(null)
     const isCartOpen = useSelector((state : RootState) => state.isCartOpen.isCartOpen)
+    const {productsArray} = HandleCartStateHook()
 
-    const ReduxLocalCart = useSelector((state : RootState) => state.LocalCart.LocalCart)
+    return (
+        <CBox
+            sx={{
+            flexDirection: 'column',
+            transition: 'all .3s ease',
+            width: '100%',
+            background: 'white',
+            top: `${isCartOpen
+                ? '100%'
+                : '-100vh'}`,
+            zIndex: '55',
+            px: '0',
+            display: {
+                xs: 'flex'
+            },
+            borderTop: '1px solid #8080802b',
+            color: 'black',
+            position: 'absolute'
+        }}>
+            <CBox className='limit'>
 
-    useEffect(() => {
-        const localStorageCart = localStorage.getItem('Cart')
-        if (  ReduxLocalCart.items.length < 1 && localStorageCart) {
+                <Box
+                    className='flexed '
+                    sx={{
+                    width: '100%',
+                    pt: '1em',
+                    height: '50px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                }}>
 
-            dispatch(saveLocalCart(JSON.parse(localStorageCart))); 
-        }
-         
-        },[])
-
-    useEffect(() => {
-       
-       if (ReduxLocalCart) setProductsArray(ReduxLocalCart.items)
-    },[ReduxLocalCart])
-
-
-        return (
-            <CBox
-                sx={{
-                flexDirection: 'column',
-                transition: 'all .3s ease',
-                width: '100%',
-                background: 'white',
-                top: `${isCartOpen
-                    ? '100%'
-                    : '-100vh'}`,
-                zIndex: '55',
-                px: '0',
-                display: {
-                    xs: 'flex'
-                },
-                borderTop: '1px solid #8080802b',
-                color: 'black',
-                position: 'absolute'
-            }}>
-                <CBox className='limit'>
-
-                    <Box
-                        className='flexed '
+                    <CTypo
+                        fontSize={{
+                        xs: '1.2em',
+                        md: '1.3em',
+                        xl: '1.4em'
+                    }}
                         sx={{
-                        width: '100%',
-                        pt: '1em',
-                        height: '50px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
+                        mt: '0'
+                    }}
+                        text='Your Bag'></CTypo>
+                    <IconButton
+                        onClick={() => {
+                        dispatch(toggleCartState(false));
+                        dispatch(toggleBackDropState(false))
+                    }}
+                        sx={{
+                        transition: 'all .3s ease',
+                        ':hover': {
+                            background: 'pink'
+                        },
+                        color: 'red',
+                        m: '4px',
+                        padding: '8px',
+                        display: 'flex'
+                    }}
+                        type='button'>
+                        <CloseIcon/>
+                    </IconButton>
 
-                        <CTypo
-                            fontSize={{
-                            xs: '1.2em',
-                            md: '1.3em',
-                            xl: '1.4em'
-                        }}
-                            sx={{
-                            mt: '0'
-                        }}
-                            text='Your Bag'></CTypo>
-                        <IconButton
-                            onClick={() => {
-                            dispatch(toggleCartState(false));
-                            dispatch(toggleBackDropState(false))
-                        }}
-                            sx={{
-                            transition: 'all .3s ease',
-                            ':hover': {
-                                background: 'pink'
-                            },
-                            color: 'red',
-                            m: '4px',
-                            padding: '8px',
-                            display: 'flex'
-                        }}
-                            type='button'>
-                            <CloseIcon/>
-                        </IconButton>
-
-                    </Box>
-                    <Box sx={{
-                        pb: '2em'
-                    }}>
-                        {productsArray && productsArray.length > 0
-                            ? <Box
-                                    sx={{
-                                    mb: '1.5em',
-                                    mt: '.5em'
-                                }}>
-                                    {productsArray
-                                        .slice(0,3)
-                                        .map(item => {{
+                </Box>
+                <Box sx={{
+                    pb: '2em'
+                }}>
+                    {productsArray && productsArray.length > 0
+                        ? <Box
+                                sx={{
+                                mb: '1.5em',
+                                mt: '.5em'
+                            }}>
+                                {productsArray
+                                    .slice(0, 3)
+                                    .map(item => {{
                               
                                 
                                return <CartItem
@@ -123,31 +103,32 @@ const CartBar = ({} : ICartBar) => {
                                  />
                             }})
 }
-                                </Box>
-                            : <CTypo
-                                sx={{
-                                mt: '0'
-                            }}
-                                fontWeight='300'
-                                text='There are no items here.'></CTypo>}
-
-                        <Link
-                            onClick={() => {
-                            dispatch(toggleBackDropState(false));
-                            dispatch(toggleCartState(false))
+                            </Box>
+                        : <CTypo
+                            sx={{
+                            mt: '0'
                         }}
-                            to='/cart'>
-                            <CTypo
-                                sx={{
-                                mt: '0'
-                            }}
-                                fontWeight='300'
-                                color='blue'
-                                text='Visit bag'></CTypo>
-                        </Link>
-                    </Box>
+                            fontWeight='300'
+                            text='There are no items here.'></CTypo>}
 
-                </CBox>
+                    <Link
+                        onClick={() => {
+                        dispatch(toggleBackDropState(false));
+                        dispatch(toggleCartState(false))
+                    }}
+                        to='/cart'>
+                        <CTypo
+                            sx={{
+                            mt: '0'
+                        }}
+                            fontWeight='300'
+                            color='blue'
+                            text='Visit bag'></CTypo>
+                    </Link>
+                </Box>
+
             </CBox>
-        )}
-    export default CartBar
+        </CBox>
+    )
+}
+export default CartBar

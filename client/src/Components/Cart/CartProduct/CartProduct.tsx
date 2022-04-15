@@ -7,12 +7,23 @@ import CTypo from '../../CustomMui/CTypo';
 import CartProductForm from './CartProductForm';
 import CButton from '../../CustomMui/CButton';
 import Button from '@mui/material/Button';
-const img = 'https://ucarecdn.com/e2879886-9fdb-41ce-a85a-67bb466b67ea/'
+// const img = 'https://ucarecdn.com/e2879886-9fdb-41ce-a85a-67bb466b67ea/'
 
-const CartProduct = () => {
+interface ICartProduct{
+    img : string;
+    title : string
+    qty : number | string;
+    id : string | undefined
+    category : string
+    price : number
+    description : string
+}
+const CartProduct = ({img ,description,title,price ,qty,id,category}:ICartProduct) => {
     return (
 
-        <Box sx={{
+        <Box
+        id={`${id}`}
+        sx={{
             display: 'flex',
             borderBottom: '1px solid #80808061',
             pb:'10px',
@@ -35,11 +46,12 @@ const CartProduct = () => {
                         md:'1.2em'
                     }}>
                         <Link to='/'>
-                            Some title
+                           {title}
                         </Link>
                     </CTypo>
 
                     <CTypo
+                    className=''
                         fontSize={{
                         xs: '.8em',
                         sm: '1em'
@@ -49,7 +61,7 @@ const CartProduct = () => {
                         sx={{
                         mt: '0'
                     }}
-                        text='some some some asfa asfasf qwta ara ara safasf as'></CTypo>
+                        text={description}></CTypo>
                               <CTypo
                         fontSize={{
                         xs: '.8em',
@@ -60,7 +72,7 @@ const CartProduct = () => {
                         sx={{
                        
                     }}
-                        text='120$'></CTypo>
+                        text={`$${price}`}></CTypo>
                 </Box>
 
                 <CartProductForm/>
