@@ -2,15 +2,15 @@ import {createSlice} from '@reduxjs/toolkit'
 import { ICart } from '../../Helpers/Hooks/CartHandlingHooks/HandleAddToCartHook'
 import { IformData } from '../../Helpers/Hooks/CreateProductHook'
 
+const LocalCart : ICart = {
 
+    items : [],
+    userId : null,
+    bill : 0
+}
 const initialState  = {
-    LocalCart : {
 
-        items : [],
-        userId : null,
-        bill : 0
-    }
-    
+    LocalCart
 }
 
 export const LocalCartSlice = createSlice({
@@ -19,16 +19,17 @@ export const LocalCartSlice = createSlice({
     reducers: {
         saveLocalCart : (state,action) => {
             state.LocalCart = action.payload
-            console.log('state: ', state);
-            console.log(' action.payload: ',  action.payload);
-        }
+      
+        },
+ 
      
        
     }
 })
 
 export const {
-    saveLocalCart
+    saveLocalCart,
+    
 } = LocalCartSlice.actions
 
 export default LocalCartSlice.reducer

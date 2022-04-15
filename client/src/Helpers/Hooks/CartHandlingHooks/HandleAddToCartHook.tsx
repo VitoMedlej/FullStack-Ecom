@@ -12,7 +12,13 @@ export interface ICart {
     bill : number
 }
 
-
+export const billCalculator = (array : ICart["items"]) => {
+    let bill = 0
+    for (let i = 0; i < array.length; i++) {
+        bill += array[i].price * array[i].quantity
+    }
+    return bill
+}
 const HandleAddToCartHook = () => {
     const dispatch = useDispatch()
   
@@ -26,13 +32,7 @@ const HandleAddToCartHook = () => {
        else setUserID(null)
     },[])
 
-    const billCalculator = (array : ICart["items"]) => {
-        let bill = 0
-        for (let i = 0; i < array.length; i++) {
-            bill += array[i].price * array[i].quantity
-        }
-        return bill
-    }
+ 
     const HandleProductAdd = async(SelectedSize : string, section : string | undefined, id : string | undefined, GetProductById : (category : string, id : string) => Promise < any >) => {
         try {
 
