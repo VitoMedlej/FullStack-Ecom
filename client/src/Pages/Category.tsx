@@ -14,6 +14,7 @@ import {RootState} from '../Redux/Store';
 import Pagination from '@mui/material/Pagination';
 import GetTotalPagesHook from '../Helpers/Hooks/GetTotalPagesHook';
 import {useNavigate} from 'react-router-dom';
+import FilterSection from '../Components/Filter/FilterSection';
 
 const Category = () => {
     const {section} = useParams()
@@ -23,17 +24,18 @@ const Category = () => {
     const navigate = useNavigate();
     const {GetDatafromDB, pages, isLoading, products} = GetProductsHook()
 
+    
     const handlePageChange = (e : React.MouseEvent < HTMLElement, MouseEvent >) => {
 
         const value = e.target as HTMLElement;
         if (value.textContent) {
             const page : number = parseInt(value.textContent)
-
             setCurrentPage(page - 1)
             navigate(`/category/shoes?limit=9&?page=${page}`);
         }
 
     }
+   
 
     useEffect(() => {
         let isMounted = true
@@ -43,6 +45,8 @@ const Category = () => {
         return () => {
             isMounted = false
         }
+
+
 
     }, [])
 
@@ -59,10 +63,12 @@ const Category = () => {
         }
 
     }, [currentPage])
-
+   
     useEffect(() => {
         dispatch(saveProductsArray(products))
+      
     }, [products])
+    
 
     return (
 
@@ -80,9 +86,9 @@ const Category = () => {
                 <Box>
                     <CTypo
                         fontSize={{
-                        xs: '2em'
+                        xs: '1.5em'
                     }}
-                        text='MEN SHOES (300)'></CTypo>
+                        text={` ${section?.toLocaleUpperCase()} (${products.length})`}></CTypo>
                 </Box>
             </CBox>
             <CBox className='limit'>
@@ -93,8 +99,8 @@ const Category = () => {
                 }}
                     container>
 
-                    <Grid item xs={12} md={3} lg={2}>
-                        fasfasf
+                    <Grid item xs={12} md={3} lg={3}>
+                       <FilterSection condition={!isLoading && products.length > 0 }/>
                     </Grid>
 
                     <Grid
@@ -103,13 +109,13 @@ const Category = () => {
                         flexWrap: 'wrap',
                         justifyContent: {
                             xs: 'center',
-                            sm: 'space-between'
+                            sm: 'space-evenly',
                         }
                     }}
                         item
                         xs={12}
                         md={9}
-                        lg={10}>
+                        lg={9}>
 
                         {!isLoading && products.length > 0 && products.map((product) => {
                             return <ProductCard
@@ -132,13 +138,15 @@ const Category = () => {
                             6
                         ].map((number) => {
                             return <Skeleton
+                                className='skeletonMargin'
                                 key={number}
                                 sx={{
                                 height: '400px',
-                                mx: '5px',
+                             
                                 width: {
-                                    xs: '46%',
-                                    md: '32%'
+                                    xs: '99%',
+                                    sm : '48%',
+                                    md: '31%'
                                 }
                             }}></Skeleton>
                         })

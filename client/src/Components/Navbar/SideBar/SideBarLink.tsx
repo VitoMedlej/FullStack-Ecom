@@ -10,20 +10,27 @@ import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice';
 interface ISideBarLink {
     link : string
     text : string
-    HandleLinkButtonClick ?: () => void
+    HandleLinkButtonClick?: () => void
 
 }
-const SideBarLink = ({link, text ,HandleLinkButtonClick} : ISideBarLink) => {
+const SideBarLink = ({link, text, HandleLinkButtonClick} : ISideBarLink) => {
 
     const dispatch = useDispatch()
 
-  
     return (
-        <Link onClick={() => HandleLinkButtonClick && HandleLinkButtonClick()} className='transed ' to={`${link}`}>
-            <CBox >
+        <Link
+            onClick={() => HandleLinkButtonClick && HandleLinkButtonClick()}
+            className='transed '
+            to={`${link}`}>
+            <CBox
+                sx={{
+                '&:hover': {
+                    background: '#8080801f'
+                }
+            }}>
                 <Box
                     sx={{
-                    my: '1em',
+                    py: '1.25em',
                     alignItems: 'center',
                     justifyContent: 'space-between'
                 }}

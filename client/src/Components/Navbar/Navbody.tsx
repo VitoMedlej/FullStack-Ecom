@@ -1,10 +1,8 @@
-import AppBar from '@mui/material/AppBar';
 import CBox from '../CustomMui/CBox';
 import {Link, useLocation} from "react-router-dom";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
@@ -16,6 +14,7 @@ import {toggleBackDropState} from '../../Redux/Slices/BackDropSlice'
 import {toggleSideBarState} from '../../Redux/Slices/SideBarSlice'
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import SearchBar from './SearchBar/SearchBar';
 interface INavBar {}
 
 
@@ -82,19 +81,22 @@ const Navbody = ({} : INavBar) => {
 
         </Box>
         <Box
+           onClick={() => {
+            HandleHomeButton()
+        }}
             className='logo'
             sx={{
+            cursor:'pointer',
             right: {
                 sm: '50%'
             },
             transform: {
                 sm: 'translateX(50%)'
-            }
+            },
+            zIndex:'2',
         }}>
             <Link
-                onClick={() => {
-                    HandleHomeButton()
-            }}
+             
                 to='/'
                 className='link'>
                 <Typography
@@ -105,43 +107,10 @@ const Navbody = ({} : INavBar) => {
             </Link>
         </Box>
 
-        <Box
-            sx={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end'
-        }}>
-            <Box
-                sx={{
-                display: 'flex',
-                background: {
-                    xs: 'white',
-                    md: '#f1f1f1'
-                }
-            }}
-                className='searchForm'
-                component='form'>
-                <Box
-                    sx={{
-                    display: {
-                        xs: 'none',
-                        md: 'block'
-                    }
-                }}>
+        <SearchBar/>
 
-                    <input placeholder='Search' className='searchInput' type="search"/>
-                </Box>
-                <IconButton
-                    sx={{
-                    color: '#3d3d3d'
-                }}
-                    type='submit'>
-                    <SearchIcon/>
-                </IconButton>
-            </Box>
+           
 
-        </Box>
         <Box sx={{
             display: 'flex'
         }}>
