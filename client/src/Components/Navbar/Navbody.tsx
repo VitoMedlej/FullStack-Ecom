@@ -15,6 +15,7 @@ import {toggleSideBarState} from '../../Redux/Slices/SideBarSlice'
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import SearchBar from './SearchBar/SearchBar';
+import { SetMobileMenuState } from '../../Redux/Slices/MobileMenuSlice';
 interface INavBar {}
 
 
@@ -116,6 +117,7 @@ const Navbody = ({} : INavBar) => {
         }}>
             <IconButton
                 onClick={() => {
+                dispatch(SetMobileMenuState(false))
                 dispatch(toggleCartState(!isCartOpen));
                 dispatch(toggleBackDropState(!isBackDrop))
             }}
@@ -143,7 +145,9 @@ const Navbody = ({} : INavBar) => {
                 if (isBackDrop && isCartOpen) {
                     dispatch(toggleCartState(false));
                     dispatch(toggleBackDropState(false))
+                    
                 }
+                dispatch(SetMobileMenuState(false))
                 dispatch(toggleBackDropState(!isBackDrop));
                 dispatch(toggleSideBarState(!isSideBar));
             }}

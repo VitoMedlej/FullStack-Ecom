@@ -26,7 +26,6 @@ router.get('/category/:category?', async(req, res) => {
 
  
 
-
     const results = await product.find(category
         ? {
             category

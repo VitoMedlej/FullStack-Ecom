@@ -1,22 +1,34 @@
-import { Box } from "@mui/material"
+import {Box} from "@mui/material"
+import { useDispatch } from "react-redux";
+import {useNavigate} from 'react-router-dom';
+import { SetMobileMenuState } from "../../../Redux/Slices/MobileMenuSlice";
 
-const CircularOption = () => {
+interface ICircularOption {
+    img : string;
+    to : string
+   
+
+}
+const CircularOption = ({to, img} : ICircularOption) => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     return (
         <Box
+            onClick={() => {
+            navigate(`${to}`);
+            dispatch(SetMobileMenuState(false))
+        }}
             sx={{
             width: '30vw',
             mt: '1em',
             cursor: 'pointer',
             height: '30vw',
-            maxHeight: '130px',
-            maxWidth: '130px',
-            borderRadius: '50%',
-            background: 'red'
+            maxHeight: '120px',
+            maxWidth: '120px',
+            borderRadius: '50%'
         }}>
-            <img
-                className='img round cursor'
-                src={`https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80`}
-                alt=""/>
+            <img className='img round cursor' src={`${img}`} alt=""/>
         </Box>
     )
 }

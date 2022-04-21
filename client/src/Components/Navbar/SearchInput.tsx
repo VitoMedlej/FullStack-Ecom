@@ -1,8 +1,10 @@
 import { Box, IconButton } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleBackDropState } from "../../Redux/Slices/BackDropSlice";
 import { toggleCartState } from "../../Redux/Slices/CartSlice";
 import SearchIcon from '@mui/icons-material/Search';
+import { SetMobileMenuState } from "../../Redux/Slices/MobileMenuSlice";
+import { RootState } from "../../Redux/Store";
 
 
 export interface ISearchInput {
@@ -16,6 +18,7 @@ const SearchInput = ({isOpen,SearchData ,setSearchData ,setOpen} : ISearchInput)
         e.preventDefault()
     }
     const dispatch = useDispatch()
+    const isMenuOpen = useSelector((state : RootState) => state.isMenuOpen.isMenuOpen)
 
     return (
         <Box
@@ -51,7 +54,7 @@ const SearchInput = ({isOpen,SearchData ,setSearchData ,setOpen} : ISearchInput)
                 onClick={() => {
                 dispatch(toggleCartState(false));
                 dispatch(toggleBackDropState(false));
-                setOpen(!isOpen)
+                dispatch(SetMobileMenuState(!isMenuOpen))
             }}
                 sx={{
                 color: '#3d3d3d'

@@ -11,6 +11,7 @@ import {RootState} from '../../../Redux/Store';
 import {toggleSideBarState} from '../../../Redux/Slices/SideBarSlice'
 import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
 import {toggleCartState} from '../../../Redux/Slices/CartSlice';
+import { SetMobileMenuState } from '../../../Redux/Slices/MobileMenuSlice';
 
 interface ISideBar {}
 
@@ -19,12 +20,13 @@ const SideBar = ({} : ISideBar) => {
     const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
 
     const dispatch = useDispatch()
-
-    const HandleLinkButtonClick = () => {
+     const HandleLinkButtonClick = () => {
         dispatch(toggleCartState(false));
         dispatch(toggleSideBarState(false));
         dispatch(toggleBackDropState(false))
+        dispatch(SetMobileMenuState(false))
     }
+  
     return (
         <AppBar
             className='trans'
@@ -72,6 +74,7 @@ const SideBar = ({} : ISideBar) => {
 
                 <IconButton
                     onClick={() => {
+                        dispatch(SetMobileMenuState(false))
                     dispatch(toggleBackDropState(false));
                     dispatch(toggleSideBarState(false))
                 }}
@@ -95,19 +98,19 @@ const SideBar = ({} : ISideBar) => {
 
 
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+            
                 link='/'
                 text={'HOME'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+             
                 link='/dashboard/main'
                 text={'DASHBOARD'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+                
                 link='/cart'
                 text={'CART'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+            
                 link='/account/login'
                 text={'LOGIN'}/>
         </Box>

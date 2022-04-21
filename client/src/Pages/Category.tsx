@@ -36,6 +36,15 @@ const Category = () => {
 
     }
    
+    useEffect(() => {
+        let isMounted = true
+
+        if (isMounted) 
+            GetDatafromDB(`https://elvito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+        return () => {
+            isMounted = false
+        }
+    }, [section])
 
     useEffect(() => {
         let isMounted = true
@@ -45,9 +54,6 @@ const Category = () => {
         return () => {
             isMounted = false
         }
-
-
-
     }, [])
 
     useEffect(() => {
@@ -129,20 +135,13 @@ const Category = () => {
                         })
 }
 
-                        {isLoading && products.length === 0 && [
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6
-                        ].map((number) => {
+                        { isLoading && products.length === 0 && new Array(6).map((number) => {
                             return <Skeleton
                                 className='skeletonMargin'
                                 key={number}
                                 sx={{
                                 height: '400px',
-                             
+                            
                                 width: {
                                     xs: '99%',
                                     sm : '48%',
