@@ -136,7 +136,7 @@ const MobileSearchMenu = ({query, setQuery} : IMobileSearchMenu) => {
 }
                     {!error && isLoading && products.length === 0 && [1,2,3,4]
                         .map((number) => {
-                            console.log('number: ', number);
+                          
                             return <Skeleton
                                 key={number }
                                 className='skeletonMargin'

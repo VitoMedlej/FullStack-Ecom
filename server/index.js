@@ -22,7 +22,6 @@ connectToDB()
 
 
 
-
 app.use(require('./src/Routes/homePageRoutes'))
 app.use(require('./src/Routes/accountRoutes.js'))
 app.use(require('./src/Routes/authRoutes.js'))
