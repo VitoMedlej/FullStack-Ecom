@@ -44,7 +44,8 @@ const GetProductsHook = () => {
         error,
         setProducts,
         GetDatafromDB,
-        setLoading
+        setLoading,
+      
     }
 }
 

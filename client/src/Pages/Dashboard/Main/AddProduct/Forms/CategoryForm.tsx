@@ -21,7 +21,7 @@ const CategoryForm = ({stateValue, handleChange} : ICategoryForm) => {
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    id="demo-simp213le-select"
                     value={stateValue}
                     name='category'
                     label="Category"

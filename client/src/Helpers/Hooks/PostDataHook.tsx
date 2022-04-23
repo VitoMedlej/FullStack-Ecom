@@ -8,7 +8,7 @@ const PostDataHook = () => {
     const PostDataToDB = async(data : IformData ,token : string) => {
         try {
             setLoading(true)
-            const response = await fetch(' https://elvito.herokuapp.com/dashboard/add-products', {
+            const response = await fetch(' https://el-vito.herokuapp.com/dashboard/add-products', {
                 method: 'POST',
                 headers: {
                     'Authorization' : token,

@@ -44,8 +44,8 @@ const CartProductForm = ({SelectedQuantity,SelectedSize} :ICartProductForm) => {
                                 setSize(parseInt(`${value}`))
                             } 
                     }}
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
+                    labelId="demo-simple-select-stan3dard-label"
+                    id="demo-simple-select-standard2"
                     value={size}
                     label="size">
 
@@ -70,7 +70,7 @@ const CartProductForm = ({SelectedQuantity,SelectedSize} :ICartProductForm) => {
                  size="small"
 
                     labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
+                    id="demo-simple-s3elect-standard22"
                     onChange={(e)=>{
                         let value = e.target.value
                         if (value) {

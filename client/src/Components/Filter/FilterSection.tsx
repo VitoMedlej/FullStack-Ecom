@@ -21,12 +21,13 @@ import {colors} from "../../Pages/Dashboard/Main/AddProduct/AddProduct";
 
 interface IFilter {
     condition : boolean
+    setValue : React.Dispatch < React.SetStateAction < number >> ;
+    value : number
+    sectionsPrice : number
 }
-const FilterSection = ({condition} : IFilter) => {
+const FilterSection = ({condition, sectionsPrice, value, setValue} : IFilter) => {
     const [isVisible,
         setVisible] = useState(false);
-    const [value,
-        setValue] = useState < number > (4000);
 
     const handleChange = (event : Event, newValue : number | number[]) => {
         setValue(newValue as number);
@@ -69,14 +70,14 @@ const FilterSection = ({condition} : IFilter) => {
                                 <AccordionSummary
                                     expandIcon={< ExpandMoreIcon />}
                                     aria-controls="panel1a-content"
-                                    id="panel1a-header">
+                                    id="pane331a-header">
                                     <Typography>Price</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     $1 - ${value}
                                     <Slider
                                         min={1}
-                                        max={4000}
+                                        max={sectionsPrice || 4000}
                                         value={value}
                                         onChange={handleChange}
                                         defaultValue={1}
@@ -96,7 +97,7 @@ const FilterSection = ({condition} : IFilter) => {
                                 }}
                                     expandIcon={< ExpandMoreIcon />}
                                     aria-controls="panel1a-content"
-                                    id="panel1a-header">
+                                    id="pan3el1a-header">
                                     <Typography>Color</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -130,7 +131,7 @@ const FilterSection = ({condition} : IFilter) => {
                                 }}
                                     expandIcon={< ExpandMoreIcon />}
                                     aria-controls="panel1a-content"
-                                    id="panel1a-header">
+                                    id="panel1a123-header">
                                     <Typography>Size</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -138,13 +139,34 @@ const FilterSection = ({condition} : IFilter) => {
                                         <Select
                                             variant='standard'
                                             labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
+                                            id="demo-s213imple-select"
                                             value={11}
                                             label="Age">
                                             <MenuItem value={8}>small</MenuItem>
                                             <MenuItem value={11}>medium</MenuItem>
                                             <MenuItem value={15}>large</MenuItem>
                                         </Select>
+                                    </FormControl>
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion
+                                sx={{
+                                mt: '1em',
+                                boxShadow: 'none'
+                            }}>
+                                <AccordionSummary
+                                    sx={{
+                                    boxShadow: 'none',
+                                    borderTop: '1px solid #e8e8e8'
+                                }}
+                                    expandIcon={< ExpandMoreIcon />}
+                                    aria-controls="panel1a-content"
+                                    id="pan12el1a-header2">
+                                    <Typography>Availability</Typography>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <FormControl fullWidth>
+                                    
                                     </FormControl>
                                 </AccordionDetails>
                             </Accordion>

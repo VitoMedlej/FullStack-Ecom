@@ -28,7 +28,7 @@ const ValidateAccountHook = () => {
 
         try {
             setLoading(true)
-            const request = await fetch('https://elvito.herokuapp.com/account/login', {
+            const request = await fetch('https://el-vito.herokuapp.com/account/login', {
                 method: 'POST',
                 headers: {
 

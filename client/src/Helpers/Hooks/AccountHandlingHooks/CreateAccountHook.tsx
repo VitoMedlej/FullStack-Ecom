@@ -21,7 +21,7 @@ const CreateAccountHook = () => {
 
         try {
             setLoading(true)
-            const request = await fetch('https://elvito.herokuapp.com/account/register', {
+            const request = await fetch('https://el-vito.herokuapp.com/account/register', {
                 method: 'POST',
                 headers: {
 

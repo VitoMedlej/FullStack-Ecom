@@ -220,7 +220,27 @@ a {
 .skeletonMargin {
     margin-top:  -5em !important;
 }
-
+.trans-group {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+  
 @media (min-width: 1305px) {
     .limit {
         width: 1200px;

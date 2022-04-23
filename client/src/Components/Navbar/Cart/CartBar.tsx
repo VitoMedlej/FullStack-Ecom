@@ -10,6 +10,7 @@ import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
 import {Link} from 'react-router-dom';
 import CartItem from './CartItem';
 import HandleCartStateHook from '../../../Helpers/Hooks/CartHandlingHooks/HandleCartStateHook';
+import { TransitionGroup ,CSSTransition } from "react-transition-group"
 
 
 const CartBar = () => {
@@ -90,22 +91,29 @@ const CartBar = () => {
                                 mb: '1.5em',
                                 mt: '.5em'
                             }}>
+                                
+                                <TransitionGroup className="trans-group">
+
+                              
                                 {productsArray
                                     .slice(0, 3)
                                     .map(item => {{
                               
                                 
-                               return <CartItem
+                                return <CSSTransition key={item._id} timeout={500} classNames="item">
+
+                                <CartItem
                                price={item.price}
                                category={item.category}
                                id={item._id}
                                key={item._id}
                                title={item.title}
                                img={item.images[0] || item.images[1]}
-                               qty={item.quantity}
-                                 />
+                               qty={item.quantity}/>
+                               </CSSTransition>
                             }})
-}
+    }
+        </TransitionGroup>  
                             </Box>
                         : <CTypo
                             sx={{

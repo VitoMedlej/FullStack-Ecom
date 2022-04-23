@@ -50,7 +50,7 @@ const SelectForm = ({optionsList  ,handleSelectChange, inputLabel} : ISelectForm
                 <InputLabel id="demo-multiple-checkbox-label">{`${inputLabel}`}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
-                    id="demo-multiple-checkbox2"
+                    id="demo-multip44le-ch2eckbox2"
                     multiple
                     name={`${inputLabel}`}
                     value={selectValue}

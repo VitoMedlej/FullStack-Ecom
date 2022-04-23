@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
+import { TransitionGroup ,CSSTransition } from "react-transition-group"
 import HandleCartStateHook from "../../Helpers/Hooks/CartHandlingHooks/HandleCartStateHook"
 import CTypo from "../CustomMui/CTypo"
 import CartProduct from "./CartProduct/CartProduct"
@@ -38,9 +39,13 @@ const CartList = () => {
                 
             {
                 productsArray && productsArray.length > 0 ?
-                productsArray.map(product => {
+                <TransitionGroup className="trans-group">
 
-                  return  <CartProduct
+                {      productsArray.map(product => {
+
+                  return <CSSTransition key={product._id} timeout={500} classNames="item">
+
+                   <CartProduct
                     price={product.price}
                     id={product._id}
                     category={product.category}
@@ -49,9 +54,12 @@ const CartList = () => {
                     qty={product.quantity}
                     size={`${product.sizes}`}
                     description={product.description.substring(0,60)}
-                  
-                  key={product._id}/> 
-                })
+                    
+                  /> 
+                    </CSSTransition>
+                })}
+                </TransitionGroup>
+
                 : 
                 <CTypo fontWeight='300' text={`Your bag is empty! ,Add some products!`}></CTypo>
             }
