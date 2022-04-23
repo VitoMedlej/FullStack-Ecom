@@ -9,7 +9,12 @@ interface IProduct {
     id : string | undefined | number 
     unit?: string
     title : string
-    Manufacturer : string
+    Manufacturer : string;
+    width ?: {
+        xs ?: string;
+        sm ?: string
+    };
+    onClick ?: () => void
 }
 const ProductCard = ({
     img,
@@ -18,11 +23,14 @@ const ProductCard = ({
     category,
     unit,
     price,
-    Manufacturer
+    Manufacturer,
+    onClick,
+    width
 } : IProduct) => {
     let inStock = true
     return (
         <Box
+        onClick={onClick && onClick}
             className='trans'
             sx={{
             border: '1px solid #80808030',
@@ -32,7 +40,7 @@ const ProductCard = ({
                 boxShadow: '1px 1px 5px #eaeaea'
             },
             position: 'relative',
-            width: {
+            width: width || {
                 xs: '100%',
                 sm : '49%',
                 md: '32%'

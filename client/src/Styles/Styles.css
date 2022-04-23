@@ -81,10 +81,6 @@ a {
   color: #1c51e6;
 }
 
-.searchForm {
-  border-radius: 17px;
-}
-
 .searchForm .searchInput {
   border-radius: 17px;
   border: none;
@@ -126,6 +122,10 @@ a {
   border: 1px solid #1976d26e;
 }
 
+.w100 {
+  width: 100%;
+}
+
 .landing {
   background-image: url("../Helpers/Images/suit.jpg");
   background-repeat: no-repeat;
@@ -149,6 +149,10 @@ a {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.round {
+  border-radius: 50%;
 }
 
 .img2 {
@@ -240,6 +244,10 @@ a {
   outline: none;
   border: none;
   background: transparent;
+}
+
+.skeletonMargin {
+  margin-top: -5em !important;
 }
 
 @media (min-width: 1305px) {

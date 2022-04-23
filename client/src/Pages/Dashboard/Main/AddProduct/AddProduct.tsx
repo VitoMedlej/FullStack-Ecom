@@ -16,6 +16,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import PostDataHook from '../../../../Helpers/Hooks/PostDataHook'
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../Redux/Store";
+export const colors = ['black', 'white', 'red', 'yellow','green','brown'];
 
 const AddProduct = () => {
     const {PostDataToDB, isLoading, results} = PostDataHook()
@@ -43,7 +44,6 @@ const AddProduct = () => {
     ];
     const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
 
-    const colors = ['black', 'white', 'red', 'yellow'];
     const [isOpen,
         setOpen] = useState(false)
     const [color,setColor] = useState('')
