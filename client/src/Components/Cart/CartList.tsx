@@ -39,7 +39,6 @@ const CartList = () => {
             {
                 productsArray && productsArray.length > 0 ?
                 productsArray.map(product => {
-                    console.log('productsArray: ', productsArray);
 
                   return  <CartProduct
                     price={product.price}

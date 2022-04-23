@@ -22,7 +22,7 @@ import Alert from '@mui/material/Alert';
 export type AlertColor = 'success' | 'info' | 'warning' | 'error';
 export interface IsnackState {
     isOpen : boolean;
-    message: string;
+    message : string;
     severity : AlertColor
 }
 const Product = () => {
@@ -30,11 +30,15 @@ const Product = () => {
     const {section, id} = useParams()
     const [product,
         setProduct] = useState < IformData > ()
-    const [snackState,setSnackState] = useState<IsnackState>({isOpen: false,message :'',severity : 'success'})
+    const [snackState,
+        setSnackState] = useState < IsnackState > ({isOpen: false, message: '', severity: 'success'})
     const ProductsArray = useSelector((state : RootState) => state.ProductsArray.productStateArray)
-    
+
     const handleClose = () => {
-        setSnackState({...snackState,isOpen : false})
+        setSnackState({
+            ...snackState,
+            isOpen: false
+        })
     }
     useEffect(() => {
 
@@ -42,54 +46,56 @@ const Product = () => {
         // could.
 
         let isMounted = true
-        if (isMounted) {
+        if (isMounted && section && id) {
 
-      
-        if (section && id && !product && !ProductsArray[0].title) {
+            if (product && ProductsArray[0].title) {
+                const currentProduct = ProductsArray.find(x => x._id === `${id}`);
 
-            GetProductById(section, id)
-            return;
+                if (currentProduct) {
+                    setProduct(currentProduct)
+                    return;
+                }
+            } else {
+                GetProductById(section, id)
+                return;
+            }
+
         }
-   
 
-
-             
-              const currentProduct =   ProductsArray.find(x => x._id === `${id}`);
-             
-            if (currentProduct) setProduct(currentProduct)
-            return;
-        }
         return () => {
             isMounted = false
         }
 
     }, [])
-    
+
     useEffect(() => {
         let isMounted = true
-        
+
         if (data && isMounted) {
             setProduct(data[0])
         }
-        
 
         return () => {
             isMounted = false
         }
-    }
-    , [data])
+    }, [data])
     const vertical = 'bottom'
     const horizontal = 'left'
     return (
         <Box>
-             <Snackbar
-            sx={{mt:'2em'}}
-            anchorOrigin={{ vertical, horizontal }}
-            open={snackState.isOpen}
-            autoHideDuration={6000}
-            onClose={handleClose}>
-          <Alert  severity={snackState.severity}>{snackState.message}</Alert>
-      </Snackbar>
+            <Snackbar
+                sx={{
+                mt: '2em'
+            }}
+                anchorOrigin={{
+                vertical,
+                horizontal
+            }}
+                open={snackState.isOpen}
+                autoHideDuration={6000}
+                onClose={handleClose}>
+                <Alert severity={snackState.severity}>{snackState.message}</Alert>
+            </Snackbar>
             <CBox className='limit'>
                 <BreadCrumbsLink section={`${section}`}/> {!error
                     ? <Grid container>
@@ -120,9 +126,9 @@ const Product = () => {
                                 <Grid md={8} item xs={12}>
 
                                     <ProductDetails
-                                    style={product && product.style}
-                                    weight={product && product.weight}
-                                      colors={product && product.colors[0]}
+                                        style={product && product.style}
+                                        weight={product && product.weight}
+                                        colors={product && product.colors[0]}
                                         isLoading={isLoading}/> {!isLoading
                                         ? <ProductReview/>
                                         : <Skeleton

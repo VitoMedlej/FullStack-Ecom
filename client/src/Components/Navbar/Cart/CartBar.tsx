@@ -63,6 +63,8 @@ const CartBar = () => {
                         onClick={() => {
                         dispatch(toggleCartState(false));
                         dispatch(toggleBackDropState(false))
+                     
+                      
                     }}
                         sx={{
                         transition: 'all .3s ease',
