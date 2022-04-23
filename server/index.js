@@ -15,10 +15,10 @@ require('dotenv').config();
 
 
 
-app.use(cors())
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-connectToDB()
+// app.use(cors())
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: true}));
+// connectToDB()
 
 
 app.get('/',(req, res) => {
