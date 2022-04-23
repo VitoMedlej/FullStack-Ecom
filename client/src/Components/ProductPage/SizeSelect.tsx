@@ -10,15 +10,17 @@ type SelectChangeEvent < T = number | string > = (Event & {
         value: T;
     };
 }) | React.ChangeEvent < HTMLInputElement > 
-
-const SizeSelect = () => {
-    const [size,
-        setSize] = useState < number | string > (8);
+interface ISizeSelect {
+    sizes ?: number[] | undefined;
+    size  : number 
+    setSize :  React.Dispatch<React.SetStateAction< number>>
+}
+const SizeSelect = ({sizes ,setSize ,size} :ISizeSelect) => {
+  
 
     const handleChange = (event : SelectChangeEvent) => {
-        console.log(event);
-
-        setSize(event.target.value);
+        const parsed = parseInt(`${event.target.value}`)
+        setSize(parsed);
 
     };
 
@@ -30,17 +32,17 @@ const SizeSelect = () => {
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
                 <Select
+            
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={size}
                     label="size"
                     onChange={handleChange}>
-                    <MenuItem value={8}>8</MenuItem>
-                    <MenuItem value={9}>9</MenuItem>
-                    <MenuItem value={10}>10</MenuItem>
-                    <MenuItem value={11}>11</MenuItem>
-                    <MenuItem value={12}>12</MenuItem>
-                    <MenuItem value={13}>13</MenuItem>
+                    {sizes && sizes.map(size=>{
+                  return  <MenuItem key={size} value={size}>{size}</MenuItem>
+                     
+                    })}
+                   
                 </Select>
             </FormControl>
         </Box>

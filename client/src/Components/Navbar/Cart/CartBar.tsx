@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import CBox from '../../CustomMui/CBox';
 import Box from '@mui/material/Box';
@@ -9,14 +8,16 @@ import {RootState} from '../../../Redux/Store';
 import {toggleCartState} from '../../../Redux/Slices/CartSlice'
 import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
 import {Link} from 'react-router-dom';
+import CartItem from './CartItem';
+import HandleCartStateHook from '../../../Helpers/Hooks/CartHandlingHooks/HandleCartStateHook';
+import { TransitionGroup ,CSSTransition } from "react-transition-group"
 
-interface ICartBar {}
 
-const CartBar = ({} : ICartBar) => {
-
-    const isCartOpen = useSelector((state : RootState) => state.isCartOpen.isCartOpen)
-
+const CartBar = () => {
     const dispatch = useDispatch()
+    const isCartOpen = useSelector((state : RootState) => state.isCartOpen.isCartOpen)
+    const {productsArray} = HandleCartStateHook()
+
     return (
         <CBox
             sx={{
@@ -42,14 +43,29 @@ const CartBar = ({} : ICartBar) => {
                     className='flexed '
                     sx={{
                     width: '100%',
+                    pt: '1em',
                     height: '50px',
                     display: 'flex',
-                    justifyContent: 'flex-end'
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
+
+                    <CTypo
+                        fontSize={{
+                        xs: '1.2em',
+                        md: '1.3em',
+                        xl: '1.4em'
+                    }}
+                        sx={{
+                        mt: '0'
+                    }}
+                        text='Your Bag'></CTypo>
                     <IconButton
                         onClick={() => {
                         dispatch(toggleCartState(false));
                         dispatch(toggleBackDropState(false))
+                     
+                      
                     }}
                         sx={{
                         transition: 'all .3s ease',
@@ -57,7 +73,6 @@ const CartBar = ({} : ICartBar) => {
                             background: 'pink'
                         },
                         color: 'red',
-                        position: 'absolute',
                         m: '4px',
                         padding: '8px',
                         display: 'flex'
@@ -70,23 +85,59 @@ const CartBar = ({} : ICartBar) => {
                 <Box sx={{
                     pb: '2em'
                 }}>
-                    <CTypo
-                        sx={{
-                        mt: '0'
-                    }}
-                        fontSize={{
-                        xs: '1.3em',
-                        md: '1.5em',
-                    xl: '1.7em'
-                    }}
-                        text='Your cart is empty!'></CTypo>
+                    {productsArray && productsArray.length > 0
+                        ? <Box
+                                sx={{
+                                mb: '1.5em',
+                                mt: '.5em'
+                            }}>
+                                
+                                <TransitionGroup className="trans-group">
+
+                              
+                                {productsArray
+                                    .slice(0, 3)
+                                    .map(item => {{
+                              
+                                
+                                return <CSSTransition key={item._id} timeout={500} classNames="item">
+
+                                <CartItem
+                               price={item.price}
+                               category={item.category}
+                               id={item._id}
+                               key={item._id}
+                               title={item.title}
+                               img={item.images[0] || item.images[1]}
+                               qty={item.quantity}/>
+                               </CSSTransition>
+                            }})
+    }
+        </TransitionGroup>  
+                            </Box>
+                        : <CTypo
+                            sx={{
+                            mt: '0'
+                        }}
+                            fontWeight='300'
+                            text='There are no items here.'></CTypo>}
+
                     <Link
                         onClick={() => {
                         dispatch(toggleBackDropState(false));
                         dispatch(toggleCartState(false))
                     }}
-                        to='/cart'>visit cart</Link>
+                        to='/cart'>
+                        <CTypo
+                            sx={{
+                            mt: '0'
+                        }}
+                            fontWeight='300'
+                            color='blue'
+                            text='Visit bag'></CTypo>
+                    </Link>
                 </Box>
+
             </CBox>
         </CBox>
     )

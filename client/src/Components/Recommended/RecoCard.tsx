@@ -1,22 +1,24 @@
 import Box from '@mui/material/Box';
 import {Link} from 'react-router-dom';
-import CBox from '../CustomMui/CBox';
 import CTypo from '../CustomMui/CTypo';
-const nike = require('../../Helpers/Images/nike.jfif')
 
 interface IRecoCard {
     category : string
     id : number | string
+    img : string
+    title : string
+    description : string
+    price : number
 }
 
-const RecoCard = ({category,id} : IRecoCard) => {
+const RecoCard = ({category,price, id, img, title, description} : IRecoCard) => {
     return (
         <Box
-            className='trans'
+            className='trans textHidden'
             sx={{
             padding: '5px',
             ':hover': {
-                transform: "translateY(-5px)",
+                transform: "translateY(-5px)"
             },
             width: '90%',
             height: '100%',
@@ -24,8 +26,8 @@ const RecoCard = ({category,id} : IRecoCard) => {
             minWidth: '200px'
         }}>
             <Link className='linkz' to={`/category/${category}/products/${id}`}></Link>
-            <Box>
-                <img className='img' src={nike} alt=""/>
+            <Box sx={{height: '450px'}}>
+                <img className='img' src={`${img}`} alt=""/>
             </Box>
 
             <Box
@@ -34,7 +36,7 @@ const RecoCard = ({category,id} : IRecoCard) => {
                 alignItems: "center",
                 justifyContent: "space-between"
             }}>
-                <Box>
+                <Box className='textHidden'>
 
                     <CTypo
                         sx={{
@@ -44,9 +46,10 @@ const RecoCard = ({category,id} : IRecoCard) => {
                         xs: '1em'
                     }}
                         fontWeight="400"
-                        text={`Nike Air Force 1 '07`}></CTypo>
+                        text={`${title}`}></CTypo>
 
                     <CTypo
+                        className='textHidden'
                         sx={{
                         mt: '0px',
                         color: '#575757'
@@ -56,10 +59,10 @@ const RecoCard = ({category,id} : IRecoCard) => {
                         sm: '1em'
                     }}
                         fontWeight="300"
-                        text={`asfasfasfrasf`}></CTypo>
+                        text={`${description}`}></CTypo>
                 </Box>
                 <Box>
-                    <CTypo fontWeight="400" text={`200$`}></CTypo>
+                    <CTypo fontWeight="400" text={`${price}$`}></CTypo>
                 </Box>
             </Box>
         </Box>

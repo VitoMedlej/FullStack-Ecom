@@ -4,11 +4,26 @@ import CTypo from '../CustomMui/CTypo';
 import RecoCard from './RecoCard';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Autoplay} from 'swiper'
-
 import {Scrollbar} from "swiper";
 import '../../Styles/Swiper.css'
+import GetFeaturedHook from '../../Helpers/Hooks/GetFeaturedHook';
+import {useEffect} from 'react';
+import {IformData} from '../../Helpers/Hooks/CreateProductHook';
 
 const Recommended = () => {
+    const {FeaturedArray, isLoading, GetFeaturedProducts} = GetFeaturedHook();
+
+    useEffect(() => {
+        let isMounted = true
+        if (isMounted) GetFeaturedProducts()
+        
+        return () => {
+            isMounted = false
+        }
+        
+    }, [])
+ 
+    
     SwiperCore.use([Autoplay]);
 
     return (
@@ -32,8 +47,10 @@ const Recommended = () => {
                     flexWrap: 'wrap',
                     justifyContent: 'space-between'
                 }}>
+                    {!isLoading && !FeaturedArray && <CTypo color='#ff0000c2' text='Failed to load products ,Please try again.'></CTypo> }
+                    {isLoading && !FeaturedArray && <CTypo text='Loading Data...'></CTypo>}
 
-                    <Swiper
+                    {!isLoading && FeaturedArray && <Swiper
                         scrollbar={{
                         hide: true
                     }}
@@ -46,7 +63,7 @@ const Recommended = () => {
                         700: {
                             slidesPerView: 2
                         },
-                        500: {
+                        600: {
                             slidesPerView: 2
                         },
                         100: {
@@ -57,23 +74,25 @@ const Recommended = () => {
                         "delay": 2000,
                         "disableOnInteraction": true
                     }}>
-                        <SwiperSlide>
+                     
+                        {FeaturedArray && FeaturedArray.map((item : IformData) => {
 
-                            <RecoCard id={15215} category='shoes'/>
-                        </SwiperSlide>
-                        <SwiperSlide>
+                            return <SwiperSlide
+                            className='swiperSlideCard'
+                            key={item._id}>
 
-                            <RecoCard id={5125} category='shoes'/>
-                        </SwiperSlide>
-                        <SwiperSlide>
+                                <RecoCard
+                                    price={item.price}
+                                    description={item.description}
+                                    img={item.images[0]}
+                                    title={item.title}
+                                    id={`${item._id}`}
+                                    category={item.category}/>
+                            </SwiperSlide>
+                        })}
 
-                            <RecoCard id={12} category='shoes'/>
-                        </SwiperSlide>
-                        <SwiperSlide>
-
-                            <RecoCard id={1245} category='shoes'/>
-                        </SwiperSlide>
                     </Swiper>
+                    }
 
                 </Box>
             </CBox>

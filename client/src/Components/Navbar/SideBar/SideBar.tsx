@@ -11,6 +11,7 @@ import {RootState} from '../../../Redux/Store';
 import {toggleSideBarState} from '../../../Redux/Slices/SideBarSlice'
 import {toggleBackDropState} from '../../../Redux/Slices/BackDropSlice'
 import {toggleCartState} from '../../../Redux/Slices/CartSlice';
+import { SetMobileMenuState } from '../../../Redux/Slices/MobileMenuSlice';
 
 interface ISideBar {}
 
@@ -19,31 +20,34 @@ const SideBar = ({} : ISideBar) => {
     const isSideBar = useSelector((state : RootState) => state.isSideBar.isSideBar)
 
     const dispatch = useDispatch()
-
-    const HandleLinkButtonClick = () => {
+     const HandleLinkButtonClick = () => {
         dispatch(toggleCartState(false));
         dispatch(toggleSideBarState(false));
         dispatch(toggleBackDropState(false))
+        dispatch(SetMobileMenuState(false))
     }
+  
     return (
         <AppBar
             className='trans'
             sx={{
             transition: '.3s ease',
-            width: '300px',
+            width: `${isSideBar ? '300px' : '0px'}`,
             height: '100vh',
             right: `${isSideBar
                 ? '0%'
                 : '-100%'}`,
             background: 'white',
             color: 'black',
-            display: {
+            display:  {
                 xs: 'flex',
                 md: 'none'
-            },
+            } ,
             position: 'absolute',
             zIndex: 3
         }}>
+        <Box sx={{display:`${isSideBar ? 'block' : 'none'}`}}>
+
             <CBox
                 sx={{
                 borderBottom: '1px solid #e2e2e2',
@@ -70,6 +74,7 @@ const SideBar = ({} : ISideBar) => {
 
                 <IconButton
                     onClick={() => {
+                        dispatch(SetMobileMenuState(false))
                     dispatch(toggleBackDropState(false));
                     dispatch(toggleSideBarState(false))
                 }}
@@ -91,22 +96,24 @@ const SideBar = ({} : ISideBar) => {
 
             </CBox>
 
+
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
-                link='/ee'
+            
+                link='/'
                 text={'HOME'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+             
                 link='/dashboard/main'
                 text={'DASHBOARD'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
+                
                 link='/cart'
-                text={'cart'}/>
+                text={'CART'}/>
             <SideBarLink
-                HandleLinkButtonClick={HandleLinkButtonClick}
-                link='/ee'
-                text={'HOME'}/>
+            
+                link='/account/login'
+                text={'LOGIN'}/>
+        </Box>
 
         </AppBar>
     )

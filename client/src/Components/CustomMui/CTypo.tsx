@@ -16,12 +16,14 @@ interface CTypo {
     sx ?: SxProps<Theme> | undefined
     color ?: string
     className ?: string
+    onClick ?: () => void
   
     
 }
-const CTypo = ({text,sx,className,fontSize ,color, children,fontWeight} : CTypo) => {
+const CTypo = ({text,onClick,sx,className,fontSize ,color, children,fontWeight} : CTypo) => {
     return (
         <Typography
+        onClick={onClick && onClick}
         className={className}
             sx={{
             

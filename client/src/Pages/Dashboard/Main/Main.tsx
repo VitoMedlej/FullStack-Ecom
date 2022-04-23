@@ -1,7 +1,5 @@
 import Box from "@mui/material/Box"
 import { useParams } from "react-router-dom"
-import CBox from "../../../Components/CustomMui/CBox"
-import CTypo from "../../../Components/CustomMui/CTypo"
 import MainNavbar from "./MainNavbar"
 import About from './About/About';
 import Products from "./Products/Products"
@@ -15,7 +13,7 @@ const Main = () => {
             sx={{
           
             width: '100%',
-            height: '100vh'
+            height: '100%'
         }}>
             <MainNavbar/>
           

@@ -8,14 +8,17 @@ interface CButton {
     sx?: SxProps < Theme > | undefined
     hover?: any
     children?: any
-    margin?: string
+    margin ?: string 
     borderRadius?: string
     isSubmitButton?: boolean;
     className?: string
+    disabled ?: boolean
+    onClick ?: () => void
 }
 
 const CButton = ({
     text,
+    disabled,
     isSubmitButton,
     background,
     className,
@@ -24,10 +27,13 @@ const CButton = ({
     hover,
     color,
     borderRadius,
+    onClick,
     sx
 } : CButton) => {
     return (
         <Button
+        onClick={onClick}
+        disabled={disabled || false}
             type={isSubmitButton ? 'submit' : 'button'}
             variant='contained'
             className={className && className}

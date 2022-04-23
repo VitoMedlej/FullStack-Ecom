@@ -17,6 +17,8 @@ const MainNavbar = () => {
 
     const isBackDrop = useSelector((state : RootState) => state.isBackDrop.isBackDrop)
     const dispatch = useDispatch()
+    const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
+
     return (
         <Box
             sx={{
@@ -55,7 +57,7 @@ const MainNavbar = () => {
                     }}>
                         <WbSunnyIcon/>
                     </IconButton>
-                    <IconButton
+              {userInfo?.username &&      <IconButton
                         sx={{
                         mx: '5px',
                         color: 'white'
@@ -66,9 +68,9 @@ const MainNavbar = () => {
                             mt: '0',
                             mr: '3px'
                         }}
-                            text='USER'/>
+                            text={`${userInfo.username }`}/>
 
-                    </IconButton>
+                    </IconButton>}
                 </Box>
             </CBox>
             <MainSidebar  setSideBarOpen={setSideBarOpen} isSideBarOpen={isSideBarOpen}/>
