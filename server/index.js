@@ -25,21 +25,16 @@ app.get('/',(req, res) => {
     res.send('hello world')
 })
 
+
+
+
 // app.use(require('./src/Routes/homePageRoutes'))
 // app.use(require('./src/Routes/accountRoutes.js'))
 // app.use(require('./src/Routes/authRoutes.js'))
-
+// app.use(require('./src/Routes/searchRoutes.js'))
 // app.use(require('./src/Routes/categoryRoutes.js'))
 
 // app.use(require('./src/Routes/dashBoardRoutes.js'))
-
-app.use(require('./src/Routes/homePageRoutes'))
-app.use(require('./src/Routes/accountRoutes.js'))
-app.use(require('./src/Routes/authRoutes.js'))
-app.use(require('./src/Routes/searchRoutes.js'))
-app.use(require('./src/Routes/categoryRoutes.js'))
-
-app.use(require('./src/Routes/dashBoardRoutes.js'))
 
 app.listen(port, () => {
     console.log("server running at port :" + port);
