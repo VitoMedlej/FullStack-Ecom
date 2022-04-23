@@ -30,10 +30,28 @@ body {
   background: #e7e7e7;
 }
 
+.appbar {
+  position: -webkit-sticky;
+}
+
+.ScrollToTopButton button {
+  position: fixed;
+  z-index: 2512512512;
+  color: white;
+  bottom: 0;
+  right: 0;
+  margin: 25px;
+  background: #000000ad;
+}
+
+.ScrollToTopButton button:hover {
+  background: #000000ad;
+}
+
 .Alink {
   text-decoration: none;
   padding: 14px 2px;
-  font-size: 17px;
+  font-size: 19px;
   margin: 0 15px 0 0;
   -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
@@ -61,10 +79,6 @@ a {
 
 .blue {
   color: #1c51e6;
-}
-
-.searchForm {
-  border-radius: 17px;
 }
 
 .searchForm .searchInput {
@@ -108,6 +122,10 @@ a {
   border: 1px solid #1976d26e;
 }
 
+.w100 {
+  width: 100%;
+}
+
 .landing {
   background-image: url("../Helpers/Images/suit.jpg");
   background-repeat: no-repeat;
@@ -133,6 +151,48 @@ a {
      object-fit: cover;
 }
 
+.round {
+  border-radius: 50%;
+}
+
+.img2 {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.textHidden {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textLimit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiperSlideCard {
+  width: 453px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .customImg {
   width: 80%;
   height: 100%;
@@ -147,6 +207,10 @@ a {
   width: 100%;
   height: 100%;
   z-index: 1;
+  cursor: pointer;
+}
+
+.cursor {
   cursor: pointer;
 }
 
@@ -180,6 +244,10 @@ a {
   outline: none;
   border: none;
   background: transparent;
+}
+
+.skeletonMargin {
+  margin-top: -5em !important;
 }
 
 @media (min-width: 1305px) {

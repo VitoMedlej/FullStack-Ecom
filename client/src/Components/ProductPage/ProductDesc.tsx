@@ -1,9 +1,18 @@
+import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
+import Skeleton from "@mui/material/Skeleton"
 import CTypo from "../CustomMui/CTypo"
 
-const ProductDesc = () => {
+
+interface IProductDesc {
+    isLoading : boolean
+    description ?: string
+}
+const ProductDesc = ({isLoading ,description} : IProductDesc) => {
     return (
         <Grid md={8} item xs={12}>
+            {!isLoading ?
+            <>
             <CTypo
                 fontWeight='500'
                 fontSize={{
@@ -20,10 +29,31 @@ const ProductDesc = () => {
                 text=' Description'/>
             <CTypo
                 sx={{
-                mt: '1em'
-            }}
+                
+                    wordBreak: 'keep-all',
+                    mt: '1em'
+                }}
                 fontWeight='300'
-                text={`orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown p rinter took a galley of type and scrambled it to make a type sp ecimen book. It has survived not only five centuries, but also the leap i nto electronic typesetting, remaining essentially unchanged. It was popularised i n the 1960s with the release of Letraset sheets con taining Lorem Ipsum passages, and more recently with desktop publishing software l ike Aldus Page' Maker including versions of Lorem Ipsum`}/>
+                text={`${description}`}/>
+                </>
+         
+         :
+        <Box >
+         <Skeleton 
+         width='200px'
+         sx={{
+             py:'.35em',
+             mt: {
+            xs: '3.5em',
+            md: '3em'
+        }}} variant='text'></Skeleton>
+
+         <Skeleton 
+         sx={{width:
+            {xs:'100%'},height:'150px'}}
+             variant='rectangular'></Skeleton>
+        </Box>
+            }
 
         </Grid>
     )

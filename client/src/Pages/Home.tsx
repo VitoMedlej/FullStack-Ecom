@@ -5,7 +5,9 @@ import Categories from '../Components/Categories/Categories';
 import Recommended from '../Components/Recommended/Recommended';
 import Ad from '../Components/Ad/Ad';
 
+
 const Home = () => {
+
 
     return <Box>
         <LandingPage/>
