@@ -10,7 +10,7 @@ const GetSingleProductHook = () => {
     const GetProductById = async(category : string, id : string) => {
         try {
             setLoading(true)
-            const result = await fetch(`https://el-vito.herokuapp.com/category/${category}/products/${id}`)
+            const result = await fetch(`${process.env.REACT_APP_URL}/category/${category}/products/${id}`)
             const data = await result.json()
                 
             setData(data)

@@ -11,7 +11,7 @@ const GetFeaturedHook = () => {
             try {
                 setLoading(true)
     
-                const request = await fetch('https://el-vito.herokuapp.com/')
+                const request = await fetch(`${process.env.REACT_APP_URL}`)
                 const results = await request.json()
                 setFeaturedArray(results)
                 setLoading(false)

@@ -11,7 +11,7 @@ const mongoose = require('mongoose')
 const Category = require('./db/Models/CategoryModel')
 const FeaturedModel = require('./db/Models/FeaturedModel')
 require('dotenv').config();
-
+mongoose.set('strictQuery', true);
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

@@ -21,7 +21,8 @@ const GetCategoryDataHook = () => {
         try {
             setLoading(true)
 
-            const request = await fetch('https://el-vito.herokuapp.com/categories')
+            
+            const request = await fetch(`${process.env.REACT_APP_URL || 'sbw-ecom.onrender.com'} `)
             const results = await request.json()
             setCategories(results)
             setLoading(false)

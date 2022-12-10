@@ -19,7 +19,7 @@ const GetProductsBySearch = () => {
         if (searchKeyword.length > 2) {
             setLoading(true)
             setError('')
-            const request = await fetch(`https://el-vito.herokuapp.com/search/?query=${searchKeyword}`)
+            const request = await fetch(`${process.env.REACT_APP_URL}/search/?query=${searchKeyword}`)
             const results = await request.json()
             if (results && results.length > 0) {
                 setProducts(results);
