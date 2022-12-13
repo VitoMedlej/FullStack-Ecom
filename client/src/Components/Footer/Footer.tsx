@@ -75,7 +75,7 @@ const Footer = () => {
                         <CTypo fontWeight='500' text='INFO'/>
 
                         <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
-                            vito.medlej@gmail.com
+                            simplebeirut@gmail.com
                         </CTypo>
                         <CTypo className='trans' color="#cfcfcfd3" fontWeight='300'>
                             Phone : +961 81 826 445
@@ -102,7 +102,7 @@ const Footer = () => {
                             <a
                                 className='FooterLink flexed'
                                 target='_blank'
-                                href={ 'https://www.facebook.com/vito.medlej.5/'}>
+                                href={ 'https://www.facebook.com/simplwbeirutweb'}>
 
                                 <FacebookOutlinedIcon
                                     sx={{
