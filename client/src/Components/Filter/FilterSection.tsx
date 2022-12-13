@@ -6,7 +6,6 @@ import {
     Button,
     Checkbox,
     FormControl,
-
     MenuItem,
     Select,
     Skeleton,
@@ -101,7 +100,7 @@ const FilterSection = ({condition, sectionsPrice, value, setValue} : IFilter) =>
                                     <Typography>Color</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    {colors.map(color => {
+                                    {colors && colors.map(color => {
 
                                         return <Checkbox
                                             key={color}
@@ -164,11 +163,11 @@ const FilterSection = ({condition, sectionsPrice, value, setValue} : IFilter) =>
                                     id="pan12el1a-header2">
                                     <Typography>Availability</Typography>
                                 </AccordionSummary>
-                                <AccordionDetails>
-                                    <FormControl fullWidth>
+                             //   <AccordionDetails>
+                                 //   <FormControl fullWidth>
                                     
-                                    </FormControl>
-                                </AccordionDetails>
+                                  //  </FormControl>
+                             //   </AccordionDetails>
                             </Accordion>
                         </Box>
 
@@ -181,9 +180,9 @@ const FilterSection = ({condition, sectionsPrice, value, setValue} : IFilter) =>
                     }
                 }}>
                     <Skeleton height={30}/>
-                    <Skeleton height={70}/>
-                    <Skeleton height={70}/>
-                    <Skeleton height={70}/>
+             {[1,2,3].map(x=> return  <Skeleton height={70}/> )}
+                  //  <Skeleton height={70}/>
+                   // <Skeleton height={70}/>
 
                 </Box>
 }
