@@ -22,10 +22,10 @@ const GetCategoryDataHook = () => {
             setLoading(true)
 
             
-            const request = await fetch(`${process.env.REACT_APP_URL || 'sbw-ecom.onrender.com'} `)
-            const results = await request.json()
-            setCategories(results)
-            setLoading(false)
+            const request = await fetch(`${process.env.REACT_APP_URL || 'sbw-ecom.onrender.com/'}categories `)
+            const results = await request.json();
+            setCategories(results);
+            setLoading(false);
 
         } catch (err) {
             setLoading(false)

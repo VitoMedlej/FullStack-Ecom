@@ -8,7 +8,7 @@ const PostDataHook = () => {
     const PostDataToDB = async(data : IformData ,token : string) => {
         try {
             setLoading(true)
-            const response = await fetch(`${process.env.REACT_APP_URL}/dashboard/add-products`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}dashboard/add-products`, {
                 method: 'POST',
                 headers: {
                     'Authorization' : token,

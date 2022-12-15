@@ -9,8 +9,8 @@ interface ICate {
     link : string
 }
 
-const CategoryCard = ({img, title, desc, link} : ICate) => {
-    let lowerCaseLink = link.toLocaleLowerCase()
+const CateCard = ({img, title, desc, link} : ICate) => {
+    let lowerCaseLink = link && link.toLocaleLowerCase()
     return (
 
         <Box
@@ -67,4 +67,4 @@ const CategoryCard = ({img, title, desc, link} : ICate) => {
     )
 }
 
-export default CategoryCard
+export default CateCard

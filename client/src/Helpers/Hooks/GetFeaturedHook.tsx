@@ -1,9 +1,8 @@
-import { useState } from "react"
-import { IformData } from "./CreateProductHook"
+import { useState } from "react";
+import { IformData } from "./CreateProductHook";
 
 const GetFeaturedHook = () => {
-    // const [categories,
-    //     setCategories] = useState < ICateData[] > ([])
+  
     const [isLoading,
         setLoading] = useState(false)
     const [FeaturedArray ,setFeaturedArray] = useState<IformData[]>()

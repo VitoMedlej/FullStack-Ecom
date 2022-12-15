@@ -28,7 +28,7 @@ const ValidateAccountHook = () => {
 
         try {
             setLoading(true)
-            const request = await fetch(`${process.env.REACT_APP_URL}/account/login`, {
+            const request = await fetch(`${process.env.REACT_APP_URL}account/login`, {
                 method: 'POST',
                 headers: {
 

@@ -42,7 +42,7 @@ const Category = () => {
         let isMounted = true
 
         if (isMounted) 
-            GetDatafromDB(`https://el-vito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+            GetDatafromDB(`${process.env.REACT_APP_URL}category/${section}?limit=9&page=${currentPage || 0}`)
         return () => {
             isMounted = false
         }
@@ -52,7 +52,7 @@ const Category = () => {
         let isMounted = true
 
         if (isMounted) 
-            GetDatafromDB(`https://el-vito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+            GetDatafromDB(`${process.env.REACT_APP_URL}category/${section}?limit=9&page=${currentPage || 0}`)
         return () => {
             isMounted = false
         }
@@ -61,7 +61,7 @@ const Category = () => {
     useEffect(() => {
         let isMounted = true
         if (isMounted) {
-            GetDatafromDB(`https://el-vito.herokuapp.com/category/${section}?limit=9&page=${currentPage || 0}`)
+            GetDatafromDB(`${process.env.REACT_APP_URL}category/${section}?limit=9&page=${currentPage || 0}`)
 
             window.scrollTo(0, 0)
         }
