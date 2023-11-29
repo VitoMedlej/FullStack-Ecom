@@ -3,10 +3,38 @@ import TextField from "@mui/material/TextField"
 import {Link} from "react-router-dom"
 import CButton from "../../../Components/CustomMui/CButton"
 import CTypo from "../../../Components/CustomMui/CTypo"
+import LoginHook from "../../../Helpers/Hooks/AccountHandlingHooks/LoginHook"
+import ValidateAccountHook from "../../../Helpers/Hooks/AccountHandlingHooks/ValidateAccountHook"
+import {useSelector, useDispatch} from 'react-redux';
+import {saveUser} from "../../../Redux/Slices/UserSlice"
+import {useNavigate} from "react-router-dom";
+import {RootState} from "../../../Redux/Store"
+import {useEffect} from "react"
+
+// yes , I am ashamed of rewriting the same code over and over... but Who cares?
+// it's a presonal project and id never do this on a real one
 
 const LoginForm = () => {
+    const navigate = useNavigate()
+    const {loginDetails, resetForm, handleSubmit} = LoginHook()
+    const {ValidateAccount, setResults, statusCode, results, isLoading} = ValidateAccountHook()
+    const userInfo = useSelector((state : RootState) => state.userInfo.UserInfo)
+
+
     return (
         <Box
+            component='form'
+            onSubmit={async(e : any) => {
+            e.preventDefault();
+            if (!isLoading && loginDetails.email && loginDetails.password) {
+             const stat =  await ValidateAccount(loginDetails)
+            if (stat === 200) {
+                navigate('/dashboard/main')
+                
+                }
+            }
+            resetForm(true)
+        }}
             sx={{
             borderRadius: '7px',
             py: '1em',
@@ -29,14 +57,21 @@ const LoginForm = () => {
                     text='Welcome back!'/>
 
                 <CTypo
-                    color='gray'
+                    color={statusCode && statusCode > 200
+                    ? 'red'
+                    : 'gray'}
                     fontWeight='300'
                     fontSize={{
                     xs: '.9em'
                 }}
-                    text='Please enter your credentials to proceed'/>
+                    text={results
+                    ?.message || 'Please enter your credentials to proceed'}/>
             </Box>
+
             <Box
+                onChange={(e : React.ChangeEvent < HTMLInputElement >) => {
+                handleSubmit(e)
+            }}
                 sx={{
                 width: '100%',
                 mt: {
@@ -44,18 +79,28 @@ const LoginForm = () => {
                     md: '3em'
                 }
             }}>
-
+            
                 <TextField
+                    required
+                    value={loginDetails.email}
+                    name='email'
+                    type='email'
+                    autoComplete="true"
                     sx={{
                     width: {
                         xs: '90%',
                         md: '80%'
                     }
                 }}
-                    id="outlined-basic"
+                    id="outlined-basic1"
                     label="Email"
                     variant="outlined"/>
                 <TextField
+                    autoComplete="true"
+                    type='password'
+                    required
+                    value={loginDetails.password}
+                    name='password'
                     sx={{
                     my: '1em',
                     width: {
@@ -69,6 +114,8 @@ const LoginForm = () => {
             </Box>
 
             <CButton
+                isSubmitButton={true}
+                disabled={isLoading}
                 hover={{
                 background: ' white ',
                 color: 'black'

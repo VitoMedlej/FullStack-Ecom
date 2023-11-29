@@ -1,15 +1,19 @@
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
+import HandleCartStateHook from "../../Helpers/Hooks/CartHandlingHooks/HandleCartStateHook"
 import CButton from "../CustomMui/CButton"
 import CTypo from "../CustomMui/CTypo"
 
 const CartSummary = () => {
 
-    let deliveryCost = 5
-    let itemsCost = 120
+    const {ReduxLocalCart} = HandleCartStateHook()
+    const bill = ReduxLocalCart.bill
+    let deliveryCost = bill === 0 ? 0 : 5
+    let itemsCost = bill
+ 
     let totalCost = itemsCost + deliveryCost
     totalCost = totalCost / 11 + totalCost
-    let endCost = totalCost.toFixed(2)
+    let endCost = bill === 0 ? 0 : totalCost.toFixed(2)
 
     return (
         <Grid item xs={12} md={4} lg={3}>
@@ -29,7 +33,7 @@ const CartSummary = () => {
                 mt: '.5em'
             }}>
                 <CTypo color='#4f4f4f' text='Subtotal '/>
-                <CTypo color='#4f4f4f' text='120$'/>
+                <CTypo color='#4f4f4f' text={`$${bill}`}/>
             </Box>
             <Box
                 className='flexed'
@@ -38,7 +42,7 @@ const CartSummary = () => {
                 mt: '.5em'
             }}>
                 <CTypo color='#4f4f4f' text='Delivery '/>
-                <CTypo color='#4f4f4f' text='5$'/>
+                <CTypo color='#4f4f4f' text={deliveryCost}/>
             </Box>
             <Box
                 className='flexed'

@@ -13,7 +13,7 @@ const DashboardSideBar = () => {
         <Box
             sx={{
             px:'.75em',
-            height: '100vh',
+            
             justifyContent: 'center',
             zIndex: '0',
             borderTop: '1px solid #8080803b',

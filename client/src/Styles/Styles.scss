@@ -7,6 +7,7 @@ body {
 
 }
 
+
 .FooterLink {
     color: #cfcfcfd3;
     &:hover {
@@ -23,10 +24,28 @@ body {
         background: #e7e7e7;
     }
 }
+.appbar {
+    position: -webkit-sticky;
+}
+.ScrollToTopButton {
+    button {
+
+        position: fixed;
+        z-index: 2512512512;
+        color: white;
+        bottom: 0;
+        right: 0;
+        margin: 25px;
+        background: #000000ad;
+        &:hover {
+            background: #000000ad;
+        }
+    }
+}
 .Alink {
     text-decoration: none;
     padding: 14px 2px;
-    font-size: 17px;
+    font-size: 19px;
     margin: 0 15px 0 0;
     transition: all 0.15s ease;
     border-bottom: 2px solid transparent;
@@ -56,7 +75,6 @@ a {
 }
 .searchForm {
 
-    border-radius: 17px;
     .searchInput {
         border-radius: 17px;
         border: none;
@@ -87,6 +105,7 @@ a {
             box-shadow: 1px 1px 5px #0b75df54;
 
         }
+        
         input {
             background: transparent;
             &:focus {
@@ -97,6 +116,10 @@ a {
         }
     }
 }
+.w100 {
+    width : 100%
+}
+
 .landing {
     background-image: url('../Helpers/Images/suit.jpg');
     background-repeat: no-repeat;
@@ -118,6 +141,36 @@ a {
     height: 100%;
     object-fit: cover;
 }
+.round {
+    border-radius:50%
+}
+.img2 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.textHidden {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.textLimit {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.swiper  {
+    width: 100%;
+}
+.swiperSlideCard {
+    width: 453px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 .customImg {
     width: 80%;
     height: 100%;
@@ -131,6 +184,10 @@ a {
     height: 100%;
     z-index: 1;
     cursor: pointer;
+}
+.cursor {
+    cursor: pointer;
+
 }
 .trans {
     transition: 0.3s ease;
@@ -160,6 +217,30 @@ a {
     border: none;
     background: transparent;
 }
+.skeletonMargin {
+    margin-top:  -5em !important;
+}
+.trans-group {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.item-enter {
+    opacity: 0;
+  }
+  .item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+  
 @media (min-width: 1305px) {
     .limit {
         width: 1200px;

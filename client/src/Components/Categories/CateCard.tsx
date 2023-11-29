@@ -1,29 +1,28 @@
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import CTypo from '../CustomMui/CTypo';
 
 interface ICate {
     img : string,
-    title : string 
+    title : string
     desc : string
     link : string
 }
 
-const CategoryCard = ({img ,title ,desc,link} : ICate) => {
-    let lowerCaseLink = link.toLocaleLowerCase()
+const CateCard = ({img, title, desc, link} : ICate) => {
+    let lowerCaseLink = link && link.toLocaleLowerCase()
     return (
-        
+
         <Box
-        className='trans'
+            className='trans'
             sx={{
-            position:'relative',
-            padding :'5px',
+            position: 'relative',
+            padding: '5px',
             width: {
                 xs: '100%',
                 sm: '48%',
-                md: '32%',
+                md: '32%'
             },
-            
             ':hover': {
                 transform: "translateY(-5px)",
                 boxShadow: '1px 1px 5px #eaeaea'
@@ -34,7 +33,11 @@ const CategoryCard = ({img ,title ,desc,link} : ICate) => {
             <Box
                 sx={{
                 width: '100%',
-                height: '500px' 
+                height: {
+                  
+                    xs: '400px',
+                    md: '500px'
+                }
             }}>
 
                 <img className="img" src={img} alt=""/>
@@ -42,15 +45,17 @@ const CategoryCard = ({img ,title ,desc,link} : ICate) => {
             <Box>
                 <CTypo
                     fontSize={{
-
                     xs: '1.1em',
                     sm: '1.2em',
-                    md : '1.3em',
-                    lg : '1.4em',
+                    md: '1.3em',
+                    lg: '1.4em'
                 }}
                     fontWeight="500"
                     sx={{
-                    textDecoration : {xs:'underLine',sm:'none'},
+                    textDecoration: {
+                        xs: 'underLine',
+                        sm: 'none'
+                    },
                     pt: '.3em'
                 }}
                     text={`${title}`}></CTypo>
@@ -62,4 +67,4 @@ const CategoryCard = ({img ,title ,desc,link} : ICate) => {
     )
 }
 
-export default CategoryCard
+export default CateCard
